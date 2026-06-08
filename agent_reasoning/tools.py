@@ -27,40 +27,31 @@ class ResearchTools:
             return "❌ Error: Could not load data. Please ensure the file exists and is a CSV."
 
         # 2. Route to correct Goal Function
-        # We normalize the string to handle "1. Launch..." or "Launch"
-        goal_key = str(goal_type).lower()
-        print(f"📊 Tools: Routing Goal '{goal_key}' on {len(df)} rows...")
+        # Map frontend label to GOAL_KEY
+        goal_mapping = {
+            "1. Launch New Product": "GOAL_1_LAUNCH",
+            "2. Diagnose Performance": "GOAL_2_PERFORMANCE",
+            "3. Improve UX / Journey": "GOAL_3_UX_JOURNEY",
+            "4. Increase Retention": "GOAL_4_RETENTION",
+            "5. Test Hypothesis": "GOAL_5_HYPOTHESIS",
+            "6. Prioritize Roadmap": "GOAL_6_PRIORITIZATION",
+            "7. Executive Summary": "GOAL_7_SYNTHESIS"
+        }
         
-        # --- GOAL 1: LAUNCH ---
-        if "launch" in goal_key or "1" in goal_key:
-            return self.quant_engine.run_goal_1_analysis(df)
+        goal_key = goal_mapping.get(goal_type, "GOAL_1_LAUNCH")
         
-        # --- GOAL 2: PERFORMANCE ---
-        elif "diagnose" in goal_key or "performance" in goal_key or "2" in goal_key:
-            return self.quant_engine.run_goal_2_analysis(df)
-
-        # --- GOAL 3: UX & JOURNEY ---
-        elif "ux" in goal_key or "journey" in goal_key or "3" in goal_key:
-            return self.quant_engine.run_goal_3_analysis(df)
-
-        # --- GOAL 4: RETENTION ---
-        elif "retention" in goal_key or "loyalty" in goal_key or "4" in goal_key:
-            return self.quant_engine.run_goal_4_analysis(df)
-
-        # --- GOAL 5: HYPOTHESIS ---
-        elif "hypothesis" in goal_key or "test" in goal_key or "5" in goal_key:
-            return self.quant_engine.run_goal_5_analysis(df)
-
-        # --- GOAL 6: ROADMAP ---
-        elif "roadmap" in goal_key or "priorit" in goal_key or "6" in goal_key:
-            return self.quant_engine.run_goal_6_analysis(df)
-
-        # --- GOAL 7: EXECUTIVE SUMMARY ---
-        elif "executive" in goal_key or "summary" in goal_key or "7" in goal_key:
-            return self.quant_engine.run_goal_7_analysis(df)
-
+        function_mapping = {
+            "GOAL_1_LAUNCH": self.quant_engine.run_goal_1_analysis,
+            "GOAL_2_PERFORMANCE": self.quant_engine.run_goal_2_analysis,
+            "GOAL_3_UX_JOURNEY": self.quant_engine.run_goal_3_analysis,
+            "GOAL_4_RETENTION": self.quant_engine.run_goal_4_analysis,
+            "GOAL_5_HYPOTHESIS": self.quant_engine.run_goal_5_analysis,
+            "GOAL_6_PRIORITIZATION": self.quant_engine.run_goal_6_analysis,
+            "GOAL_7_SYNTHESIS": self.quant_engine.run_goal_7_analysis,
+        }
+        
+        if goal_key in function_mapping:
+            return function_mapping[goal_key](df)
+            
         return f"⚠️ Tool not configured for goal: '{goal_type}' yet."
-
-# Legacy support if you still have code calling get_tools_for_goal
-def get_tools_for_goal(goal_name: str):
-    return []
+

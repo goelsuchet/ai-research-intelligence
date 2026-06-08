@@ -70,17 +70,24 @@ We solved this by building a modular system with three distinct roles:
 
 ```text
 ai-research-intelligence/
-├── agent_reasoning/       # Person 1: Logic, Prompts, & Orchestration
+├── agent_reasoning/       # Logic, Prompts, & Orchestration
 │   ├── brain.py           # Main reasoning loop
-│   └── tools.py           # Clarity checks & tool selection
-├── data_intelligence/     # Person 2: Math Engines & Vector Store
-│   ├── quant_engine.py    # Pandas/NumPy analysis
-│   └── vector_store.py    # ChromaDB management
-├── frontend_ui/           # Person 3: Streamlit Interface
+│   ├── output_manager.py  # Formats output for progressive disclosure
+│   ├── tools.py           # Routes goals to quant_engine
+│   └── validator.py       # 4-Signal Clarity Check
+├── data_intelligence/     # Math Engines & Data Store
+│   ├── db_manager.py      # ChromaDB client logic
+│   ├── qual_engine.py     # NLP/Qualitative clustering
+│   └── quant_engine.py    # Pandas/NumPy analysis
+├── frontend_ui/           # Streamlit Interface
 │   ├── app.py             # Main UI entry point
-│   └── components/        # UI widgets
+│   └── state_manager.py   # Session state & env loader
+├── samples/               # Demo data for testing
+├── generate_data.py       # Script to generate sample CSVs
+├── debug_setup.py         # Smoke test diagnostic script
 ├── requirements.txt       # Python dependencies
 └── README.md              # Project documentation
+```
 
 ## 👥 Team Members
 

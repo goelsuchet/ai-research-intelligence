@@ -60,10 +60,12 @@ class AgentBrain:
         # Only run the heavy tool if we haven't seen this file/goal combo yet, 
         # OR if it's the first run. For now, we run it every time a file is present 
         # to ensure we have fresh data, but we feed it to the LLM.
-        if file_name or "hairfall" in user_input.lower():
-            target_file = file_name if file_name else "hairfall_market_survey_demo.csv"
-            logger.info(f"📂 Brain: Running Quant Engine on {target_file}")
-            tool_output = self.tools.analyze_dataset(target_file, active_goal_hint)
+        if file_name:
+            import os
+            if not os.path.exists(file_name):
+                return f"❌ Error: The uploaded file could not be found at {file_name}."
+            logger.info(f"📂 Brain: Running Quant Engine on {file_name}")
+            tool_output = self.tools.analyze_dataset(file_name, active_goal_hint)
 
         # --- 3. COGNITIVE LAYER (Person 1 - OpenAI) ---
         # THIS IS THE MISSING PIECE. We don't return the tool output. 
@@ -85,7 +87,7 @@ class AgentBrain:
             INSTRUCTIONS:
             1. Answer the user's question using ONLY the facts from the Data Engine Output.
             2. If the user asks something not in the report (like "Age Groups"), clearly say: 
-               "My current analysis report covers [Market, Pricing, Competition], but does not yet contain specific data on [User Topic]. Would you like me to update the analysis code to include that?"
+               "My current analysis report covers the selected metrics, but does not yet contain specific data on [User Topic]. Would you like me to update the analysis code to include that?"
             3. Do not just dump the raw report unless asked. Synthesize the answer.
             """
             

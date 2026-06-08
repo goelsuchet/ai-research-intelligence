@@ -38,11 +38,11 @@ class QuantInsightEngine:
         - **Sample Size:** {market_size} respondents
         - **Verdict:** Market demand validation in progress.
         
-        **2. [cite_start]Competitive Landscape** [cite: 122-131]
+        **2. Competitive Landscape**
         - **Density:** {density} ({competitor_count} active brands detected)
         - *Strategic Note:* High density requires feature differentiation.
         
-        **3. [cite_start]Pricing Feasibility** [cite: 153-160]
+        **3. Pricing Feasibility**
         - **Average WTP:** ₹{avg_wtp:.2f}
         - **Viable Band:** ₹{min(price_points) if price_points else 0} - ₹{max(price_points) if price_points else 0}
         """
@@ -66,13 +66,13 @@ class QuantInsightEngine:
             "Retention D30": df['retention_d30'].mean() if 'retention_d30' in df.columns else 0
         }
         
-        # [cite_start]2. FUNNEL BOTTLENECKS (Module 2) [cite: 256-258]
+        # 2. FUNNEL BOTTLENECKS (Module 2) 
         bottleneck = "Unknown"
         if 'funnel_stage' in df.columns:
             dropoffs = df['funnel_stage'].value_counts(normalize=True).sort_values()
             bottleneck = dropoffs.index[0] if not dropoffs.empty else "N/A"
 
-        # [cite_start]3. CHURN ANALYSIS (Module 3) [cite: 281-283]
+        # 3. CHURN ANALYSIS (Module 3) 
         churn_reasons = []
         if 'churn_reason' in df.columns:
             churn_reasons = df['churn_reason'].value_counts().head(3).index.tolist()
@@ -80,15 +80,15 @@ class QuantInsightEngine:
         return f"""
         ### 📉 Goal 2: Performance Diagnosis
         
-        [cite_start]**1. KPI Health Check** [cite: 234-246]
+        **1. KPI Health Check** 
         - **CAC:** {current_kpis['Acquisition Cost']:.2f} (Simulated or Calculated)
         - **Time to Value:** {current_kpis['Time to Value']:.2f}
         
-        **2. [cite_start]Funnel Analysis** [cite: 265-272]
+        **2. Funnel Analysis** 
         - **Primary Bottleneck:** {bottleneck}
         - *Action:* Investigate friction at this specific stage.
         
-        **3. [cite_start]Churn Diagnosis** [cite: 293-300]
+        **3. Churn Diagnosis** 
         - **Top Reasons:** {', '.join(churn_reasons) if churn_reasons else 'Insufficient data to rank drivers.'}
         """
 
@@ -98,12 +98,12 @@ class QuantInsightEngine:
     def run_goal_3_analysis(self, df):
         """Maps Friction, Effort Scores, and Drop-off correlation."""
         
-        # [cite_start]1. Effort Score [cite: 461-467]
+        # 1. Effort Score 
         avg_effort = "N/A"
         if 'effort_score' in df.columns:
             avg_effort = round(df['effort_score'].mean(), 2)
             
-        # [cite_start]2. Friction Classification [cite: 452-460]
+        # 2. Friction Classification 
         friction_points = "None Detected"
         if 'friction_type' in df.columns:
             friction_points = df['friction_type'].mode()[0]
@@ -111,11 +111,11 @@ class QuantInsightEngine:
         return f"""
         ### 🎨 Goal 3: UX & Journey Diagnosis
         
-        [cite_start]**1. Cognitive Load Analysis** [cite: 461-467]
+        **1. Cognitive Load Analysis** 
         - **Average Effort Score:** {avg_effort} (Scale 1-10)
         - *Insight:* Lower scores correlate with higher conversion.
         
-        **2. [cite_start]Friction Taxonomy** [cite: 452-460]
+        **2. Friction Taxonomy** 
         - **Dominant Friction:** {friction_points}
         - *Recommendation:* If 'Cognitive', simplify copy. If 'Technical', fix bugs.
         """
@@ -126,12 +126,12 @@ class QuantInsightEngine:
     def run_goal_4_analysis(self, df):
         """Analyzes Retention Curves, Habits, and Loyalty Drivers."""
         
-        # [cite_start]1. Retention Baseline [cite: 598-607]
+        # 1. Retention Baseline 
         d30_rate = "N/A"
         if 'retention_d30' in df.columns:
             d30_rate = f"{df['retention_d30'].mean() * 100:.1f}%"
             
-        # [cite_start]2. Habit Signals [cite: 637-644]
+        # 2. Habit Signals 
         habit_strength = "Weak"
         if 'login_frequency' in df.columns:
             freq = df['login_frequency'].mean()
@@ -140,11 +140,11 @@ class QuantInsightEngine:
         return f"""
         ### 🔄 Goal 4: Retention & Loyalty Intelligence
         
-        [cite_start]**1. Retention Health** [cite: 598-607]
+        **1. Retention Health** 
         - **D30 Retention:** {d30_rate}
         - *Benchmark:* Compare against category average of 20%.
         
-        **2. [cite_start]Habit Formation** [cite: 637-644]
+        **2. Habit Formation** 
         - **Signal Strength:** {habit_strength}
         - *Strategy:* Focus on the 'Trigger -> Action' loop for frequency < 3.
         """
@@ -155,11 +155,11 @@ class QuantInsightEngine:
     def run_goal_5_analysis(self, df):
         """Audits Hypotheses, Checks Evidence, and Assigns Confidence."""
         
-        # [cite_start]1. Hypothesis Quality [cite: 815-826]
+        # 1. Hypothesis Quality 
         # (Simulating an audit of rows in the CSV)
         valid_hypotheses = len(df)
         
-        # [cite_start]2. Evidence Strength [cite: 873-885]
+        # 2. Evidence Strength 
         # Check if we have statistical significance columns
         sig_level = "Directional Only"
         if 'p_value' in df.columns:
@@ -168,11 +168,11 @@ class QuantInsightEngine:
         return f"""
         ### 🧪 Goal 5: Hypothesis Validation Engine
         
-        [cite_start]**1. Intake Audit** [cite: 815-826]
+        **1. Intake Audit** 
         - **Hypotheses Reviewed:** {valid_hypotheses}
         - **Status:** Structure Validated.
         
-        **2. [cite_start]Evidence Classification** [cite: 873-885]
+        **2. Evidence Classification** 
         - **Signal Strength:** {sig_level}
         - *Guidance:* If 'Directional Only', do not scale to 100% of users yet.
         """
@@ -183,7 +183,7 @@ class QuantInsightEngine:
     def run_goal_6_analysis(self, df):
         """Ranks initiatives using RICE/ICE and constraint modeling."""
         
-        # [cite_start]1. Prioritization [cite: 1093-1103]
+        # 1. Prioritization 
         top_item = "None"
         rice_score = "N/A"
         
@@ -204,12 +204,12 @@ class QuantInsightEngine:
         return f"""
         ### 📋 Goal 6: Roadmap Prioritization
         
-        [cite_start]**1. Ranked Initiatives** [cite: 1093-1103]
+        **1. Ranked Initiatives** 
         - **#1 Priority:** {top_item}
         - **Score:** {rice_score}
         - *Framework:* RICE (Reach * Impact * Confidence / Effort)
         
-        **2. [cite_start]Feasibility Check** [cite: 1070-1083]
+        **2. Feasibility Check** 
         - **Constraint Mode:** Resources are assumed finite. 
         - *Action:* Ensure engineering capacity aligns with the #1 priority.
         """
@@ -225,15 +225,15 @@ class QuantInsightEngine:
         return f"""
         ### 📢 Goal 7: Executive Strategy Brief
         
-        **1. [cite_start]The Bottom Line** [cite: 1192-1199]
+        **1. The Bottom Line** 
         - **Dataset:** Analyzed {rows} data points across the business.
         - **Primary Insight:** Data indicates a strong need for optimization before scaling.
         
-        **2. [cite_start]Critical Decision** [cite: 1268-1272]
+        **2. Critical Decision** 
         - **Recommendation:** **INVEST** in Retention (Goal 4) mechanisms.
         - **Risk:** High churn is currently the leaks bucket preventing growth.
         
-        **3. [cite_start]Confidence Level** [cite: 1220-1227]
+        **3. Confidence Level** 
         - **Score:** Medium-High
         - *Rationale:* Backed by quantitative retention signals in the dataset.
         """

@@ -1,6 +1,7 @@
 import streamlit as st
 from state_manager import initialize_session_state
 import pandas as pd
+import tempfile
 
 # --- 1. SETUP & STATE ---
 st.set_page_config(page_title="AI Research Agent", page_icon="🧠", layout="wide")
@@ -57,11 +58,24 @@ col1, col2 = st.columns([1, 1])
 
 with col1:
     uploaded_file = st.file_uploader("📂 Upload Research Data (CSV, Excel)", type=["csv", "xlsx"])
+    temp_file_path = None
     if uploaded_file:
         st.success(f"✅ Loaded: {uploaded_file.name}")
-        # In a real scenario, we would process this file here
-        # df = pd.read_csv(uploaded_file) 
-        # st.dataframe(df.head())
+        # Save to temp file securely (avoiding leaks on rerun)
+        if 'uploaded_file_id' not in st.session_state or st.session_state.uploaded_file_id != uploaded_file.file_id:
+            with tempfile.NamedTemporaryFile(delete=False, suffix=".csv") as tmp:
+                tmp.write(uploaded_file.getvalue())
+                st.session_state.temp_file_path = tmp.name
+                st.session_state.uploaded_file_id = uploaded_file.file_id
+        
+        temp_file_path = st.session_state.temp_file_path
+        
+        # Display preview
+        try:
+            df = pd.read_csv(temp_file_path)
+            st.dataframe(df.head())
+        except Exception as e:
+            st.error(f"Error reading file: {e}")
 
 with col2:
     st.markdown("#### 🎙️ / 📝 Context Input")
@@ -82,7 +96,7 @@ if prompt := st.chat_input("Ask a specific question or type 'Run Analysis' to pr
     full_context_prompt = f"""
     [SYSTEM_METADATA]
     ACTIVE_GOAL: {selected_goal}
-    UPLOADED_FILE: {uploaded_file.name if uploaded_file else 'None'}
+    UPLOADED_FILE: {temp_file_path if temp_file_path else 'None'}
     USER_NOTES: {context_text}
     [/SYSTEM_METADATA]
 

@@ -3,7 +3,7 @@ import numpy as np
 import random
 
 # --- CONFIGURATION ---
-NUM_RESPONSES = 1000
+NUM_RESPONSES = 50000
 
 # --- DATA GENERATION ---
 data = {
@@ -72,5 +72,5 @@ df = pd.DataFrame(data)
 df.loc[df['satisfaction_score'] < 4, 'willingness_to_pay_inr'] = 699 # Desperate users pay more
 
 # --- SAVE ---
-df.to_csv("hairfall_market_survey_demo.csv", index=False)
-print("✅ Demo Data Generated: 'hairfall_market_survey_demo.csv' (1000 rows)")
+df.to_csv("large_hairfall_market_survey_demo.csv", index=False)
+print("Demo Data Generated: 'large_hairfall_market_survey_demo.csv' (50000 rows)")
