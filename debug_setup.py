@@ -6,11 +6,11 @@ load_dotenv()
 
 # Basic check before loading heavy machinery
 if not os.getenv("OPENAI_API_KEY"):
-    print("❌ Error: OPENAI_API_KEY not found in .env file.")
+    print("[ERROR] OPENAI_API_KEY not found in .env file.")
     print("Please add your key to .env before running.")
     exit(1)
 
-print("✅ Environment check passed. Loading AgentBrain...")
+print("[SUCCESS] Environment check passed. Loading AgentBrain...")
 
 try:
     from agent_reasoning.brain import AgentBrain
@@ -26,7 +26,7 @@ try:
         demo_file = "large_hairfall_market_survey_demo.csv"
     if not os.path.exists(demo_file):
         demo_file = "hairfall_market_survey_demo.csv"
-    print(f"🧠 Running smoke test on {demo_file}...")
+    print(f"[BRAIN] Running smoke test on {demo_file}...")
     
     prompt = f"""
     [SYSTEM_METADATA]
@@ -40,9 +40,9 @@ try:
     
     response = brain.process_turn(prompt)
     
-    print("\n--- 🟢 RESPONSE PREVIEW (First 300 chars) ---")
+    print("\n--- [RESPONSE] PREVIEW (First 300 chars) ---")
     print(response[:300] + "...\n")
-    print("✅ Smoke test complete. The brain is functioning.")
+    print("[SUCCESS] Smoke test complete. The brain is functioning.")
     
 except Exception as e:
-    print(f"\n❌ Diagnostic failed with exception: {e}")
+    print(f"\n[ERROR] Diagnostic failed with exception: {e}")

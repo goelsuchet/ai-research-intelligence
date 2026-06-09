@@ -11,7 +11,7 @@ Read this *before* editing code so we don't reintroduce hackathon-era mistakes.
 
 - **The thesis:** Generic LLMs hallucinate numbers, so business teams can't trust them. We split the system into a deterministic **Math Engine** (Pandas/NumPy, no LLM) and a **Reasoning Brain** (LLM, never invents data — only narrates what the engine returned). Every claim must be traceable to a tool + source file.
 - **Target user:** Product managers, market researchers, founders evaluating B2C ideas (FMCG, D2C, SaaS-for-consumers).
-- **Demo domain:** Hair-care / FMCG market surveys (see `hairfall_market_survey_demo.csv`). Sample CSVs for other goals live under `samples/`.
+- **Demo domain:** Hair-care / FMCG market surveys (see `samples/hairfall_market_survey_demo.csv`). Sample CSVs for other goals live under `samples/`.
 
 The user-facing differentiators we promise (and must keep honest):
 1. **Bicameral architecture** — math is deterministic, LLM only narrates.
@@ -78,6 +78,7 @@ Everything outside this graph is either dead code or a bug. **Don't add code tha
 
 ### Streamlit file uploads
 - **Always save uploads to a temp path** (`tempfile.NamedTemporaryFile(delete=False, suffix=".csv")`) and pass the path through metadata. The brain `pd.read_csv`s a path, not a buffer.
+- **Gate on `uploaded_file.file_id`** to avoid re-writing the same temp file on every Streamlit rerun. Store the active path in `st.session_state.temp_file_path`.
 
 ### LLM cost
 - Use `gpt-4o-mini` for synthesis / safety scrubbing (fast, cheap).
@@ -127,3 +128,15 @@ Smoke tests live in `tests/` (pytest). Each goal × each sample CSV must run wit
 ## 📚 Where the Plan Lives
 
 `PLAN.md` at the repo root has the phased rebuild plan (Phases 1–4) with per-file deltas. When in doubt about scope, check there before refactoring.
+
+**Current status:** Phases 1–5 complete (demo-ready + analyst voice + math depth). **Phase 6 planned, not started** — Phase 6 = visual charts + interactive what-if sliders. See `PLAN.md`.
+
+**What Phase 4 delivered:**
+- Streaming via `yield from self.llm.stream(...)` in `OutputManager`; `brain.py` returns `response_stream` generator; `app.py` consumes with `st.write_stream`.
+- `st.empty()` status message replaces `st.spinner` so the loading indicator stays visible until the first token arrives.
+- "📄 Export Brief (Markdown)" download button in the UI.
+- `tests/test_smoke.py` with per-goal section-header assertions covering all 7 goals.
+- `.github/workflows/ci.yml` running `generate_data.py --all` before pytest on every push to `main`.
+- `synthesis_engine.py`, `canonical_system.py` deleted; `qual_engine.py` stub methods removed.
+
+**Next session:** Execute Phase 5 (voice + depth), then Phase 6 (visuals + what-ifs). Update README + this file when each ships.

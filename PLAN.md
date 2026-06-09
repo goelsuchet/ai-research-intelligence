@@ -1,8 +1,8 @@
 # 📋 Rebuild Plan — AI Research Intelligence Agent
 
-> Status: **Drafted** · Last updated: 2026-06-08
+> Status: **Phases 1–5 Shipped · Phase 6 Planned (not started)** · Last updated: 2026-06-09
 >
-> This plan turns the hackathon prototype into a portfolio-grade project. It's organized into 4 phases; each phase is independently shippable. Phase 1 alone makes the demo not-embarrassing; Phases 1+2 give a working MVP; Phase 3 delivers every README promise; Phase 4 is polish.
+> This plan turns the hackathon prototype into a portfolio-grade project. Phases 1–4 made it correct, complete, and demo-ready. Phase 5 added analyst voice, math depth, and contextual gap analysis. Phase 6 adds visuals and interactive what-if scenarios (experience). Each phase is independently shippable.
 
 ---
 
@@ -92,7 +92,7 @@ That's the **entire live path**. Everything else is dead code.
 
 ---
 
-## 🛠️ Phase 1 — Stop the Bleeding (4–6 hrs)
+## ✅ Phase 1 — Stop the Bleeding — COMPLETE
 
 **Goal:** App works correctly on Goal 1, no broken code in the repo, uploads don't lie.
 
@@ -114,9 +114,11 @@ That's the **entire live path**. Everything else is dead code.
 - `streamlit run frontend_ui/app.py` → upload `hairfall_market_survey_demo.csv` → run Goal 1 → get a clean, citation-free, real analysis.
 - No file in the repo crashes on import.
 
+**Completed:** All 9 tasks shipped and pushed to `main`. `requirements.txt` regenerated via `pip freeze` (UTF-8). Known Phase 2 carry-overs documented in CLAUDE.md.
+
 ---
 
-## 🛠️ Phase 2 — Make All 7 Goals Work (1–2 days)
+## ✅ Phase 2 — Make All 7 Goals Work — COMPLETE
 
 **Goal:** Every goal produces real numbers on real input. No more "N/A" / "Unknown" placeholder reports.
 
@@ -136,9 +138,15 @@ That's the **entire live path**. Everything else is dead code.
 - All 7 goals produce real, data-driven reports.
 - Sample CSVs work without surprises.
 
+**Completed:** All 5 tasks shipped. All 7 goals return `(report_text, trace_dict)` with populated `computations`. Per-goal sample CSVs generated. `GOAL_MAPPING` centralized in `goal_library.py`. Synthesis prompt uses real section headers extracted from report output.
+
+**Known carry-overs into Phase 3 (do not re-fix in isolation):**
+- `brain.py:75` passes `[ERROR]` strings to the LLM — needs `if tool_output and not tool_output.startswith("[ERROR]"):` guard.
+- `quant_engine.run_goal_2_analysis` funnel bottleneck relies on `value_counts()` coincidentally matching funnel order — Phase 3 should sort by explicit stage order before diffing.
+
 ---
 
-## 🛠️ Phase 3 — Deliver Every README Promise (3–5 days)
+## ✅ Phase 3 — Deliver Every README Promise — COMPLETE
 
 **Goal:** The features in the README actually exist in the code. This is where the architectural story becomes real.
 
@@ -187,17 +195,125 @@ That's the **entire live path**. Everything else is dead code.
 - Every claim in the README is true in the code.
 - Project is portfolio-defensible in an interview.
 
+**Completed:** All Phase 3 items shipped. Traceability (`trace_dict` + `[Source: <tool> on <file>]` citations), progressive disclosure (4 layers + layer buttons), clarity gate (`validator.py` wired), sequential goal queueing (explicit `[➡ Next]` button, GOAL_KEY routing fixed), and Vector RAG (`db_manager.py` ingestion + brain.py retrieval) are all live.
+
+**Known carry-overs into Phase 4:**
+- `data_intelligence/qual_engine.py` — stub methods not yet deleted (3e.1). Stub soup still present; delete or replace before shipping.
+- `data_intelligence/synthesis_engine.py` — slated for deletion (3e.4), not confirmed removed.
+- `data_intelligence/canonical_system.py` — slated for deletion (3e.5), not confirmed removed.
+- Streaming not yet wired — `OutputManager` returns a full string; `st.write_stream` not called (Phase 4 item).
+
 ---
 
-## 🛠️ Phase 4 — Polish & Demo-Readiness (1 day)
+## ✅ Phase 4 — Polish & Demo-Readiness — COMPLETE
 
 | # | File | Change |
 |---|---|---|
-| 4.1 | `frontend_ui/app.py` | Stream LLM tokens via `st.write_stream`. Add "📄 Export Brief (Markdown)" button that downloads the current trace+report. |
-| 4.2 | `agent_reasoning/brain.py` | Switch synthesis to `gpt-4o-mini` (cheap/fast); keep `gpt-4-turbo` for the validator only. Wire `langchain` streaming callbacks. |
-| 4.3 | `README.md` | Update screenshots. Regenerate demo GIF/video. Refresh "Run it in 60 seconds" quickstart. Drop the outdated `vector_store.py` reference. |
-| 4.4 | **NEW** `tests/` | Add `pytest` smoke tests: each goal × each sample CSV → no exceptions, output contains expected section headers. |
-| 4.5 | **NEW** `.github/workflows/ci.yml` | Run smoke tests on push to `main`. |
+| 4.1 | `frontend_ui/app.py` | Stream LLM tokens via `st.write_stream`. Added "📄 Export Brief (Markdown)" download button that packages the last response + JSON trace. Replaced `st.spinner` (closed before tokens arrived) with `st.empty()` status message that clears the instant streaming begins. |
+| 4.2 | `agent_reasoning/brain.py` | `process_turn` now returns `response_stream` (lazy generator) instead of a full string. `output_manager.generate_response` uses `yield from self.llm.stream(...)` throughout all 4 layers. |
+| 4.3 | `README.md` | Updated to match final architecture. Added "Run it in 60 seconds" quickstart. |
+| 4.4 | **NEW** `tests/test_smoke.py` | `pytest` smoke tests parameterized over all 7 goals × their canonical sample CSVs. Each test asserts: no `[ERROR]`, trace contract (`tool`, `rows_analyzed > 0`), and **per-goal named section headers** (e.g., "Market Attractiveness" for Goal 1, "Retention Health" for Goal 4) derived directly from `quant_engine.py` — catches wrong routing and broken sections. |
+| 4.5 | **NEW** `.github/workflows/ci.yml` | Runs on push/PR to `main`. Steps: checkout → Python 3.12 → install deps → `python generate_data.py --all` → `pytest tests/test_smoke.py -v`. The generate step is required because `samples/` is untracked. |
+| 4.6 | `data_intelligence/` | Deleted `synthesis_engine.py` and `canonical_system.py`. Removed all hardcoded-stub methods from `qual_engine.py`; only `extract_core_problems` (KMeans clustering) and `score_pain_intensity` (TextBlob) remain. |
+
+**Known carry-overs / future work (to discuss next session):**
+- No current known bugs. Next priorities → **Phase 5 (Report Depth & Analyst Voice)** and **Phase 6 (Visuals & Interactive What-Ifs)**, below.
+
+---
+
+## ✅ Phase 5 — Report Depth & Analyst Voice — COMPLETE
+
+**Goal:** Kill the corporate-email tone, and make answers *teach the user something they didn't already know*. Today the agent reads three numbers back in a business letter. After Phase 5 it should read like a senior analyst's briefing: longer, interpreted, with practical scenarios and grounded "what-if" reasoning — every claim still traceable, still no LLM-invented numbers.
+
+### The two root causes (diagnosed from the live demo)
+
+1. **Email tone.** `output_manager._generate_handover` literally instructs the LLM to *"Write a brief, professional 'Handover Message'"*. The model reads "message/handover" as a business letter and emits `Subject:` / `Dear [User]` / `Best regards` / `[Your Position]`. Nothing in `system_persona.py` bans salutations or sign-offs.
+2. **Thin substance.** (a) The quant engine computes only a handful of aggregates per goal — Goal 1 returns sample size, competitor count, avg WTP, and nothing else. (b) The output prompts then truncate even that (`data[:500] / [:1500] / [:3000]`) and ask for a "summary," so the LLM can only restate three numbers the user already knew. The LLM can never be deeper than the engine feeds it.
+3. **No gap awareness.** In the demo the user priced at **₹1200**; the engine reported a viable band of **₹150–₹999** and avg WTP **₹508** — and never noticed that ₹1200 sits *above the entire surveyed market*. The user's own context (price, audience, hypothesis) from the notes box is never fed into the analysis.
+
+### File-by-file changes
+
+#### 5a. Analyst voice — eliminate the email format
+
+| # | File | Change | Effect |
+|---|---|---|---|
+| 5a.1 | `agent_reasoning/prompts/system_persona.py` | Add a **VOICE & FORMAT** block: "You are a senior research analyst briefing a colleague directly. NEVER use email/letter scaffolding — no `Subject:` line, no `Dear …`, no `Best regards`, no `[Your Name]` / `[Your Position]` signature, no salutation or sign-off. Open with the single most important finding (BLUF). Write in direct second person ('your ₹1200 price point…')." Include one ❌-email / ✅-briefing example pair. | Bans the letter format at the persona level. |
+| 5a.2 | `agent_reasoning/output_manager.py` | Rewrite every layer template (`_generate_handover`, `_generate_layer_1/2`). Replace the phrase "Handover Message" with "readout / briefing"; drop "Write a … message to the user." Inline the no-email rule into each prompt as a hard constraint. Prepend `SYSTEM_INSTRUCTIONS` as a real `SystemMessage` (currently the layers send only a `HumanMessage`, so the persona's rules don't reach them). | Tone fixed at every layer, not just persona. |
+
+#### 5b. Deeper deterministic analysis (still zero LLM in the engine)
+
+| # | File | Change | Effect |
+|---|---|---|---|
+| 5b.1 | `data_intelligence/quant_engine.py` | For **every** goal, expand beyond means: add **distribution & percentiles** (p25/median/p75, not just mean), **segmentation** (group-by any categorical present — e.g., WTP by `age_group` / `city_tier` / `gender`), **top-N breakdowns**, and **derived ratios**. Each new number lands in `trace_dict["computations"]` so it stays traceable. | Engine has real depth to narrate. |
+| 5b.2 | `data_intelligence/quant_engine.py` | Add a **gap-analysis** step that uses user context (see 5b.4): compare the user's stated price / target against the computed band and report the gap explicitly (e.g., `price_vs_market`: "₹1200 is above p95 WTP of ₹950; ~8% of respondents reachable"). | Surfaces the non-obvious insight the demo missed. |
+| 5b.3 | `data_intelligence/quant_engine.py` | Add a deterministic **scenario block** per goal — a small computed table the narration (and Phase 6 charts) consume. Goal 1: a **price→reach curve** (`% of respondents with WTP ≥ price` across a price sweep). Goal 2/3: funnel drop at each stage. Goal 4: retention-decay curve. Goal 5: variant lift + confidence. Goal 6: RICE ranking table. Stored under `trace_dict["scenarios"]`. **No LLM, no charts here — just numbers.** | Foundation for what-ifs (narrative now, interactive in Phase 6). |
+| 5b.4 | `agent_reasoning/brain.py` | Parse the `USER_NOTES` block (already captured by `app.py`) into a `context` dict — extract a price figure (regex on `₹\d+` / "priced at"), target-audience phrase, and hypothesis text. Pass `context` into `QuantInsightEngine(context=…)` and forward it into the synthesis prompt. | Analysis becomes tailored to *this* user's plan, not generic. |
+
+#### 5c. Richer, longer narration
+
+| # | File | Change | Effect |
+|---|---|---|---|
+| 5c.1 | `agent_reasoning/output_manager.py` | **Remove the `[:500] / [:1500] / [:3000]` truncations.** Pass the full report + full `trace_dict` (incl. `scenarios`) to the LLM. | LLM stops being starved of data. |
+| 5c.2 | `agent_reasoning/output_manager.py` | Restructure the **evidence** layer prompt to demand a long-form brief with named sections: **(1) Bottom line · (2) What the numbers say — *and why each one matters* · (3) Practical scenarios (2–3 concrete situations grounded in the data) · (4) What-if analysis (read from `trace_dict["scenarios"]`) · (5) Risks & data gaps · (6) What to investigate next.** Instruct: interpret every number ("what does this imply for the decision?"), never merely restate it. Keep `[Source: …]` citations and safety rules. | Output that adds knowledge, not just echoes it. |
+| 5c.3 | `agent_reasoning/output_manager.py` | Keep `handover` short (it's the "I'm ready" ping) but make `summary` a tight 5–7 sentence verdict and `evidence` the full long-form brief from 5c.2. Preserve progressive disclosure — depth lives behind the **Show Evidence** button, not dumped at once. | Honors the progressive-disclosure contract while adding depth. |
+
+### Design decisions
+- **Detailed is the default.** The evidence layer is always the full multi-section brief (6 sections per 5c.2) — no concise mode, no depth toggle. Progressive disclosure is preserved by keeping `handover` short and `summary` tight, with the full depth behind the **Show Evidence** button.
+- **Context parsing stays deterministic** (regex/keyword in `brain.py`), not a separate LLM call — cheap and predictable. If a price isn't found, gap analysis is simply skipped (emit a data-gap note, never invent one).
+- **Engine stays LLM-free.** All new depth (percentiles, segments, scenarios, gap) is pandas/numpy. The LLM only narrates.
+
+### Deliverable
+- Upload the hairfall demo, price at ₹1200 → the agent opens with something like *"At ₹1200 you'd reach only ~8% of surveyed buyers — your price sits above the ₹150–₹999 band where 92% of demand lives [Source: …]."* No `Subject:`, no `Dear`, no sign-off. Evidence layer is a multi-section brief with practical scenarios and what-ifs.
+- All 7 goals return enriched `trace_dict` with `computations`, `scenarios`, and (where context allows) `gap` keys.
+
+---
+
+## 🟪 Phase 6 — Visuals & Interactive What-Ifs — PLANNED
+
+**Goal:** Turn the numbers into pictures and let the user *play* with them. Phase 5 makes the agent describe a price→reach curve in words; Phase 6 draws it and gives the user a slider to drag. Charts and what-ifs are computed deterministically (pandas), rendered in the UI — **the LLM never generates a chart or a number.**
+
+### File-by-file changes
+
+#### 6a. Chart-ready specs from the engine (deterministic)
+
+| # | File | Change | Effect |
+|---|---|---|---|
+| 6a.1 | `data_intelligence/quant_engine.py` | Each goal appends `trace_dict["visuals"] = [ {"type": "bar"\|"hist"\|"line"\|"funnel"\|"scatter", "title": …, "x": [...], "y": [...], "x_label":…, "y_label":…} ]`. Pure data, no rendering. Driven off the same computations/scenarios from Phase 5 (e.g., Goal 1: WTP histogram, price→reach line, competitor-share bar; Goal 2: funnel; Goal 4: retention-decay line; Goal 5: variant-conversion bar; Goal 6: impact-vs-effort RICE scatter). | One source of truth for every chart; still traceable. |
+
+#### 6b. Render visuals in the UI
+
+| # | File | Change | Effect |
+|---|---|---|---|
+| 6b.1 | **NEW** `frontend_ui/charts.py` | A pure `spec → plotly.graph_objects.Figure` mapper (`render_visual(spec)`). One small function per chart type. No Streamlit, no engine imports — easy to unit-test. | Rendering decoupled from data. |
+| 6b.2 | `frontend_ui/app.py` | After each assistant turn, if `trace.get("visuals")`, render them with `st.plotly_chart(render_visual(spec), use_container_width=True)` inside a `📈 Visuals` expander. Resilient: skip silently if absent/malformed. | Every goal shows charts. |
+| 6b.3 | `requirements.txt` | Add `plotly` (and `kaleido` for static PNG export in 6d). Pin versions. | Reproducible installs. |
+
+#### 6c. Interactive what-if controls
+
+| # | File | Change | Effect |
+|---|---|---|---|
+| 6c.1 | `data_intelligence/quant_engine.py` | Expose small **pure recompute functions** the UI can call live without re-running the whole goal — e.g., `reach_at_price(df, price) → float`, `projected_revenue(df, price) → float`, `rice_at(reach, impact, conf, effort)`. Deterministic, no LLM. | Sliders can recompute instantly. |
+| 6c.2 | **NEW** `frontend_ui/scenarios.py` + `app.py` | Goal-aware what-if panel: e.g., Goal 1 shows a **price `st.slider`** that live-updates "At ₹X, Y% of surveyed market reachable · projected reach Z" plus a marker on the price→reach chart. Goal 6 shows effort/impact sliders re-ranking RICE. No LLM round-trip — calls 6c.1 directly. | The headline "what-if" feature, made tactile. |
+
+#### 6d. Richer export
+
+| # | File | Change | Effect |
+|---|---|---|---|
+| 6d.1 | `frontend_ui/app.py` | Extend "📄 Export Brief": embed charts as PNG (via `kaleido`) into the exported document and append the scenario tables. Add an "include charts" toggle; markdown stays the default. | Export reflects what the user saw on screen. |
+
+#### 6e. Tests + docs (the contract)
+
+| # | File | Change | Effect |
+|---|---|---|---|
+| 6e.1 | `tests/test_smoke.py` | Assert each goal's `trace["visuals"]` is present and well-formed (type in allowed set, `len(x)==len(y)`). Assert recompute functions return sane shapes (e.g., `reach_at_price` is monotonically non-increasing in price). Add a **no-email** regression assert: output contains no `Subject:` / `Best regards` / `Dear `. | Locks in Phase 5 + 6 behavior. |
+| 6e.2 | `README.md` + `CLAUDE.md` | Document the new differentiators (visual layer, interactive what-ifs, analyst voice). Add the convention "engine emits `trace_dict['visuals']` / `['scenarios']`; UI renders, engine never draws" and the anti-pattern "no email/letter scaffolding in any output." | Docs match shipped reality (per the repo contract). |
+
+### Design decisions
+- **Plotly** over Streamlit-native charts: interactive hover/zoom and a polished look for a portfolio demo, with a clean `spec → figure` seam.
+- **What-ifs are interactive sliders backed by deterministic recompute**, not LLM narration — instant, reproducible, and impossible to hallucinate.
+
+### Deliverable
+- Every goal renders charts under a `📈 Visuals` expander; Goal 1 (and ≥2 others) have a live what-if slider; export embeds the charts. CI stays green with the new asserts.
 
 ---
 
@@ -215,6 +331,11 @@ That's the **entire live path**. Everything else is dead code.
 | Vector DB / RAG | ❌ Never populated | ✅ Verbatim quotes in answers | db_manager.py, brain.py, qual_engine.py |
 | Multi-modal input | 🟡 CSV-only, text ignored | ✅ CSV+XLSX+text | quant_engine.py, app.py |
 | Safety scrubbing | 🟡 Extra LLM call | ✅ Inline in prompts | output_manager.py |
+| Analyst voice (no email tone) | ❌ Letter format | 🟦 P5 | system_persona.py, output_manager.py |
+| Report depth (segments, percentiles, gap) | ❌ 3 aggregates | 🟦 P5 | quant_engine.py, brain.py |
+| Practical scenarios + what-ifs (narrative) | ❌ None | 🟦 P5 | quant_engine.py (scenarios), output_manager.py |
+| Visual representations (charts) | ❌ None | 🟪 P6 | quant_engine.py, charts.py, app.py |
+| Interactive what-if sliders | ❌ None | 🟪 P6 | quant_engine.py, scenarios.py, app.py |
 
 ---
 

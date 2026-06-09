@@ -46,45 +46,47 @@ class ClarityValidator:
 
         prompt = ChatPromptTemplate.from_template(template)
         
-        try:
-            _input = prompt.format_prompt(
-                goal=goal,
-                user_input=user_input,
-                findings=str(findings)[:2000],
-                format_instructions=self.parser.get_format_instructions()
-            )
-            # Invoke properly with messages
-            output = self.llm.invoke(_input.to_messages())
-            assessment = self.parser.parse(output.content)
+        for attempt in range(2):
+            try:
+                _input = prompt.format_prompt(
+                    goal=goal,
+                    user_input=user_input,
+                    findings=str(findings)[:2000],
+                    format_instructions=self.parser.get_format_instructions()
+                )
+                # Invoke properly with messages
+                output = self.llm.invoke(_input.to_messages())
+                assessment = self.parser.parse(output.content)
 
-            # STRICT CLARITY LOGIC
-            is_clear = all([
-                assessment.question_coverage,
-                assessment.risk_visibility,
-                assessment.structural_understanding,
-                assessment.diminishing_returns
-            ])
+                # STRICT CLARITY LOGIC
+                is_clear = all([
+                    assessment.question_coverage,
+                    assessment.risk_visibility,
+                    assessment.structural_understanding,
+                    assessment.diminishing_returns
+                ])
 
-            escalation_needed = False
-            escalation_type = None
+                escalation_needed = False
+                escalation_type = None
 
-            if not is_clear:
-                if assessment.missing_info_type == "Type A":
-                    escalation_needed = True
-                    escalation_type = "prioritization"
-                elif assessment.missing_info_type == "Type B":
-                    escalation_needed = True
-                    escalation_type = "summary"
-                # Type C (Data Gap) does not escalate; it stops naturally.
+                if not is_clear:
+                    if assessment.missing_info_type == "Type A":
+                        escalation_needed = True
+                        escalation_type = "prioritization"
+                    elif assessment.missing_info_type == "Type B":
+                        escalation_needed = True
+                        escalation_type = "summary"
+                    # Type C (Data Gap) does not escalate; it stops naturally.
 
-            return {
-                "is_clear": is_clear,
-                "escalation_needed": escalation_needed,
-                "escalation_type": escalation_type,
-                "reason": assessment.reasoning
-            }
+                return {
+                    "is_clear": is_clear,
+                    "escalation_needed": escalation_needed,
+                    "escalation_type": escalation_type,
+                    "reason": assessment.reasoning
+                }
 
-        except Exception as e:
-            logger.error(f"Validation failed: {e}")
-            # Fallback to "Not Clear" but safe if LLM fails
-            return {"is_clear": False, "escalation_needed": False, "reason": "Validation Error"}
+            except Exception as e:
+                logger.error(f"Validation failed on attempt {attempt+1}: {e}")
+                if attempt == 1:
+                    # Fallback to "Not Clear" but safe if LLM fails
+                    return {"is_clear": False, "escalation_needed": False, "escalation_type": None, "reason": "Validation Error"}

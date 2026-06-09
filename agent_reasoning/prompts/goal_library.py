@@ -79,3 +79,13 @@ GOAL_DEFINITIONS = {
         ]
     }
 }
+
+GOAL_MAPPING = {
+    "1. Launch New Product": "GOAL_1_LAUNCH",
+    "2. Diagnose Performance": "GOAL_2_PERFORMANCE",
+    "3. Improve UX / Journey": "GOAL_3_UX_JOURNEY",
+    "4. Increase Retention": "GOAL_4_RETENTION",
+    "5. Test Hypothesis": "GOAL_5_HYPOTHESIS",
+    "6. Prioritize Roadmap": "GOAL_6_PRIORITIZATION",
+    "7. Executive Summary": "GOAL_7_SYNTHESIS"
+}

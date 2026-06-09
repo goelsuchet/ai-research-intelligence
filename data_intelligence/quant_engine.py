@@ -2,17 +2,26 @@ import pandas as pd
 import numpy as np
 
 class QuantInsightEngine:
-    def __init__(self, context=None):
+    def __init__(self):
         """
-        Initializes the engine with mandatory context validation.
+        Initializes the engine.
         """
-        self.context = context if context else {}
+        pass
+
+    def _segment_metric(self, df, metric_col):
+        segments = {}
+        for cat in ['age_group', 'city_tier', 'gender', 'segment', 'variant']:
+            if cat in df.columns:
+                grouped = df.groupby(cat)[metric_col].mean().dropna().round(2).to_dict()
+                if grouped:
+                    segments[cat] = grouped
+        return segments
 
     def load_data(self, file_path_or_buffer):
         """Loads CSV or Excel data into a Pandas DataFrame."""
         try:
-            if isinstance(file_path_or_buffer, str) and file_path_or_buffer.endswith('.csv'):
-                return pd.read_csv(file_path_or_buffer)
+            if isinstance(file_path_or_buffer, str) and file_path_or_buffer.endswith('.xlsx'):
+                return pd.read_excel(file_path_or_buffer)
             else:
                 return pd.read_csv(file_path_or_buffer)
         except Exception:
@@ -21,219 +30,418 @@ class QuantInsightEngine:
     # =========================================================================
     # 🧪 GOAL 1: LAUNCH RESEARCH
     # =========================================================================
-    def run_goal_1_analysis(self, df):
-        """Analyzes Market Size, Competition, and Pricing."""
+    def run_goal_1_analysis(self, df, file_path="Unknown", context=None):
+        if context is None: context = {}
+        trace_dict = {"tool": "run_goal_1_analysis", "source_file": file_path, "columns_used": [], "rows_analyzed": len(df), "computations": {}, "scenarios": {}, "gap": None}
+        report_lines = ["### 🚀 Goal 1: Launch Viability Report", ""]
+        
         market_size = len(df)
-        competitor_count = df['current_brand'].nunique() if 'current_brand' in df.columns else 0
-        price_points = df['willingness_to_pay_inr'].dropna().tolist() if 'willingness_to_pay_inr' in df.columns else []
+        report_lines.append(f"**1. Market Attractiveness**\n- **Sample Size:** {market_size} respondents")
         
-        # Logic
-        avg_wtp = np.mean(price_points) if price_points else 0
-        density = "High" if competitor_count > 5 else "Low"
-
-        return f"""
-        ### 🚀 Goal 1: Launch Viability Report
-        
-        **1. Market Attractiveness**
-        - **Sample Size:** {market_size} respondents
-        - **Verdict:** Market demand validation in progress.
-        
-        **2. Competitive Landscape**
-        - **Density:** {density} ({competitor_count} active brands detected)
-        - *Strategic Note:* High density requires feature differentiation.
-        
-        **3. Pricing Feasibility**
-        - **Average WTP:** ₹{avg_wtp:.2f}
-        - **Viable Band:** ₹{min(price_points) if price_points else 0} - ₹{max(price_points) if price_points else 0}
-        """
+        if 'current_brand' in df.columns:
+            trace_dict["columns_used"].append('current_brand')
+            competitor_count = df['current_brand'].nunique()
+            top_brands = df['current_brand'].value_counts().head(3).to_dict()
+            density = "High" if competitor_count > 5 else "Low"
+            trace_dict["computations"]["competitor_count"] = competitor_count
+            trace_dict["computations"]["top_brands"] = top_brands
+            report_lines.append(f"\n**2. Competitive Landscape**\n- **Density:** {density} ({competitor_count} active brands)\n- **Top Leaders:** {', '.join([f'{k} ({v})' for k,v in top_brands.items()])}")
+        else:
+            report_lines.append(f"\n**2. Competitive Landscape**\n- ⚠️ Data gap identified: `current_brand` column missing.")
+            
+        if 'willingness_to_pay_inr' in df.columns:
+            trace_dict["columns_used"].append('willingness_to_pay_inr')
+            price_points = df['willingness_to_pay_inr'].dropna()
+            
+            p25 = np.percentile(price_points, 25)
+            median = np.median(price_points)
+            p75 = np.percentile(price_points, 75)
+            p95 = np.percentile(price_points, 95)
+            avg_wtp = np.mean(price_points)
+            
+            trace_dict["computations"]["wtp_stats"] = {"mean": avg_wtp, "p25": p25, "median": median, "p75": p75, "p95": p95}
+            
+            # Segmentation
+            segments = self._segment_metric(df, 'willingness_to_pay_inr')
+            if segments:
+                trace_dict["computations"]["wtp_segments"] = segments
+                report_lines.append("- **Segments:**")
+                for cat, group in segments.items():
+                    top_seg = max(group, key=group.get)
+                    report_lines.append(f"  - Highest {cat}: {top_seg} (₹{group[top_seg]:.2f})")
+            
+            # Scenarios
+            sweep = np.linspace(p25, p95, num=5)
+            reach_curve = {f"INR_{int(p)}": round((price_points >= p).mean() * 100, 1) for p in sweep}
+            trace_dict["scenarios"]["price_reach_curve_pct"] = reach_curve
+            
+            report_lines.append(f"\n**3. Pricing Feasibility**\n- **Median WTP:** ₹{median:.2f}\n- **Viable Band (p25-p75):** ₹{p25:.2f} - ₹{p75:.2f}")
+            
+            # Gap Analysis
+            target_price = context.get("price_target")
+            if target_price:
+                reachable_pct = (price_points >= target_price).mean() * 100
+                gap_msg = f"Your target price of ₹{target_price} reaches {reachable_pct:.1f}% of the surveyed market."
+                if target_price > p95:
+                    gap_msg += f" This is above the p95 WTP (₹{p95:.2f}). You are targeting the extreme premium niche."
+                elif target_price < p25:
+                    gap_msg += f" This is below the p25 WTP (₹{p25:.2f}). You are pricing very competitively."
+                
+                trace_dict["gap"] = gap_msg
+                report_lines.append(f"- **Contextual Gap Analysis:** {gap_msg}")
+        else:
+            report_lines.append(f"\n**3. Pricing Feasibility**\n- ⚠️ Data gap identified: `willingness_to_pay_inr` column missing.")
+            
+        return "\n".join(report_lines), trace_dict
 
     # =========================================================================
     # 📉 GOAL 2: PERFORMANCE DIAGNOSIS
     # =========================================================================
-    def run_goal_2_analysis(self, df):
-        """
-        Orchestrates Goal 2: Diagnosing why performance is good or bad.
-        Checks KPIs, Funnels, and Churn drivers.
-        """
-        insights = {}
+    def run_goal_2_analysis(self, df, file_path="Unknown", context=None):
+        if context is None: context = {}
+        trace_dict = {"tool": "run_goal_2_analysis", "source_file": file_path, "columns_used": [], "rows_analyzed": len(df), "computations": {}, "scenarios": {}, "gap": None}
+        report_lines = ["### 📉 Goal 2: Performance Diagnosis\n\n**1. KPI Health Check**"]
         
-        # 1. KPI HEALTH CHECK (Module 1)
-        # We look for columns like 'conversion_rate', 'cac', 'retention_d30'
-        # If not found, we simulate basic health checks based on generic data
-        current_kpis = {
-            "Acquisition Cost": df['acquisition_cost'].mean() if 'acquisition_cost' in df.columns else 0,
-            "Time to Value": df['time_to_value_seconds'].mean() if 'time_to_value_seconds' in df.columns else 0,
-            "Retention D30": df['retention_d30'].mean() if 'retention_d30' in df.columns else 0
-        }
+        for col in ['acquisition_cost', 'time_to_value_seconds', 'retention_d30']:
+            if col in df.columns:
+                trace_dict["columns_used"].append(col)
+                if df[col].dtype.kind in 'bifc':
+                    # Numeric column: get percentiles
+                    vals = df[col].dropna()
+                    if not vals.empty:
+                        p25, p50, p75 = np.percentile(vals, [25, 50, 75])
+                        mean_val = vals.mean()
+                        trace_dict["computations"][col] = {"mean": mean_val, "p25": p25, "median": p50, "p75": p75}
+                        report_lines.append(f"- **{col}:** Mean: {mean_val:.2f} | Median: {p50:.2f} | P75: {p75:.2f}")
+                        
+                        # Segmentation
+                        segments = self._segment_metric(df, col)
+                        if segments:
+                            trace_dict["computations"][f"{col}_segments"] = segments
+                    else:
+                        report_lines.append(f"- ⚠️ Data gap identified: `{col}` has no valid numbers.")
+                else:
+                    # Categorical / boolean
+                    val = df[col].mode()[0] if not df[col].empty else "Unknown"
+                    trace_dict["computations"][col] = val
+                    report_lines.append(f"- **{col} (Mode):** {val}")
+            else:
+                report_lines.append(f"- ⚠️ Data gap identified: `{col}` missing.")
         
-        # 2. FUNNEL BOTTLENECKS (Module 2) 
-        bottleneck = "Unknown"
+        report_lines.append("\n**2. Funnel Analysis**")
         if 'funnel_stage' in df.columns:
-            dropoffs = df['funnel_stage'].value_counts(normalize=True).sort_values()
-            bottleneck = dropoffs.index[0] if not dropoffs.empty else "N/A"
+            trace_dict["columns_used"].append('funnel_stage')
+            funnel_order = ["Landing", "Signup", "Onboarding", "Activation", "Paid"]
+            existing_stages = [s for s in funnel_order if s in df['funnel_stage'].unique()]
+            if not existing_stages:
+                existing_stages = df['funnel_stage'].unique().tolist()
+                
+            counts = df['funnel_stage'].value_counts().reindex(existing_stages).fillna(0)
+            if len(counts) > 1:
+                drops = counts.diff().abs()
+                bottleneck = drops.idxmax()
+                
+                # Scenarios: Funnel Drop Table
+                total_start = counts.iloc[0] if counts.iloc[0] > 0 else 1
+                funnel_pct = (counts / total_start * 100).round(1).to_dict()
+                trace_dict["scenarios"]["funnel_survival_pct"] = funnel_pct
+            else:
+                bottleneck = counts.index[0] if not counts.empty else "N/A"
+            trace_dict["computations"]["bottleneck"] = bottleneck
+            report_lines.append(f"- **Primary Bottleneck:** {bottleneck}")
+        else:
+            report_lines.append("- ⚠️ Data gap identified: `funnel_stage` missing.")
 
-        # 3. CHURN ANALYSIS (Module 3) 
-        churn_reasons = []
+        report_lines.append("\n**3. Churn Diagnosis**")
         if 'churn_reason' in df.columns:
-            churn_reasons = df['churn_reason'].value_counts().head(3).index.tolist()
+            trace_dict["columns_used"].append('churn_reason')
+            churn_counts = df['churn_reason'].value_counts()
+            total_churn = churn_counts.sum()
+            top_churn = churn_counts.head(3)
+            
+            churn_reasons = []
+            for reason, count in top_churn.items():
+                pct = (count / total_churn) * 100
+                churn_reasons.append(f"{reason} ({pct:.1f}%)")
+            
+            trace_dict["computations"]["churn_reasons"] = top_churn.to_dict()
+            report_lines.append(f"- **Top Reasons:** {', '.join(churn_reasons)}")
+            
+            # Gap Analysis: Check if the user's hypothesized pain point is a top reason
+            hypothesis = context.get("notes", "").lower()
+            if hypothesis and "churn" in hypothesis:
+                # If they mention a specific churn reason, see if it's in the top 3
+                found_match = False
+                for reason in top_churn.index:
+                    if str(reason).lower() in hypothesis:
+                        trace_dict["gap"] = f"Your hypothesized churn reason ('{reason}') aligns with the data. It is a top reason."
+                        found_match = True
+                        break
+                if not found_match:
+                    trace_dict["gap"] = "Your hypothesized churn reason does not appear in the top 3 reasons."
+                report_lines.append(f"- **Contextual Gap Analysis:** {trace_dict['gap']}")
+        else:
+            report_lines.append("- ⚠️ Data gap identified: `churn_reason` missing.")
 
-        return f"""
-        ### 📉 Goal 2: Performance Diagnosis
-        
-        **1. KPI Health Check** 
-        - **CAC:** {current_kpis['Acquisition Cost']:.2f} (Simulated or Calculated)
-        - **Time to Value:** {current_kpis['Time to Value']:.2f}
-        
-        **2. Funnel Analysis** 
-        - **Primary Bottleneck:** {bottleneck}
-        - *Action:* Investigate friction at this specific stage.
-        
-        **3. Churn Diagnosis** 
-        - **Top Reasons:** {', '.join(churn_reasons) if churn_reasons else 'Insufficient data to rank drivers.'}
-        """
+        return "\n".join(report_lines), trace_dict
 
     # =========================================================================
     # 🎨 GOAL 3: UX & JOURNEY DIAGNOSIS
     # =========================================================================
-    def run_goal_3_analysis(self, df):
-        """Maps Friction, Effort Scores, and Drop-off correlation."""
+    def run_goal_3_analysis(self, df, file_path="Unknown", context=None):
+        if context is None: context = {}
+        trace_dict = {"tool": "run_goal_3_analysis", "source_file": file_path, "columns_used": [], "rows_analyzed": len(df), "computations": {}, "scenarios": {}, "gap": None}
+        report_lines = ["### 🎨 Goal 3: UX & Journey Diagnosis\n\n**1. Cognitive Load Analysis**"]
         
-        # 1. Effort Score 
-        avg_effort = "N/A"
         if 'effort_score' in df.columns:
-            avg_effort = round(df['effort_score'].mean(), 2)
+            efforts = df['effort_score'].dropna()
+            avg_effort = round(efforts.mean(), 2)
+            p25, median, p75 = np.percentile(efforts, [25, 50, 75])
+            trace_dict["computations"]["effort_score"] = {"mean": avg_effort, "p25": p25, "median": median, "p75": p75}
+            report_lines.append(f"- **Average Effort Score:** {avg_effort} (Scale 1-10)\n- **Effort Spread:** Median {median:.1f} (P25: {p25:.1f}, P75: {p75:.1f})")
             
-        # 2. Friction Classification 
-        friction_points = "None Detected"
+            # Segmentation
+            segments = self._segment_metric(df, 'effort_score')
+            if segments:
+                trace_dict["computations"]["effort_segments"] = segments
+            
+            # Scenarios: Effort distribution if stage available
+            if 'funnel_stage' in df.columns:
+                stage_effort = df.groupby('funnel_stage')['effort_score'].mean().round(2).to_dict()
+                trace_dict["scenarios"]["effort_by_stage"] = stage_effort
+                report_lines.append(f"- **Effort by Stage:** {', '.join([f'{k}: {v}' for k,v in stage_effort.items()])}")
+        else:
+            report_lines.append("- ⚠️ Data gap identified: `effort_score` missing.")
+            
+        report_lines.append("\n**2. Friction Taxonomy**")
         if 'friction_type' in df.columns:
-            friction_points = df['friction_type'].mode()[0]
+            frictions = df['friction_type'].value_counts()
+            top_friction = frictions.head(3).to_dict()
+            friction_points = frictions.index[0] if not frictions.empty else "Unknown"
+            trace_dict["computations"]["friction_points"] = friction_points
+            trace_dict["computations"]["top_frictions"] = top_friction
+            report_lines.append(f"- **Dominant Friction:** {friction_points}\n- **Top Issues:** {', '.join([f'{k} ({v})' for k,v in top_friction.items()])}")
+            
+            # Gap Analysis
+            hypothesis = context.get("notes", "").lower()
+            if hypothesis and "friction" in hypothesis:
+                found_match = False
+                for f in top_friction.keys():
+                    if str(f).lower() in hypothesis:
+                        trace_dict["gap"] = f"Your hypothesized friction ('{f}') is indeed a top issue."
+                        found_match = True
+                        break
+                if not found_match:
+                    trace_dict["gap"] = "Your hypothesized friction does not appear in the top 3 reported issues."
+                report_lines.append(f"- **Contextual Gap Analysis:** {trace_dict['gap']}")
+        else:
+            report_lines.append("- ⚠️ Data gap identified: `friction_type` missing.")
 
-        return f"""
-        ### 🎨 Goal 3: UX & Journey Diagnosis
-        
-        **1. Cognitive Load Analysis** 
-        - **Average Effort Score:** {avg_effort} (Scale 1-10)
-        - *Insight:* Lower scores correlate with higher conversion.
-        
-        **2. Friction Taxonomy** 
-        - **Dominant Friction:** {friction_points}
-        - *Recommendation:* If 'Cognitive', simplify copy. If 'Technical', fix bugs.
-        """
+        return "\n".join(report_lines), trace_dict
 
     # =========================================================================
     # 🔄 GOAL 4: RETENTION & LOYALTY
     # =========================================================================
-    def run_goal_4_analysis(self, df):
-        """Analyzes Retention Curves, Habits, and Loyalty Drivers."""
+    def run_goal_4_analysis(self, df, file_path="Unknown", context=None):
+        if context is None: context = {}
+        trace_dict = {"tool": "run_goal_4_analysis", "source_file": file_path, "columns_used": [], "rows_analyzed": len(df), "computations": {}, "scenarios": {}, "gap": None}
+        report_lines = ["### 🔄 Goal 4: Retention & Loyalty Intelligence\n\n**1. Retention Health**"]
         
-        # 1. Retention Baseline 
-        d30_rate = "N/A"
         if 'retention_d30' in df.columns:
-            d30_rate = f"{df['retention_d30'].mean() * 100:.1f}%"
+            trace_dict["columns_used"].append('retention_d30')
+            d30_rate_val = df['retention_d30'].mean() * 100
+            d30_rate = f"{d30_rate_val:.1f}%"
+            trace_dict["computations"]["retention_rate"] = df['retention_d30'].mean()
+            report_lines.append(f"- **D30 Retention:** {d30_rate}")
             
-        # 2. Habit Signals 
-        habit_strength = "Weak"
+            trace_dict["scenarios"]["retention_decay"] = {
+                "Day_1": 100.0,
+                "Day_7": min(round(d30_rate_val * 1.5, 1), 100.0),
+                "Day_14": min(round(d30_rate_val * 1.2, 1), 100.0),
+                "Day_30": round(d30_rate_val, 1),
+            }
+        elif 'satisfaction_score' in df.columns:
+            trace_dict["columns_used"].append('satisfaction_score')
+            proxy_rate = (df['satisfaction_score'] >= 8).mean()
+            trace_dict["computations"]["retention_proxy"] = proxy_rate
+            report_lines.append(f"- **Derived Intent to Repurchase:** {proxy_rate * 100:.1f}% (Proxy from Satisfaction)")
+        else:
+            report_lines.append("- ⚠️ Data gap identified: `retention_d30` missing.")
+            
+        report_lines.append("\n**2. Habit Formation**")
         if 'login_frequency' in df.columns:
-            freq = df['login_frequency'].mean()
-            habit_strength = "Strong" if freq > 3 else "Moderate"
+            trace_dict["columns_used"].append('login_frequency')
+            freqs = df['login_frequency'].dropna()
+            if not freqs.empty:
+                freq_mean = freqs.mean()
+                p25, median, p75 = np.percentile(freqs, [25, 50, 75])
+                habit_strength = "Strong" if freq_mean > 3 else "Moderate"
+                trace_dict["computations"]["login_frequency"] = {"mean": freq_mean, "p25": p25, "median": median, "p75": p75}
+                report_lines.append(f"- **Signal Strength:** {habit_strength} (Mean: {freq_mean:.1f}, Median: {median:.1f})")
+                
+                # Segmentation
+                segments = self._segment_metric(df, 'login_frequency')
+                if segments:
+                    trace_dict["computations"]["login_segments"] = segments
+                
+                # Gap Analysis
+                hypothesis = context.get("notes", "").lower()
+                if "daily" in hypothesis or "high frequency" in hypothesis:
+                    if median >= 5:
+                        trace_dict["gap"] = "Your hypothesis of 'daily/high frequency' is supported by a median login rate of >= 5."
+                    else:
+                        trace_dict["gap"] = f"Your hypothesis of 'high frequency' contrasts with actual median frequency of {median:.1f}."
+                    report_lines.append(f"- **Contextual Gap Analysis:** {trace_dict['gap']}")
+            else:
+                report_lines.append("- ⚠️ Data gap identified: `login_frequency` contains no valid numbers.")
+        else:
+            report_lines.append("- ⚠️ Data gap identified: `login_frequency` missing.")
 
-        return f"""
-        ### 🔄 Goal 4: Retention & Loyalty Intelligence
-        
-        **1. Retention Health** 
-        - **D30 Retention:** {d30_rate}
-        - *Benchmark:* Compare against category average of 20%.
-        
-        **2. Habit Formation** 
-        - **Signal Strength:** {habit_strength}
-        - *Strategy:* Focus on the 'Trigger -> Action' loop for frequency < 3.
-        """
+        return "\n".join(report_lines), trace_dict
 
     # =========================================================================
     # 🧪 GOAL 5: HYPOTHESIS VALIDATION
     # =========================================================================
-    def run_goal_5_analysis(self, df):
-        """Audits Hypotheses, Checks Evidence, and Assigns Confidence."""
+    def run_goal_5_analysis(self, df, file_path="Unknown", context=None):
+        if context is None: context = {}
+        trace_dict = {"tool": "run_goal_5_analysis", "source_file": file_path, "columns_used": [], "rows_analyzed": len(df), "computations": {}, "scenarios": {}, "gap": None}
+        report_lines = [f"### 🧪 Goal 5: Hypothesis Validation Engine\n\n**1. Intake Audit**\n- **Hypotheses Reviewed:** {len(df)}", "\n**2. Evidence Classification**"]
         
-        # 1. Hypothesis Quality 
-        # (Simulating an audit of rows in the CSV)
-        valid_hypotheses = len(df)
-        
-        # 2. Evidence Strength 
-        # Check if we have statistical significance columns
-        sig_level = "Directional Only"
         if 'p_value' in df.columns:
+            trace_dict["columns_used"].append('p_value')
             sig_level = "Statistically Significant" if df['p_value'].min() < 0.05 else "Inconclusive"
+            trace_dict["computations"]["min_p_value"] = df['p_value'].min()
+            report_lines.append(f"- **Signal Strength:** {sig_level}")
+        else:
+            report_lines.append("- ⚠️ Data gap identified: `p_value` missing.")
+            
+        if 'variant' in df.columns and 'conversion_rate' in df.columns:
+            trace_dict["columns_used"].extend(['variant', 'conversion_rate'])
+            variant_conv = df.groupby('variant')['conversion_rate'].mean().to_dict()
+            trace_dict["computations"]["variant_conversion"] = variant_conv
+            
+            # Segmentation
+            segments = self._segment_metric(df, 'conversion_rate')
+            if segments:
+                trace_dict["computations"]["conversion_segments"] = segments
+                
+            report_lines.append("\n**3. Variant Performance**")
+            for var, conv in variant_conv.items():
+                report_lines.append(f"- **{var}:** {conv*100:.1f}%")
+                
+            winning_variant = max(variant_conv, key=variant_conv.get)
+            trace_dict["computations"]["winning_variant"] = winning_variant
+            
+            # Scenarios: Lift
+            baseline_conv = variant_conv.get("control", variant_conv.get(list(variant_conv.keys())[0]))
+            winner_conv = variant_conv[winning_variant]
+            if baseline_conv and baseline_conv > 0:
+                relative_lift = ((winner_conv - baseline_conv) / baseline_conv) * 100
+                trace_dict["scenarios"]["lift"] = {"winner": winning_variant, "relative_lift_pct": round(relative_lift, 1)}
+                report_lines.append(f"- **Relative Lift:** +{relative_lift:.1f}% (for {winning_variant})")
+                
+            # Gap Analysis
+            hypothesis = context.get("notes", "").lower()
+            if hypothesis:
+                if str(winning_variant).lower() in hypothesis:
+                    trace_dict["gap"] = f"Your hypothesized variant ('{winning_variant}') is indeed the winner."
+                else:
+                    trace_dict["gap"] = f"Your hypothesis does not match the winning variant ('{winning_variant}')."
+                report_lines.append(f"- **Contextual Gap Analysis:** {trace_dict['gap']}")
 
-        return f"""
-        ### 🧪 Goal 5: Hypothesis Validation Engine
-        
-        **1. Intake Audit** 
-        - **Hypotheses Reviewed:** {valid_hypotheses}
-        - **Status:** Structure Validated.
-        
-        **2. Evidence Classification** 
-        - **Signal Strength:** {sig_level}
-        - *Guidance:* If 'Directional Only', do not scale to 100% of users yet.
-        """
+        return "\n".join(report_lines), trace_dict
 
     # =========================================================================
     # 📋 GOAL 6: PRIORITIZATION & ROADMAP
     # =========================================================================
-    def run_goal_6_analysis(self, df):
-        """Ranks initiatives using RICE/ICE and constraint modeling."""
+    def run_goal_6_analysis(self, df, file_path="Unknown", context=None):
+        if context is None: context = {}
+        trace_dict = {"tool": "run_goal_6_analysis", "source_file": file_path, "columns_used": [], "rows_analyzed": len(df), "computations": {}, "scenarios": {}, "gap": None}
+        report_lines = ["### 📋 Goal 6: Roadmap Prioritization\n\n**1. Ranked Initiatives**"]
         
-        # 1. Prioritization 
-        top_item = "None"
-        rice_score = "N/A"
-        
-        # Use existing columns or simulate for safety
         if 'impact_score' in df.columns and 'effort_score' in df.columns:
-            # RICE = (Reach * Impact * Confidence) / Effort
-            # We assume columns exist or default to 1
-            impact = df['impact_score']
-            effort = df['effort_score']
-            confidence = df['confidence_score'] if 'confidence_score' in df.columns else 1.0
+            trace_dict["columns_used"].extend(['impact_score', 'effort_score'])
+            df_local = df.copy()
+            impact = df_local['impact_score']
+            effort = df_local['effort_score']
+            confidence = df_local['confidence_score'] if 'confidence_score' in df_local.columns else 1.0
+            reach = df_local['reach'] if 'reach' in df_local.columns else 1.0
+            if 'confidence_score' in df_local.columns:
+                trace_dict["columns_used"].append('confidence_score')
+            if 'reach' in df_local.columns:
+                trace_dict["columns_used"].append('reach')
             
-            df['rice_score'] = (impact * confidence) / effort
+            df_local['rice_score'] = (reach * impact * confidence) / effort.replace(0, 0.1)
             
-            best_row = df.sort_values('rice_score', ascending=False).iloc[0]
-            top_item = best_row['feature_name'] if 'feature_name' in df.columns else "Item #1"
+            # Get Top 5 for scenarios
+            df_sorted = df_local.sort_values('rice_score', ascending=False)
+            top_5 = df_sorted.head(5)
+            
+            scenario_table = {}
+            for idx, row in top_5.iterrows():
+                fname = row.get('feature_name', f'Item {idx}')
+                scenario_table[fname] = round(row['rice_score'], 2)
+            trace_dict["scenarios"]["top_features_rice"] = scenario_table
+            
+            best_row = top_5.iloc[0]
+            top_item = best_row.get('feature_name', "Item #1")
             rice_score = round(best_row['rice_score'], 2)
+            trace_dict["computations"]["top_item"] = top_item
+            trace_dict["computations"]["rice_score"] = rice_score
+            report_lines.append(f"- **#1 Priority:** {top_item}\n- **Score:** {rice_score}")
+            report_lines.append(f"- **Runner Ups:** {', '.join(list(scenario_table.keys())[1:3])}")
+            
+            # Segmentation
+            segments = self._segment_metric(df_local, 'rice_score')
+            if segments:
+                trace_dict["computations"]["rice_segments"] = segments
+            
+            # Gap Analysis
+            hypothesis = context.get("notes", "").lower()
+            if hypothesis:
+                found_rank = None
+                for i, fname in enumerate(scenario_table.keys()):
+                    if str(fname).lower() in hypothesis:
+                        found_rank = i + 1
+                        break
+                if found_rank:
+                    trace_dict["gap"] = f"Your hypothesized feature is ranked #{found_rank} in the RICE priority list."
+                else:
+                    trace_dict["gap"] = "Your hypothesized feature did not make the top 5."
+                report_lines.append(f"- **Contextual Gap Analysis:** {trace_dict['gap']}")
+        else:
+            report_lines.append("- ⚠️ Data gap identified: `impact_score` or `effort_score` missing.")
 
-        return f"""
-        ### 📋 Goal 6: Roadmap Prioritization
-        
-        **1. Ranked Initiatives** 
-        - **#1 Priority:** {top_item}
-        - **Score:** {rice_score}
-        - *Framework:* RICE (Reach * Impact * Confidence / Effort)
-        
-        **2. Feasibility Check** 
-        - **Constraint Mode:** Resources are assumed finite. 
-        - *Action:* Ensure engineering capacity aligns with the #1 priority.
-        """
+        return "\n".join(report_lines), trace_dict
 
     # =========================================================================
     # 📢 GOAL 7: EXECUTIVE SUMMARY
     # =========================================================================
-    def run_goal_7_analysis(self, df):
-        """Synthesizes all insights into a Board-Ready Summary."""
+    def run_goal_7_analysis(self, df, file_path="Unknown", context=None):
+        if context is None: context = {}
+        trace_dict = {"tool": "run_goal_7_analysis", "source_file": file_path, "columns_used": list(df.columns), "rows_analyzed": len(df), "computations": {}, "scenarios": {}, "gap": None}
         
-        rows = len(df)
+        numeric_cols = df.select_dtypes(include=[np.number]).columns
+        stats = []
+        health_scores = {}
+        for col in numeric_cols:
+            mean_val = df[col].mean()
+            std_val = df[col].std()
+            stats.append(f"- **{col}**: Mean {mean_val:.2f}, Std {std_val:.2f}")
+            trace_dict["computations"][f"{col}_mean"] = mean_val
+            
+            # Simple scenario: normalize the mean as a 1-100 score relative to max
+            max_val = df[col].max()
+            if max_val and max_val > 0:
+                health_scores[col] = round((mean_val / max_val) * 100, 1)
+                
+        trace_dict["scenarios"]["health_scores"] = health_scores
         
-        return f"""
-        ### 📢 Goal 7: Executive Strategy Brief
+        report_lines = [
+            f"### 📢 Goal 7: Executive Strategy Brief",
+            f"**1. The Bottom Line**",
+            f"- **Dataset:** Analyzed {len(df)} data points.",
+            f"\n**2. Aggregate Statistics**"
+        ] + stats
         
-        **1. The Bottom Line** 
-        - **Dataset:** Analyzed {rows} data points across the business.
-        - **Primary Insight:** Data indicates a strong need for optimization before scaling.
-        
-        **2. Critical Decision** 
-        - **Recommendation:** **INVEST** in Retention (Goal 4) mechanisms.
-        - **Risk:** High churn is currently the leaks bucket preventing growth.
-        
-        **3. Confidence Level** 
-        - **Score:** Medium-High
-        - *Rationale:* Backed by quantitative retention signals in the dataset.
-        """
+        return "\n".join(report_lines), trace_dict

@@ -1,0 +1,501 @@
+response_id,age_group,gender,city_tier,primary_hair_concern,hairfall_severity,current_brand,satisfaction_score,willingness_to_pay_inr,purchase_frequency,ingredient_preference,feedback_text
+RESP_0001,25-34,Male,Tier 1,Hairfall,Severe (Visible Thinning),Head & Shoulders,7,150,Quarterly,Ayurvedic/Herbal,Nothing works on my scalp.
+RESP_0002,18-24,Female,Tier 1,Hairfall,Severe (Visible Thinning),Generic/Ayurvedic,7,250,Bi-Monthly,Ayurvedic/Herbal,Nothing works on my scalp.
+RESP_0003,55+,Female,Tier 2,Dryness,Mild (Seasonal),Head & Shoulders,2,699,Quarterly,Chemical/Scientific,Good but causes dandruff.
+RESP_0004,35-44,Female,Tier 3,Hairfall,Mild (Seasonal),Pantene,4,399,Monthly,Ayurvedic/Herbal,I need a solution for post-partum hair loss.
+RESP_0005,18-24,Female,Tier 2,Oily Scalp,Severe (Visible Thinning),Dove,6,399,Quarterly,Ayurvedic/Herbal,Made my hair dry but stopped fall.
+RESP_0006,18-24,Female,Tier 1,Dryness,Severe (Visible Thinning),Generic/Ayurvedic,9,250,Bi-Monthly,Chemical/Scientific,Good but causes dandruff.
+RESP_0007,35-44,Female,Tier 3,Frizz,Moderate (Clumps),Generic/Ayurvedic,8,250,Bi-Monthly,Ayurvedic/Herbal,Too expensive for daily use.
+RESP_0008,45-54,Female,Tier 2,Hairfall,Mild (Seasonal),Pantene,2,699,Monthly,Chemical/Scientific,Nothing works on my scalp.
+RESP_0009,18-24,Female,Tier 2,Dandruff,Severe (Visible Thinning),Mamaearth,4,399,Bi-Monthly,Ayurvedic/Herbal,I want something that actually stops hairfall.
+RESP_0010,18-24,Male,Tier 2,Dryness,Severe (Visible Thinning),Generic/Ayurvedic,6,499,Bi-Monthly,No Preference,Just marketing gimmicks.
+RESP_0011,25-34,Female,Tier 2,Dryness,Severe (Visible Thinning),Pantene,4,499,Monthly,Ayurvedic/Herbal,Too expensive for daily use.
+RESP_0012,18-24,Female,Tier 3,Frizz,Moderate (Clumps),Head & Shoulders,8,699,Bi-Monthly,Chemical/Scientific,I need a solution for post-partum hair loss.
+RESP_0013,25-34,Male,Tier 1,Oily Scalp,Moderate (Clumps),Head & Shoulders,6,499,Bi-Monthly,No Preference,Just marketing gimmicks.
+RESP_0014,25-34,Male,Tier 1,Hairfall,Mild (Seasonal),Generic/Ayurvedic,9,399,Monthly,Ayurvedic/Herbal,I prefer natural smell.
+RESP_0015,35-44,Male,Tier 1,Hairfall,Mild (Seasonal),Mamaearth,9,399,Quarterly,Ayurvedic/Herbal,Good but causes dandruff.
+RESP_0016,55+,Male,Tier 2,Oily Scalp,Severe (Visible Thinning),Generic/Ayurvedic,6,999,Monthly,Chemical/Scientific,Too expensive for daily use.
+RESP_0017,25-34,Female,Tier 2,Hairfall,Moderate (Clumps),Pantene,4,250,Monthly,Ayurvedic/Herbal,I want something that actually stops hairfall.
+RESP_0018,25-34,Male,Tier 1,Dandruff,Moderate (Clumps),Mamaearth,7,499,Monthly,Ayurvedic/Herbal,I want something that actually stops hairfall.
+RESP_0019,35-44,Male,Tier 2,Hairfall,Severe (Visible Thinning),Tresemme,6,499,Monthly,Ayurvedic/Herbal,Too expensive for daily use.
+RESP_0020,55+,Male,Tier 3,Oily Scalp,Moderate (Clumps),Mamaearth,7,399,Bi-Monthly,Chemical/Scientific,I prefer natural smell.
+RESP_0021,35-44,Female,Tier 1,Hairfall,Mild (Seasonal),Generic/Ayurvedic,5,499,Quarterly,Chemical/Scientific,I need a solution for post-partum hair loss.
+RESP_0022,25-34,Female,Tier 1,Hairfall,Severe (Visible Thinning),Tresemme,5,250,Quarterly,Ayurvedic/Herbal,Just marketing gimmicks.
+RESP_0023,35-44,Male,Tier 2,Hairfall,Mild (Seasonal),Pantene,8,399,Monthly,Ayurvedic/Herbal,Too expensive for daily use.
+RESP_0024,18-24,Female,Tier 2,Dandruff,Mild (Seasonal),Generic/Ayurvedic,7,499,Quarterly,Ayurvedic/Herbal,I prefer natural smell.
+RESP_0025,25-34,Male,Tier 2,Hairfall,Severe (Visible Thinning),Head & Shoulders,8,399,Bi-Monthly,Ayurvedic/Herbal,Made my hair dry but stopped fall.
+RESP_0026,35-44,Male,Tier 1,Dryness,Mild (Seasonal),Dove,3,699,Bi-Monthly,Chemical/Scientific,I prefer natural smell.
+RESP_0027,45-54,Female,Tier 1,Dryness,Severe (Visible Thinning),Head & Shoulders,8,399,Bi-Monthly,Chemical/Scientific,I want something that actually stops hairfall.
+RESP_0028,55+,Female,Tier 1,Hairfall,Severe (Visible Thinning),Generic/Ayurvedic,7,399,Quarterly,Ayurvedic/Herbal,Made my hair dry but stopped fall.
+RESP_0029,55+,Male,Tier 1,Hairfall,Mild (Seasonal),Generic/Ayurvedic,4,399,Monthly,No Preference,I need a solution for post-partum hair loss.
+RESP_0030,18-24,Female,Tier 3,Dandruff,Severe (Visible Thinning),Pantene,3,699,Bi-Monthly,No Preference,Just marketing gimmicks.
+RESP_0031,25-34,Female,Tier 1,Hairfall,Severe (Visible Thinning),Mamaearth,6,399,Bi-Monthly,Chemical/Scientific,Good but causes dandruff.
+RESP_0032,25-34,Male,Tier 2,Frizz,Mild (Seasonal),Head & Shoulders,7,699,Quarterly,No Preference,I need a solution for post-partum hair loss.
+RESP_0033,25-34,Male,Tier 1,Hairfall,Moderate (Clumps),Pantene,10,250,Bi-Monthly,Ayurvedic/Herbal,I need a solution for post-partum hair loss.
+RESP_0034,25-34,Female,Tier 3,Hairfall,Mild (Seasonal),Mamaearth,6,250,Quarterly,Ayurvedic/Herbal,Too expensive for daily use.
+RESP_0035,45-54,Female,Tier 3,Hairfall,Mild (Seasonal),Tresemme,5,399,Quarterly,Ayurvedic/Herbal,Too expensive for daily use.
+RESP_0036,45-54,Male,Tier 3,Hairfall,Severe (Visible Thinning),Pantene,5,399,Bi-Monthly,Ayurvedic/Herbal,Just marketing gimmicks.
+RESP_0037,45-54,Female,Tier 3,Oily Scalp,Moderate (Clumps),Dove,5,499,Quarterly,Ayurvedic/Herbal,Made my hair dry but stopped fall.
+RESP_0038,25-34,Male,Tier 1,Hairfall,Severe (Visible Thinning),Pantene,5,399,Monthly,Ayurvedic/Herbal,I prefer natural smell.
+RESP_0039,35-44,Female,Tier 1,Hairfall,Severe (Visible Thinning),Tresemme,7,499,Bi-Monthly,Ayurvedic/Herbal,Too expensive for daily use.
+RESP_0040,45-54,Female,Tier 1,Hairfall,Mild (Seasonal),Pantene,4,250,Bi-Monthly,Ayurvedic/Herbal,Good but causes dandruff.
+RESP_0041,18-24,Female,Tier 3,Dandruff,Mild (Seasonal),Generic/Ayurvedic,3,699,Monthly,No Preference,Made my hair dry but stopped fall.
+RESP_0042,25-34,Female,Tier 1,Hairfall,Moderate (Clumps),Head & Shoulders,1,699,Quarterly,Chemical/Scientific,Good but causes dandruff.
+RESP_0043,25-34,Other,Tier 1,Dryness,Mild (Seasonal),Head & Shoulders,4,499,Monthly,Ayurvedic/Herbal,I want something that actually stops hairfall.
+RESP_0044,25-34,Female,Tier 2,Hairfall,Moderate (Clumps),Generic/Ayurvedic,1,699,Monthly,Chemical/Scientific,Good but causes dandruff.
+RESP_0045,35-44,Male,Tier 1,Hairfall,Moderate (Clumps),Generic/Ayurvedic,3,699,Bi-Monthly,Ayurvedic/Herbal,I want something that actually stops hairfall.
+RESP_0046,18-24,Female,Tier 1,Hairfall,Mild (Seasonal),Head & Shoulders,7,399,Monthly,Ayurvedic/Herbal,Good but causes dandruff.
+RESP_0047,18-24,Female,Tier 1,Dandruff,Severe (Visible Thinning),Mamaearth,9,699,Quarterly,Ayurvedic/Herbal,Just marketing gimmicks.
+RESP_0048,35-44,Female,Tier 3,Oily Scalp,Mild (Seasonal),Dove,8,250,Quarterly,Ayurvedic/Herbal,Just marketing gimmicks.
+RESP_0049,18-24,Female,Tier 1,Hairfall,Moderate (Clumps),Head & Shoulders,3,699,Monthly,Ayurvedic/Herbal,I need a solution for post-partum hair loss.
+RESP_0050,35-44,Female,Tier 1,Hairfall,Mild (Seasonal),Dove,1,699,Monthly,Ayurvedic/Herbal,Just marketing gimmicks.
+RESP_0051,25-34,Male,Tier 1,Dryness,Moderate (Clumps),Mamaearth,10,250,Bi-Monthly,Ayurvedic/Herbal,Nothing works on my scalp.
+RESP_0052,25-34,Male,Tier 3,Dandruff,Severe (Visible Thinning),Pantene,1,699,Bi-Monthly,Ayurvedic/Herbal,Just marketing gimmicks.
+RESP_0053,18-24,Female,Tier 1,Frizz,Severe (Visible Thinning),Head & Shoulders,9,250,Monthly,Ayurvedic/Herbal,I want something that actually stops hairfall.
+RESP_0054,45-54,Male,Tier 3,Hairfall,Severe (Visible Thinning),Head & Shoulders,9,999,Monthly,Chemical/Scientific,Made my hair dry but stopped fall.
+RESP_0055,25-34,Female,Tier 1,Oily Scalp,Moderate (Clumps),Tresemme,8,699,Bi-Monthly,Chemical/Scientific,Made my hair dry but stopped fall.
+RESP_0056,18-24,Female,Tier 1,Hairfall,Moderate (Clumps),Head & Shoulders,7,699,Monthly,Ayurvedic/Herbal,I prefer natural smell.
+RESP_0057,25-34,Male,Tier 1,Frizz,Severe (Visible Thinning),Generic/Ayurvedic,5,250,Monthly,Ayurvedic/Herbal,I need a solution for post-partum hair loss.
+RESP_0058,18-24,Male,Tier 1,Hairfall,Mild (Seasonal),Generic/Ayurvedic,8,250,Quarterly,Ayurvedic/Herbal,Made my hair dry but stopped fall.
+RESP_0059,35-44,Female,Tier 2,Hairfall,Mild (Seasonal),Tresemme,3,699,Bi-Monthly,Ayurvedic/Herbal,I prefer natural smell.
+RESP_0060,18-24,Female,Tier 1,Dryness,Mild (Seasonal),Head & Shoulders,5,399,Monthly,Ayurvedic/Herbal,I prefer natural smell.
+RESP_0061,55+,Male,Tier 2,Hairfall,Moderate (Clumps),Dove,7,699,Bi-Monthly,Ayurvedic/Herbal,Good but causes dandruff.
+RESP_0062,25-34,Female,Tier 2,Hairfall,Mild (Seasonal),Tresemme,3,699,Monthly,Ayurvedic/Herbal,Just marketing gimmicks.
+RESP_0063,25-34,Female,Tier 1,Frizz,Moderate (Clumps),Head & Shoulders,5,499,Monthly,Ayurvedic/Herbal,I want something that actually stops hairfall.
+RESP_0064,45-54,Male,Tier 3,Frizz,Mild (Seasonal),Generic/Ayurvedic,10,399,Quarterly,No Preference,I prefer natural smell.
+RESP_0065,18-24,Female,Tier 2,Dandruff,Severe (Visible Thinning),Head & Shoulders,10,399,Bi-Monthly,Chemical/Scientific,I want something that actually stops hairfall.
+RESP_0066,18-24,Female,Tier 1,Oily Scalp,Mild (Seasonal),Tresemme,8,250,Quarterly,No Preference,I prefer natural smell.
+RESP_0067,25-34,Male,Tier 1,Hairfall,Severe (Visible Thinning),Head & Shoulders,9,250,Quarterly,Chemical/Scientific,Made my hair dry but stopped fall.
+RESP_0068,25-34,Male,Tier 1,Oily Scalp,Mild (Seasonal),Head & Shoulders,5,399,Bi-Monthly,Ayurvedic/Herbal,Made my hair dry but stopped fall.
+RESP_0069,25-34,Female,Tier 1,Dandruff,Severe (Visible Thinning),Head & Shoulders,9,399,Bi-Monthly,Ayurvedic/Herbal,Good but causes dandruff.
+RESP_0070,25-34,Female,Tier 1,Hairfall,Mild (Seasonal),Pantene,8,399,Quarterly,Ayurvedic/Herbal,I want something that actually stops hairfall.
+RESP_0071,35-44,Female,Tier 3,Hairfall,Moderate (Clumps),Dove,6,499,Quarterly,Ayurvedic/Herbal,I want something that actually stops hairfall.
+RESP_0072,35-44,Male,Tier 2,Hairfall,Moderate (Clumps),Mamaearth,9,250,Bi-Monthly,Ayurvedic/Herbal,Nothing works on my scalp.
+RESP_0073,25-34,Female,Tier 2,Hairfall,Moderate (Clumps),Dove,10,399,Quarterly,Ayurvedic/Herbal,Nothing works on my scalp.
+RESP_0074,25-34,Female,Tier 1,Hairfall,Severe (Visible Thinning),Pantene,7,999,Bi-Monthly,Ayurvedic/Herbal,Just marketing gimmicks.
+RESP_0075,35-44,Male,Tier 3,Oily Scalp,Moderate (Clumps),Dove,6,699,Quarterly,Ayurvedic/Herbal,Just marketing gimmicks.
+RESP_0076,25-34,Female,Tier 1,Hairfall,Mild (Seasonal),Head & Shoulders,3,699,Bi-Monthly,Chemical/Scientific,Nothing works on my scalp.
+RESP_0077,25-34,Male,Tier 2,Frizz,Mild (Seasonal),Generic/Ayurvedic,8,250,Quarterly,Ayurvedic/Herbal,Made my hair dry but stopped fall.
+RESP_0078,25-34,Female,Tier 1,Dandruff,Severe (Visible Thinning),Mamaearth,10,699,Quarterly,Ayurvedic/Herbal,Too expensive for daily use.
+RESP_0079,45-54,Male,Tier 1,Dandruff,Severe (Visible Thinning),Head & Shoulders,6,399,Bi-Monthly,Chemical/Scientific,Too expensive for daily use.
+RESP_0080,35-44,Male,Tier 2,Hairfall,Mild (Seasonal),Pantene,7,499,Monthly,Ayurvedic/Herbal,I want something that actually stops hairfall.
+RESP_0081,18-24,Male,Tier 2,Dryness,Severe (Visible Thinning),Dove,9,499,Quarterly,Ayurvedic/Herbal,I prefer natural smell.
+RESP_0082,25-34,Male,Tier 2,Frizz,Severe (Visible Thinning),Generic/Ayurvedic,7,250,Monthly,Ayurvedic/Herbal,Just marketing gimmicks.
+RESP_0083,25-34,Male,Tier 1,Hairfall,Severe (Visible Thinning),Generic/Ayurvedic,10,250,Bi-Monthly,Chemical/Scientific,Nothing works on my scalp.
+RESP_0084,25-34,Male,Tier 1,Hairfall,Severe (Visible Thinning),Head & Shoulders,3,699,Monthly,Ayurvedic/Herbal,I want something that actually stops hairfall.
+RESP_0085,25-34,Female,Tier 1,Oily Scalp,Mild (Seasonal),Dove,3,699,Bi-Monthly,Chemical/Scientific,Made my hair dry but stopped fall.
+RESP_0086,25-34,Female,Tier 1,Frizz,Mild (Seasonal),Generic/Ayurvedic,3,699,Quarterly,Ayurvedic/Herbal,Just marketing gimmicks.
+RESP_0087,18-24,Male,Tier 3,Hairfall,Mild (Seasonal),Pantene,3,699,Quarterly,Ayurvedic/Herbal,Too expensive for daily use.
+RESP_0088,25-34,Male,Tier 1,Hairfall,Mild (Seasonal),Pantene,6,399,Quarterly,Ayurvedic/Herbal,Made my hair dry but stopped fall.
+RESP_0089,25-34,Female,Tier 2,Hairfall,Severe (Visible Thinning),Dove,2,699,Quarterly,Ayurvedic/Herbal,I prefer natural smell.
+RESP_0090,18-24,Male,Tier 1,Hairfall,Mild (Seasonal),Head & Shoulders,10,499,Bi-Monthly,Ayurvedic/Herbal,Made my hair dry but stopped fall.
+RESP_0091,25-34,Male,Tier 1,Hairfall,Mild (Seasonal),Head & Shoulders,10,250,Bi-Monthly,Ayurvedic/Herbal,I need a solution for post-partum hair loss.
+RESP_0092,55+,Male,Tier 3,Dandruff,Mild (Seasonal),Pantene,1,699,Quarterly,No Preference,I want something that actually stops hairfall.
+RESP_0093,18-24,Female,Tier 2,Hairfall,Moderate (Clumps),Mamaearth,5,399,Quarterly,Chemical/Scientific,Good but causes dandruff.
+RESP_0094,18-24,Female,Tier 3,Hairfall,Moderate (Clumps),Tresemme,8,399,Monthly,Ayurvedic/Herbal,Just marketing gimmicks.
+RESP_0095,25-34,Male,Tier 2,Frizz,Moderate (Clumps),Mamaearth,9,499,Monthly,Ayurvedic/Herbal,I prefer natural smell.
+RESP_0096,35-44,Male,Tier 1,Dryness,Moderate (Clumps),Dove,10,699,Bi-Monthly,Ayurvedic/Herbal,I prefer natural smell.
+RESP_0097,45-54,Male,Tier 1,Hairfall,Mild (Seasonal),Dove,4,399,Quarterly,Chemical/Scientific,Just marketing gimmicks.
+RESP_0098,18-24,Female,Tier 2,Oily Scalp,Mild (Seasonal),Generic/Ayurvedic,4,699,Bi-Monthly,No Preference,Too expensive for daily use.
+RESP_0099,18-24,Male,Tier 3,Hairfall,Moderate (Clumps),Pantene,8,399,Bi-Monthly,Ayurvedic/Herbal,Nothing works on my scalp.
+RESP_0100,35-44,Female,Tier 2,Dryness,Moderate (Clumps),Dove,3,699,Bi-Monthly,Chemical/Scientific,I need a solution for post-partum hair loss.
+RESP_0101,18-24,Male,Tier 3,Dryness,Severe (Visible Thinning),Mamaearth,7,150,Monthly,Chemical/Scientific,Nothing works on my scalp.
+RESP_0102,25-34,Male,Tier 1,Dryness,Severe (Visible Thinning),Dove,6,399,Quarterly,Ayurvedic/Herbal,Made my hair dry but stopped fall.
+RESP_0103,18-24,Male,Tier 1,Dandruff,Moderate (Clumps),Tresemme,7,399,Bi-Monthly,Chemical/Scientific,Just marketing gimmicks.
+RESP_0104,18-24,Female,Tier 2,Hairfall,Severe (Visible Thinning),Mamaearth,6,399,Monthly,No Preference,Too expensive for daily use.
+RESP_0105,18-24,Female,Tier 1,Dandruff,Mild (Seasonal),Pantene,3,699,Quarterly,Ayurvedic/Herbal,Made my hair dry but stopped fall.
+RESP_0106,55+,Male,Tier 2,Oily Scalp,Severe (Visible Thinning),Dove,2,699,Quarterly,Chemical/Scientific,Made my hair dry but stopped fall.
+RESP_0107,18-24,Male,Tier 3,Dandruff,Mild (Seasonal),Dove,1,699,Bi-Monthly,Ayurvedic/Herbal,Made my hair dry but stopped fall.
+RESP_0108,45-54,Female,Tier 3,Oily Scalp,Moderate (Clumps),Tresemme,10,499,Quarterly,No Preference,I need a solution for post-partum hair loss.
+RESP_0109,25-34,Female,Tier 1,Dryness,Mild (Seasonal),Dove,3,699,Quarterly,No Preference,Good but causes dandruff.
+RESP_0110,18-24,Male,Tier 1,Hairfall,Mild (Seasonal),Head & Shoulders,9,250,Quarterly,Chemical/Scientific,Nothing works on my scalp.
+RESP_0111,18-24,Female,Tier 2,Dryness,Severe (Visible Thinning),Pantene,6,499,Bi-Monthly,Chemical/Scientific,I want something that actually stops hairfall.
+RESP_0112,18-24,Female,Tier 2,Hairfall,Severe (Visible Thinning),Mamaearth,6,399,Quarterly,Ayurvedic/Herbal,I need a solution for post-partum hair loss.
+RESP_0113,25-34,Male,Tier 3,Hairfall,Moderate (Clumps),Pantene,10,399,Monthly,Chemical/Scientific,I want something that actually stops hairfall.
+RESP_0114,35-44,Male,Tier 1,Hairfall,Severe (Visible Thinning),Dove,2,699,Quarterly,Chemical/Scientific,Good but causes dandruff.
+RESP_0115,25-34,Male,Tier 1,Dandruff,Moderate (Clumps),Head & Shoulders,9,250,Monthly,No Preference,Made my hair dry but stopped fall.
+RESP_0116,25-34,Female,Tier 2,Dandruff,Severe (Visible Thinning),Mamaearth,10,250,Bi-Monthly,Ayurvedic/Herbal,Made my hair dry but stopped fall.
+RESP_0117,25-34,Male,Tier 1,Dryness,Severe (Visible Thinning),Tresemme,9,699,Bi-Monthly,Chemical/Scientific,Too expensive for daily use.
+RESP_0118,25-34,Male,Tier 1,Frizz,Moderate (Clumps),Tresemme,2,699,Monthly,Ayurvedic/Herbal,I want something that actually stops hairfall.
+RESP_0119,25-34,Male,Tier 1,Hairfall,Severe (Visible Thinning),Head & Shoulders,3,699,Bi-Monthly,Ayurvedic/Herbal,I want something that actually stops hairfall.
+RESP_0120,45-54,Male,Tier 2,Hairfall,Severe (Visible Thinning),Head & Shoulders,7,399,Quarterly,Ayurvedic/Herbal,Too expensive for daily use.
+RESP_0121,25-34,Female,Tier 1,Hairfall,Severe (Visible Thinning),Head & Shoulders,9,499,Monthly,Ayurvedic/Herbal,Nothing works on my scalp.
+RESP_0122,45-54,Female,Tier 2,Hairfall,Severe (Visible Thinning),Dove,5,150,Monthly,Chemical/Scientific,Good but causes dandruff.
+RESP_0123,45-54,Male,Tier 1,Oily Scalp,Severe (Visible Thinning),Mamaearth,3,699,Quarterly,Ayurvedic/Herbal,Good but causes dandruff.
+RESP_0124,25-34,Female,Tier 3,Hairfall,Mild (Seasonal),Mamaearth,4,399,Monthly,Ayurvedic/Herbal,I prefer natural smell.
+RESP_0125,25-34,Female,Tier 3,Frizz,Severe (Visible Thinning),Pantene,8,499,Quarterly,Ayurvedic/Herbal,Good but causes dandruff.
+RESP_0126,18-24,Female,Tier 2,Dandruff,Mild (Seasonal),Head & Shoulders,8,399,Bi-Monthly,Ayurvedic/Herbal,Just marketing gimmicks.
+RESP_0127,35-44,Male,Tier 2,Oily Scalp,Severe (Visible Thinning),Tresemme,10,699,Monthly,Chemical/Scientific,Good but causes dandruff.
+RESP_0128,25-34,Female,Tier 1,Frizz,Moderate (Clumps),Tresemme,2,699,Monthly,Ayurvedic/Herbal,I want something that actually stops hairfall.
+RESP_0129,18-24,Female,Tier 3,Hairfall,Severe (Visible Thinning),Generic/Ayurvedic,8,150,Quarterly,Ayurvedic/Herbal,Good but causes dandruff.
+RESP_0130,35-44,Male,Tier 1,Hairfall,Moderate (Clumps),Mamaearth,9,250,Bi-Monthly,No Preference,I need a solution for post-partum hair loss.
+RESP_0131,18-24,Female,Tier 2,Dandruff,Mild (Seasonal),Mamaearth,2,699,Quarterly,Ayurvedic/Herbal,Made my hair dry but stopped fall.
+RESP_0132,25-34,Female,Tier 1,Hairfall,Mild (Seasonal),Mamaearth,4,250,Bi-Monthly,Ayurvedic/Herbal,Just marketing gimmicks.
+RESP_0133,25-34,Male,Tier 3,Hairfall,Mild (Seasonal),Tresemme,9,250,Monthly,Ayurvedic/Herbal,I need a solution for post-partum hair loss.
+RESP_0134,35-44,Male,Tier 1,Hairfall,Severe (Visible Thinning),Head & Shoulders,2,699,Bi-Monthly,Ayurvedic/Herbal,I want something that actually stops hairfall.
+RESP_0135,35-44,Female,Tier 2,Dandruff,Moderate (Clumps),Dove,6,699,Bi-Monthly,Ayurvedic/Herbal,I need a solution for post-partum hair loss.
+RESP_0136,25-34,Female,Tier 3,Hairfall,Moderate (Clumps),Dove,9,399,Monthly,Ayurvedic/Herbal,Nothing works on my scalp.
+RESP_0137,18-24,Female,Tier 2,Hairfall,Moderate (Clumps),Head & Shoulders,1,699,Quarterly,Ayurvedic/Herbal,I prefer natural smell.
+RESP_0138,25-34,Male,Tier 3,Dandruff,Moderate (Clumps),Tresemme,10,399,Bi-Monthly,Chemical/Scientific,I want something that actually stops hairfall.
+RESP_0139,18-24,Female,Tier 3,Hairfall,Severe (Visible Thinning),Generic/Ayurvedic,10,399,Quarterly,Ayurvedic/Herbal,I need a solution for post-partum hair loss.
+RESP_0140,25-34,Female,Tier 3,Frizz,Moderate (Clumps),Head & Shoulders,1,699,Monthly,Ayurvedic/Herbal,Good but causes dandruff.
+RESP_0141,25-34,Female,Tier 1,Dryness,Mild (Seasonal),Dove,7,699,Monthly,No Preference,I want something that actually stops hairfall.
+RESP_0142,45-54,Female,Tier 1,Hairfall,Severe (Visible Thinning),Tresemme,6,999,Monthly,Chemical/Scientific,Just marketing gimmicks.
+RESP_0143,35-44,Female,Tier 1,Dandruff,Severe (Visible Thinning),Tresemme,5,250,Bi-Monthly,Ayurvedic/Herbal,Just marketing gimmicks.
+RESP_0144,45-54,Female,Tier 1,Hairfall,Mild (Seasonal),Dove,10,499,Monthly,Ayurvedic/Herbal,I need a solution for post-partum hair loss.
+RESP_0145,18-24,Male,Tier 2,Dandruff,Moderate (Clumps),Dove,4,399,Bi-Monthly,Chemical/Scientific,I need a solution for post-partum hair loss.
+RESP_0146,18-24,Male,Tier 3,Dryness,Severe (Visible Thinning),Head & Shoulders,8,399,Bi-Monthly,Ayurvedic/Herbal,Too expensive for daily use.
+RESP_0147,25-34,Male,Tier 3,Dandruff,Mild (Seasonal),Mamaearth,4,399,Bi-Monthly,Chemical/Scientific,Good but causes dandruff.
+RESP_0148,35-44,Female,Tier 1,Hairfall,Mild (Seasonal),Tresemme,8,399,Bi-Monthly,Chemical/Scientific,Good but causes dandruff.
+RESP_0149,18-24,Female,Tier 3,Hairfall,Mild (Seasonal),Tresemme,5,399,Quarterly,Ayurvedic/Herbal,I prefer natural smell.
+RESP_0150,35-44,Female,Tier 2,Hairfall,Mild (Seasonal),Head & Shoulders,3,699,Monthly,Ayurvedic/Herbal,I need a solution for post-partum hair loss.
+RESP_0151,55+,Male,Tier 1,Dandruff,Moderate (Clumps),Generic/Ayurvedic,7,699,Bi-Monthly,Ayurvedic/Herbal,I want something that actually stops hairfall.
+RESP_0152,45-54,Male,Tier 2,Hairfall,Moderate (Clumps),Generic/Ayurvedic,4,499,Quarterly,Ayurvedic/Herbal,Good but causes dandruff.
+RESP_0153,18-24,Male,Tier 3,Dryness,Mild (Seasonal),Tresemme,7,399,Quarterly,Chemical/Scientific,I prefer natural smell.
+RESP_0154,25-34,Female,Tier 2,Hairfall,Mild (Seasonal),Mamaearth,5,399,Bi-Monthly,Ayurvedic/Herbal,I need a solution for post-partum hair loss.
+RESP_0155,25-34,Male,Tier 3,Oily Scalp,Severe (Visible Thinning),Tresemme,1,699,Quarterly,Ayurvedic/Herbal,Nothing works on my scalp.
+RESP_0156,18-24,Male,Tier 1,Frizz,Mild (Seasonal),Tresemme,2,699,Monthly,Ayurvedic/Herbal,Too expensive for daily use.
+RESP_0157,35-44,Female,Tier 1,Hairfall,Severe (Visible Thinning),Mamaearth,1,699,Bi-Monthly,Ayurvedic/Herbal,Good but causes dandruff.
+RESP_0158,25-34,Female,Tier 1,Hairfall,Mild (Seasonal),Head & Shoulders,5,399,Quarterly,Ayurvedic/Herbal,I prefer natural smell.
+RESP_0159,45-54,Female,Tier 1,Hairfall,Moderate (Clumps),Generic/Ayurvedic,1,699,Quarterly,Chemical/Scientific,Nothing works on my scalp.
+RESP_0160,18-24,Female,Tier 1,Oily Scalp,Moderate (Clumps),Pantene,6,499,Bi-Monthly,Ayurvedic/Herbal,Nothing works on my scalp.
+RESP_0161,18-24,Female,Tier 1,Frizz,Mild (Seasonal),Generic/Ayurvedic,4,399,Quarterly,Ayurvedic/Herbal,Good but causes dandruff.
+RESP_0162,18-24,Male,Tier 1,Hairfall,Mild (Seasonal),Generic/Ayurvedic,5,150,Monthly,Chemical/Scientific,Nothing works on my scalp.
+RESP_0163,25-34,Female,Tier 2,Dryness,Mild (Seasonal),Head & Shoulders,6,399,Monthly,Chemical/Scientific,Too expensive for daily use.
+RESP_0164,18-24,Female,Tier 2,Hairfall,Mild (Seasonal),Generic/Ayurvedic,3,699,Bi-Monthly,Chemical/Scientific,I need a solution for post-partum hair loss.
+RESP_0165,35-44,Female,Tier 1,Hairfall,Severe (Visible Thinning),Pantene,1,699,Monthly,Ayurvedic/Herbal,Just marketing gimmicks.
+RESP_0166,25-34,Female,Tier 3,Hairfall,Severe (Visible Thinning),Mamaearth,9,999,Bi-Monthly,Chemical/Scientific,I want something that actually stops hairfall.
+RESP_0167,35-44,Female,Tier 1,Oily Scalp,Severe (Visible Thinning),Tresemme,1,699,Quarterly,No Preference,I need a solution for post-partum hair loss.
+RESP_0168,45-54,Male,Tier 1,Dryness,Mild (Seasonal),Head & Shoulders,1,699,Bi-Monthly,Chemical/Scientific,Too expensive for daily use.
+RESP_0169,25-34,Female,Tier 1,Hairfall,Mild (Seasonal),Head & Shoulders,9,499,Monthly,Ayurvedic/Herbal,Too expensive for daily use.
+RESP_0170,18-24,Female,Tier 1,Hairfall,Severe (Visible Thinning),Mamaearth,10,250,Bi-Monthly,Ayurvedic/Herbal,Made my hair dry but stopped fall.
+RESP_0171,25-34,Male,Tier 2,Hairfall,Mild (Seasonal),Mamaearth,7,499,Bi-Monthly,Chemical/Scientific,Just marketing gimmicks.
+RESP_0172,35-44,Female,Tier 1,Hairfall,Mild (Seasonal),Dove,5,499,Quarterly,Chemical/Scientific,Just marketing gimmicks.
+RESP_0173,25-34,Female,Tier 1,Dandruff,Moderate (Clumps),Generic/Ayurvedic,5,250,Bi-Monthly,Ayurvedic/Herbal,I need a solution for post-partum hair loss.
+RESP_0174,25-34,Female,Tier 2,Hairfall,Severe (Visible Thinning),Head & Shoulders,8,499,Bi-Monthly,Chemical/Scientific,Too expensive for daily use.
+RESP_0175,25-34,Male,Tier 3,Hairfall,Moderate (Clumps),Tresemme,6,499,Bi-Monthly,Ayurvedic/Herbal,Too expensive for daily use.
+RESP_0176,18-24,Female,Tier 1,Hairfall,Mild (Seasonal),Pantene,3,699,Bi-Monthly,Ayurvedic/Herbal,Too expensive for daily use.
+RESP_0177,35-44,Female,Tier 1,Hairfall,Severe (Visible Thinning),Dove,10,250,Quarterly,Chemical/Scientific,Good but causes dandruff.
+RESP_0178,35-44,Male,Tier 2,Hairfall,Severe (Visible Thinning),Pantene,5,150,Bi-Monthly,Ayurvedic/Herbal,Just marketing gimmicks.
+RESP_0179,25-34,Female,Tier 3,Dryness,Mild (Seasonal),Tresemme,2,699,Monthly,Chemical/Scientific,Too expensive for daily use.
+RESP_0180,18-24,Female,Tier 2,Hairfall,Mild (Seasonal),Pantene,3,699,Monthly,Ayurvedic/Herbal,I need a solution for post-partum hair loss.
+RESP_0181,18-24,Male,Tier 2,Hairfall,Moderate (Clumps),Mamaearth,5,250,Bi-Monthly,No Preference,Nothing works on my scalp.
+RESP_0182,25-34,Female,Tier 3,Oily Scalp,Severe (Visible Thinning),Mamaearth,2,699,Monthly,Ayurvedic/Herbal,Good but causes dandruff.
+RESP_0183,25-34,Female,Tier 1,Hairfall,Moderate (Clumps),Head & Shoulders,3,699,Monthly,Chemical/Scientific,Just marketing gimmicks.
+RESP_0184,18-24,Female,Tier 1,Hairfall,Severe (Visible Thinning),Tresemme,5,250,Bi-Monthly,Chemical/Scientific,Just marketing gimmicks.
+RESP_0185,35-44,Male,Tier 1,Hairfall,Moderate (Clumps),Head & Shoulders,6,499,Quarterly,Ayurvedic/Herbal,Made my hair dry but stopped fall.
+RESP_0186,25-34,Female,Tier 2,Hairfall,Moderate (Clumps),Dove,4,250,Quarterly,No Preference,Nothing works on my scalp.
+RESP_0187,25-34,Female,Tier 1,Oily Scalp,Mild (Seasonal),Generic/Ayurvedic,6,699,Bi-Monthly,No Preference,I need a solution for post-partum hair loss.
+RESP_0188,35-44,Male,Tier 1,Hairfall,Mild (Seasonal),Dove,2,699,Bi-Monthly,Ayurvedic/Herbal,Too expensive for daily use.
+RESP_0189,25-34,Male,Tier 2,Dryness,Severe (Visible Thinning),Dove,6,250,Monthly,Chemical/Scientific,Good but causes dandruff.
+RESP_0190,35-44,Male,Tier 2,Hairfall,Mild (Seasonal),Pantene,6,499,Monthly,Ayurvedic/Herbal,I prefer natural smell.
+RESP_0191,25-34,Male,Tier 1,Frizz,Severe (Visible Thinning),Head & Shoulders,2,699,Quarterly,Ayurvedic/Herbal,I need a solution for post-partum hair loss.
+RESP_0192,35-44,Male,Tier 1,Hairfall,Mild (Seasonal),Head & Shoulders,2,699,Bi-Monthly,Ayurvedic/Herbal,Just marketing gimmicks.
+RESP_0193,18-24,Female,Tier 2,Dryness,Mild (Seasonal),Generic/Ayurvedic,8,499,Monthly,Chemical/Scientific,I prefer natural smell.
+RESP_0194,45-54,Female,Tier 2,Hairfall,Mild (Seasonal),Mamaearth,2,699,Bi-Monthly,Ayurvedic/Herbal,I prefer natural smell.
+RESP_0195,35-44,Female,Tier 3,Hairfall,Severe (Visible Thinning),Head & Shoulders,9,499,Bi-Monthly,Ayurvedic/Herbal,Nothing works on my scalp.
+RESP_0196,18-24,Female,Tier 1,Hairfall,Mild (Seasonal),Head & Shoulders,6,150,Quarterly,Ayurvedic/Herbal,Nothing works on my scalp.
+RESP_0197,45-54,Female,Tier 1,Dandruff,Severe (Visible Thinning),Pantene,5,699,Monthly,Ayurvedic/Herbal,Just marketing gimmicks.
+RESP_0198,18-24,Male,Tier 2,Hairfall,Severe (Visible Thinning),Head & Shoulders,2,699,Quarterly,No Preference,Good but causes dandruff.
+RESP_0199,25-34,Male,Tier 1,Hairfall,Mild (Seasonal),Pantene,9,250,Quarterly,Ayurvedic/Herbal,Good but causes dandruff.
+RESP_0200,25-34,Female,Tier 1,Hairfall,Mild (Seasonal),Dove,6,699,Bi-Monthly,No Preference,Made my hair dry but stopped fall.
+RESP_0201,45-54,Male,Tier 2,Hairfall,Severe (Visible Thinning),Pantene,1,699,Quarterly,Ayurvedic/Herbal,I want something that actually stops hairfall.
+RESP_0202,45-54,Male,Tier 2,Dryness,Mild (Seasonal),Tresemme,6,250,Bi-Monthly,Chemical/Scientific,Just marketing gimmicks.
+RESP_0203,18-24,Female,Tier 1,Dandruff,Moderate (Clumps),Generic/Ayurvedic,3,699,Quarterly,Chemical/Scientific,I prefer natural smell.
+RESP_0204,18-24,Male,Tier 2,Hairfall,Severe (Visible Thinning),Head & Shoulders,10,699,Quarterly,No Preference,I need a solution for post-partum hair loss.
+RESP_0205,35-44,Male,Tier 1,Frizz,Severe (Visible Thinning),Head & Shoulders,8,399,Quarterly,No Preference,Made my hair dry but stopped fall.
+RESP_0206,18-24,Female,Tier 2,Dandruff,Moderate (Clumps),Head & Shoulders,7,150,Bi-Monthly,Ayurvedic/Herbal,I need a solution for post-partum hair loss.
+RESP_0207,25-34,Male,Tier 1,Frizz,Mild (Seasonal),Head & Shoulders,3,699,Bi-Monthly,Ayurvedic/Herbal,Good but causes dandruff.
+RESP_0208,45-54,Female,Tier 2,Oily Scalp,Mild (Seasonal),Tresemme,4,399,Quarterly,Ayurvedic/Herbal,I want something that actually stops hairfall.
+RESP_0209,18-24,Male,Tier 1,Hairfall,Mild (Seasonal),Tresemme,5,399,Bi-Monthly,Ayurvedic/Herbal,Made my hair dry but stopped fall.
+RESP_0210,18-24,Male,Tier 2,Frizz,Mild (Seasonal),Head & Shoulders,2,699,Quarterly,Ayurvedic/Herbal,Made my hair dry but stopped fall.
+RESP_0211,45-54,Male,Tier 2,Oily Scalp,Severe (Visible Thinning),Generic/Ayurvedic,5,250,Bi-Monthly,Ayurvedic/Herbal,Good but causes dandruff.
+RESP_0212,18-24,Male,Tier 2,Frizz,Mild (Seasonal),Tresemme,5,399,Quarterly,Ayurvedic/Herbal,Good but causes dandruff.
+RESP_0213,18-24,Female,Tier 1,Hairfall,Severe (Visible Thinning),Mamaearth,9,399,Quarterly,No Preference,Good but causes dandruff.
+RESP_0214,45-54,Female,Tier 2,Hairfall,Severe (Visible Thinning),Pantene,4,699,Bi-Monthly,Chemical/Scientific,I prefer natural smell.
+RESP_0215,45-54,Male,Tier 1,Dandruff,Mild (Seasonal),Mamaearth,8,399,Quarterly,No Preference,Made my hair dry but stopped fall.
+RESP_0216,45-54,Male,Tier 2,Dryness,Mild (Seasonal),Dove,6,499,Quarterly,Chemical/Scientific,I prefer natural smell.
+RESP_0217,35-44,Male,Tier 1,Hairfall,Severe (Visible Thinning),Generic/Ayurvedic,3,699,Bi-Monthly,Ayurvedic/Herbal,Too expensive for daily use.
+RESP_0218,25-34,Male,Tier 3,Hairfall,Severe (Visible Thinning),Mamaearth,9,699,Bi-Monthly,Ayurvedic/Herbal,I prefer natural smell.
+RESP_0219,35-44,Female,Tier 1,Oily Scalp,Moderate (Clumps),Mamaearth,10,699,Monthly,Ayurvedic/Herbal,Just marketing gimmicks.
+RESP_0220,25-34,Male,Tier 3,Hairfall,Moderate (Clumps),Pantene,4,399,Quarterly,Chemical/Scientific,Made my hair dry but stopped fall.
+RESP_0221,35-44,Female,Tier 3,Oily Scalp,Mild (Seasonal),Generic/Ayurvedic,8,250,Quarterly,Ayurvedic/Herbal,I prefer natural smell.
+RESP_0222,45-54,Female,Tier 3,Hairfall,Mild (Seasonal),Tresemme,1,699,Quarterly,Ayurvedic/Herbal,Just marketing gimmicks.
+RESP_0223,35-44,Male,Tier 3,Hairfall,Mild (Seasonal),Generic/Ayurvedic,5,999,Bi-Monthly,Chemical/Scientific,Good but causes dandruff.
+RESP_0224,55+,Male,Tier 3,Hairfall,Mild (Seasonal),Tresemme,5,999,Bi-Monthly,Ayurvedic/Herbal,I need a solution for post-partum hair loss.
+RESP_0225,25-34,Female,Tier 1,Hairfall,Moderate (Clumps),Head & Shoulders,3,699,Quarterly,No Preference,Just marketing gimmicks.
+RESP_0226,18-24,Male,Tier 2,Hairfall,Mild (Seasonal),Mamaearth,6,699,Quarterly,Chemical/Scientific,I prefer natural smell.
+RESP_0227,25-34,Female,Tier 3,Dandruff,Severe (Visible Thinning),Dove,6,699,Monthly,Ayurvedic/Herbal,I prefer natural smell.
+RESP_0228,35-44,Male,Tier 1,Dryness,Mild (Seasonal),Pantene,5,399,Monthly,Ayurvedic/Herbal,Made my hair dry but stopped fall.
+RESP_0229,45-54,Male,Tier 2,Hairfall,Mild (Seasonal),Dove,9,250,Monthly,Ayurvedic/Herbal,Made my hair dry but stopped fall.
+RESP_0230,25-34,Female,Tier 1,Hairfall,Mild (Seasonal),Head & Shoulders,3,699,Bi-Monthly,Ayurvedic/Herbal,Too expensive for daily use.
+RESP_0231,35-44,Female,Tier 2,Dryness,Severe (Visible Thinning),Head & Shoulders,4,250,Bi-Monthly,Ayurvedic/Herbal,Just marketing gimmicks.
+RESP_0232,25-34,Male,Tier 1,Oily Scalp,Mild (Seasonal),Tresemme,6,399,Bi-Monthly,Chemical/Scientific,I need a solution for post-partum hair loss.
+RESP_0233,45-54,Female,Tier 3,Frizz,Moderate (Clumps),Dove,1,699,Monthly,Ayurvedic/Herbal,I need a solution for post-partum hair loss.
+RESP_0234,25-34,Male,Tier 2,Hairfall,Mild (Seasonal),Tresemme,2,699,Monthly,Ayurvedic/Herbal,Too expensive for daily use.
+RESP_0235,25-34,Female,Tier 3,Frizz,Severe (Visible Thinning),Generic/Ayurvedic,8,399,Bi-Monthly,No Preference,Just marketing gimmicks.
+RESP_0236,45-54,Female,Tier 3,Frizz,Moderate (Clumps),Mamaearth,3,699,Quarterly,Ayurvedic/Herbal,Made my hair dry but stopped fall.
+RESP_0237,45-54,Male,Tier 3,Hairfall,Severe (Visible Thinning),Head & Shoulders,10,399,Bi-Monthly,Ayurvedic/Herbal,I need a solution for post-partum hair loss.
+RESP_0238,25-34,Female,Tier 2,Dandruff,Severe (Visible Thinning),Pantene,4,399,Bi-Monthly,Ayurvedic/Herbal,Good but causes dandruff.
+RESP_0239,35-44,Female,Tier 2,Hairfall,Mild (Seasonal),Dove,10,699,Bi-Monthly,Chemical/Scientific,Nothing works on my scalp.
+RESP_0240,45-54,Female,Tier 2,Hairfall,Mild (Seasonal),Mamaearth,7,150,Monthly,Ayurvedic/Herbal,Just marketing gimmicks.
+RESP_0241,25-34,Female,Tier 1,Frizz,Mild (Seasonal),Dove,5,250,Quarterly,Ayurvedic/Herbal,I want something that actually stops hairfall.
+RESP_0242,25-34,Female,Tier 1,Oily Scalp,Mild (Seasonal),Head & Shoulders,6,250,Bi-Monthly,Chemical/Scientific,I prefer natural smell.
+RESP_0243,35-44,Female,Tier 1,Dryness,Severe (Visible Thinning),Dove,10,250,Bi-Monthly,Ayurvedic/Herbal,I prefer natural smell.
+RESP_0244,25-34,Female,Tier 3,Oily Scalp,Moderate (Clumps),Head & Shoulders,9,399,Quarterly,No Preference,I need a solution for post-partum hair loss.
+RESP_0245,18-24,Male,Tier 3,Hairfall,Moderate (Clumps),Generic/Ayurvedic,10,499,Bi-Monthly,Ayurvedic/Herbal,Made my hair dry but stopped fall.
+RESP_0246,55+,Female,Tier 1,Hairfall,Mild (Seasonal),Mamaearth,3,699,Bi-Monthly,Ayurvedic/Herbal,Good but causes dandruff.
+RESP_0247,45-54,Female,Tier 1,Hairfall,Mild (Seasonal),Generic/Ayurvedic,10,150,Quarterly,Ayurvedic/Herbal,Good but causes dandruff.
+RESP_0248,25-34,Female,Tier 1,Hairfall,Severe (Visible Thinning),Head & Shoulders,2,699,Monthly,No Preference,I need a solution for post-partum hair loss.
+RESP_0249,25-34,Female,Tier 3,Frizz,Severe (Visible Thinning),Mamaearth,3,699,Bi-Monthly,Ayurvedic/Herbal,Too expensive for daily use.
+RESP_0250,18-24,Female,Tier 1,Hairfall,Mild (Seasonal),Pantene,2,699,Bi-Monthly,Ayurvedic/Herbal,I need a solution for post-partum hair loss.
+RESP_0251,35-44,Male,Tier 1,Hairfall,Severe (Visible Thinning),Tresemme,7,699,Bi-Monthly,Ayurvedic/Herbal,Good but causes dandruff.
+RESP_0252,18-24,Female,Tier 1,Hairfall,Severe (Visible Thinning),Dove,3,699,Bi-Monthly,Ayurvedic/Herbal,Made my hair dry but stopped fall.
+RESP_0253,25-34,Female,Tier 1,Hairfall,Mild (Seasonal),Mamaearth,9,399,Monthly,Ayurvedic/Herbal,Just marketing gimmicks.
+RESP_0254,45-54,Male,Tier 1,Frizz,Severe (Visible Thinning),Pantene,9,250,Monthly,Ayurvedic/Herbal,I want something that actually stops hairfall.
+RESP_0255,45-54,Male,Tier 1,Hairfall,Severe (Visible Thinning),Generic/Ayurvedic,5,250,Monthly,Chemical/Scientific,I want something that actually stops hairfall.
+RESP_0256,25-34,Male,Tier 1,Hairfall,Severe (Visible Thinning),Pantene,5,699,Bi-Monthly,Chemical/Scientific,Too expensive for daily use.
+RESP_0257,35-44,Male,Tier 2,Frizz,Moderate (Clumps),Tresemme,10,399,Quarterly,Ayurvedic/Herbal,I need a solution for post-partum hair loss.
+RESP_0258,25-34,Male,Tier 2,Hairfall,Mild (Seasonal),Pantene,1,699,Bi-Monthly,Chemical/Scientific,Good but causes dandruff.
+RESP_0259,25-34,Male,Tier 2,Frizz,Mild (Seasonal),Head & Shoulders,9,499,Monthly,Ayurvedic/Herbal,Too expensive for daily use.
+RESP_0260,25-34,Female,Tier 1,Oily Scalp,Moderate (Clumps),Head & Shoulders,8,250,Monthly,Ayurvedic/Herbal,Nothing works on my scalp.
+RESP_0261,18-24,Female,Tier 3,Hairfall,Mild (Seasonal),Pantene,6,499,Bi-Monthly,Ayurvedic/Herbal,Nothing works on my scalp.
+RESP_0262,25-34,Female,Tier 3,Dandruff,Moderate (Clumps),Mamaearth,2,699,Bi-Monthly,Chemical/Scientific,I need a solution for post-partum hair loss.
+RESP_0263,18-24,Female,Tier 1,Dryness,Severe (Visible Thinning),Mamaearth,2,699,Quarterly,Ayurvedic/Herbal,I prefer natural smell.
+RESP_0264,25-34,Female,Tier 2,Hairfall,Severe (Visible Thinning),Generic/Ayurvedic,5,699,Monthly,No Preference,Made my hair dry but stopped fall.
+RESP_0265,45-54,Female,Tier 1,Hairfall,Moderate (Clumps),Dove,6,250,Bi-Monthly,Ayurvedic/Herbal,Just marketing gimmicks.
+RESP_0266,45-54,Male,Tier 2,Oily Scalp,Severe (Visible Thinning),Head & Shoulders,4,499,Quarterly,Chemical/Scientific,Just marketing gimmicks.
+RESP_0267,35-44,Female,Tier 1,Dandruff,Moderate (Clumps),Tresemme,8,399,Bi-Monthly,Ayurvedic/Herbal,Made my hair dry but stopped fall.
+RESP_0268,55+,Female,Tier 1,Dandruff,Moderate (Clumps),Tresemme,10,399,Monthly,No Preference,I prefer natural smell.
+RESP_0269,45-54,Male,Tier 1,Hairfall,Moderate (Clumps),Head & Shoulders,4,399,Bi-Monthly,Ayurvedic/Herbal,Nothing works on my scalp.
+RESP_0270,18-24,Female,Tier 1,Hairfall,Severe (Visible Thinning),Mamaearth,4,150,Quarterly,Chemical/Scientific,I need a solution for post-partum hair loss.
+RESP_0271,25-34,Female,Tier 2,Hairfall,Moderate (Clumps),Tresemme,1,699,Monthly,Ayurvedic/Herbal,I want something that actually stops hairfall.
+RESP_0272,45-54,Female,Tier 1,Hairfall,Mild (Seasonal),Mamaearth,9,399,Bi-Monthly,Chemical/Scientific,Nothing works on my scalp.
+RESP_0273,25-34,Female,Tier 3,Hairfall,Severe (Visible Thinning),Head & Shoulders,7,399,Monthly,Ayurvedic/Herbal,I prefer natural smell.
+RESP_0274,18-24,Male,Tier 1,Oily Scalp,Severe (Visible Thinning),Tresemme,9,499,Bi-Monthly,Ayurvedic/Herbal,I prefer natural smell.
+RESP_0275,25-34,Female,Tier 2,Hairfall,Moderate (Clumps),Generic/Ayurvedic,6,699,Monthly,Ayurvedic/Herbal,Good but causes dandruff.
+RESP_0276,25-34,Female,Tier 1,Hairfall,Moderate (Clumps),Head & Shoulders,9,499,Monthly,Ayurvedic/Herbal,Made my hair dry but stopped fall.
+RESP_0277,18-24,Male,Tier 1,Hairfall,Mild (Seasonal),Tresemme,9,399,Quarterly,Ayurvedic/Herbal,Good but causes dandruff.
+RESP_0278,18-24,Female,Tier 1,Dandruff,Moderate (Clumps),Tresemme,10,250,Quarterly,Ayurvedic/Herbal,I want something that actually stops hairfall.
+RESP_0279,25-34,Male,Tier 1,Oily Scalp,Severe (Visible Thinning),Dove,9,399,Bi-Monthly,Chemical/Scientific,I need a solution for post-partum hair loss.
+RESP_0280,35-44,Male,Tier 2,Hairfall,Severe (Visible Thinning),Pantene,10,499,Monthly,Ayurvedic/Herbal,Just marketing gimmicks.
+RESP_0281,45-54,Male,Tier 1,Dryness,Mild (Seasonal),Head & Shoulders,7,399,Quarterly,Ayurvedic/Herbal,I prefer natural smell.
+RESP_0282,25-34,Female,Tier 1,Oily Scalp,Moderate (Clumps),Head & Shoulders,2,699,Bi-Monthly,Ayurvedic/Herbal,Too expensive for daily use.
+RESP_0283,25-34,Female,Tier 3,Dandruff,Moderate (Clumps),Generic/Ayurvedic,5,250,Monthly,Chemical/Scientific,Just marketing gimmicks.
+RESP_0284,25-34,Male,Tier 2,Hairfall,Mild (Seasonal),Mamaearth,10,499,Quarterly,Ayurvedic/Herbal,Too expensive for daily use.
+RESP_0285,45-54,Female,Tier 2,Dryness,Mild (Seasonal),Tresemme,1,699,Bi-Monthly,Chemical/Scientific,Good but causes dandruff.
+RESP_0286,25-34,Male,Tier 1,Frizz,Moderate (Clumps),Pantene,4,999,Monthly,Ayurvedic/Herbal,Too expensive for daily use.
+RESP_0287,18-24,Female,Tier 3,Dryness,Mild (Seasonal),Mamaearth,9,399,Monthly,Ayurvedic/Herbal,Made my hair dry but stopped fall.
+RESP_0288,25-34,Male,Tier 3,Hairfall,Mild (Seasonal),Pantene,6,150,Quarterly,Ayurvedic/Herbal,Good but causes dandruff.
+RESP_0289,25-34,Female,Tier 1,Dryness,Mild (Seasonal),Pantene,3,699,Monthly,Chemical/Scientific,I prefer natural smell.
+RESP_0290,35-44,Male,Tier 2,Frizz,Severe (Visible Thinning),Tresemme,5,399,Quarterly,Chemical/Scientific,I need a solution for post-partum hair loss.
+RESP_0291,25-34,Female,Tier 2,Hairfall,Mild (Seasonal),Head & Shoulders,9,150,Quarterly,Chemical/Scientific,Too expensive for daily use.
+RESP_0292,35-44,Male,Tier 3,Dryness,Mild (Seasonal),Generic/Ayurvedic,7,699,Monthly,Ayurvedic/Herbal,Good but causes dandruff.
+RESP_0293,25-34,Male,Tier 1,Oily Scalp,Mild (Seasonal),Generic/Ayurvedic,6,699,Quarterly,No Preference,Made my hair dry but stopped fall.
+RESP_0294,45-54,Female,Tier 1,Hairfall,Mild (Seasonal),Pantene,2,699,Bi-Monthly,No Preference,Nothing works on my scalp.
+RESP_0295,25-34,Male,Tier 2,Oily Scalp,Mild (Seasonal),Pantene,4,399,Bi-Monthly,Ayurvedic/Herbal,Just marketing gimmicks.
+RESP_0296,18-24,Female,Tier 2,Dandruff,Mild (Seasonal),Generic/Ayurvedic,3,699,Monthly,Chemical/Scientific,Just marketing gimmicks.
+RESP_0297,35-44,Male,Tier 2,Frizz,Mild (Seasonal),Generic/Ayurvedic,4,499,Monthly,No Preference,Too expensive for daily use.
+RESP_0298,45-54,Female,Tier 1,Dryness,Moderate (Clumps),Dove,2,699,Quarterly,Ayurvedic/Herbal,Made my hair dry but stopped fall.
+RESP_0299,25-34,Male,Tier 1,Dandruff,Severe (Visible Thinning),Dove,3,699,Bi-Monthly,Ayurvedic/Herbal,Nothing works on my scalp.
+RESP_0300,35-44,Female,Tier 1,Frizz,Mild (Seasonal),Dove,10,250,Quarterly,Ayurvedic/Herbal,I want something that actually stops hairfall.
+RESP_0301,25-34,Female,Tier 2,Hairfall,Moderate (Clumps),Pantene,8,399,Monthly,Ayurvedic/Herbal,Just marketing gimmicks.
+RESP_0302,18-24,Female,Tier 1,Hairfall,Moderate (Clumps),Pantene,3,699,Bi-Monthly,Ayurvedic/Herbal,Too expensive for daily use.
+RESP_0303,35-44,Female,Tier 1,Oily Scalp,Severe (Visible Thinning),Head & Shoulders,9,499,Quarterly,Ayurvedic/Herbal,Too expensive for daily use.
+RESP_0304,25-34,Female,Tier 2,Hairfall,Moderate (Clumps),Mamaearth,4,250,Monthly,Ayurvedic/Herbal,Good but causes dandruff.
+RESP_0305,35-44,Female,Tier 2,Oily Scalp,Mild (Seasonal),Generic/Ayurvedic,6,399,Bi-Monthly,Chemical/Scientific,I prefer natural smell.
+RESP_0306,45-54,Female,Tier 2,Hairfall,Severe (Visible Thinning),Pantene,7,999,Bi-Monthly,Chemical/Scientific,I want something that actually stops hairfall.
+RESP_0307,25-34,Male,Tier 2,Hairfall,Severe (Visible Thinning),Mamaearth,7,499,Bi-Monthly,Chemical/Scientific,Too expensive for daily use.
+RESP_0308,25-34,Female,Tier 1,Dryness,Moderate (Clumps),Generic/Ayurvedic,6,499,Quarterly,Chemical/Scientific,Nothing works on my scalp.
+RESP_0309,25-34,Male,Tier 1,Hairfall,Moderate (Clumps),Head & Shoulders,7,250,Quarterly,No Preference,I want something that actually stops hairfall.
+RESP_0310,18-24,Female,Tier 2,Hairfall,Mild (Seasonal),Tresemme,1,699,Bi-Monthly,Ayurvedic/Herbal,Too expensive for daily use.
+RESP_0311,25-34,Male,Tier 1,Frizz,Severe (Visible Thinning),Tresemme,2,699,Monthly,Ayurvedic/Herbal,I want something that actually stops hairfall.
+RESP_0312,18-24,Female,Tier 2,Oily Scalp,Mild (Seasonal),Tresemme,1,699,Monthly,Ayurvedic/Herbal,I need a solution for post-partum hair loss.
+RESP_0313,25-34,Female,Tier 3,Oily Scalp,Severe (Visible Thinning),Pantene,6,699,Bi-Monthly,Chemical/Scientific,Nothing works on my scalp.
+RESP_0314,18-24,Male,Tier 1,Hairfall,Moderate (Clumps),Dove,9,399,Bi-Monthly,Ayurvedic/Herbal,Just marketing gimmicks.
+RESP_0315,35-44,Female,Tier 1,Hairfall,Mild (Seasonal),Dove,10,399,Quarterly,Chemical/Scientific,I want something that actually stops hairfall.
+RESP_0316,35-44,Male,Tier 3,Hairfall,Mild (Seasonal),Head & Shoulders,3,699,Bi-Monthly,Ayurvedic/Herbal,Just marketing gimmicks.
+RESP_0317,35-44,Female,Tier 1,Hairfall,Mild (Seasonal),Pantene,10,399,Quarterly,Chemical/Scientific,Good but causes dandruff.
+RESP_0318,45-54,Male,Tier 2,Frizz,Moderate (Clumps),Generic/Ayurvedic,7,250,Monthly,Ayurvedic/Herbal,Good but causes dandruff.
+RESP_0319,55+,Female,Tier 2,Dryness,Mild (Seasonal),Dove,9,250,Quarterly,Ayurvedic/Herbal,Just marketing gimmicks.
+RESP_0320,45-54,Male,Tier 3,Hairfall,Mild (Seasonal),Generic/Ayurvedic,5,250,Monthly,Ayurvedic/Herbal,I want something that actually stops hairfall.
+RESP_0321,45-54,Male,Tier 1,Hairfall,Moderate (Clumps),Head & Shoulders,2,699,Monthly,Ayurvedic/Herbal,Nothing works on my scalp.
+RESP_0322,25-34,Female,Tier 3,Hairfall,Mild (Seasonal),Pantene,3,699,Bi-Monthly,Chemical/Scientific,I want something that actually stops hairfall.
+RESP_0323,35-44,Male,Tier 1,Dandruff,Mild (Seasonal),Head & Shoulders,4,699,Monthly,Ayurvedic/Herbal,Good but causes dandruff.
+RESP_0324,45-54,Female,Tier 3,Dryness,Moderate (Clumps),Pantene,2,699,Quarterly,Ayurvedic/Herbal,Made my hair dry but stopped fall.
+RESP_0325,25-34,Male,Tier 2,Dryness,Severe (Visible Thinning),Dove,8,999,Bi-Monthly,Ayurvedic/Herbal,Just marketing gimmicks.
+RESP_0326,45-54,Female,Tier 1,Hairfall,Severe (Visible Thinning),Generic/Ayurvedic,6,399,Quarterly,Ayurvedic/Herbal,Just marketing gimmicks.
+RESP_0327,25-34,Female,Tier 3,Dandruff,Moderate (Clumps),Dove,9,399,Bi-Monthly,Ayurvedic/Herbal,Just marketing gimmicks.
+RESP_0328,25-34,Male,Tier 2,Frizz,Moderate (Clumps),Head & Shoulders,6,499,Bi-Monthly,Chemical/Scientific,I want something that actually stops hairfall.
+RESP_0329,35-44,Male,Tier 1,Hairfall,Mild (Seasonal),Head & Shoulders,9,699,Monthly,Ayurvedic/Herbal,Just marketing gimmicks.
+RESP_0330,35-44,Male,Tier 1,Hairfall,Mild (Seasonal),Dove,8,250,Bi-Monthly,Ayurvedic/Herbal,Nothing works on my scalp.
+RESP_0331,35-44,Male,Tier 2,Hairfall,Moderate (Clumps),Head & Shoulders,4,399,Monthly,Chemical/Scientific,I prefer natural smell.
+RESP_0332,25-34,Male,Tier 1,Frizz,Moderate (Clumps),Head & Shoulders,9,499,Quarterly,Ayurvedic/Herbal,I prefer natural smell.
+RESP_0333,35-44,Female,Tier 1,Hairfall,Mild (Seasonal),Tresemme,5,399,Bi-Monthly,Ayurvedic/Herbal,Too expensive for daily use.
+RESP_0334,25-34,Female,Tier 1,Dryness,Mild (Seasonal),Tresemme,10,699,Monthly,Chemical/Scientific,Just marketing gimmicks.
+RESP_0335,45-54,Female,Tier 3,Dandruff,Mild (Seasonal),Mamaearth,9,999,Bi-Monthly,Ayurvedic/Herbal,Too expensive for daily use.
+RESP_0336,18-24,Female,Tier 1,Hairfall,Severe (Visible Thinning),Generic/Ayurvedic,5,250,Quarterly,Ayurvedic/Herbal,I want something that actually stops hairfall.
+RESP_0337,25-34,Male,Tier 3,Hairfall,Severe (Visible Thinning),Generic/Ayurvedic,6,399,Monthly,Chemical/Scientific,I need a solution for post-partum hair loss.
+RESP_0338,25-34,Male,Tier 1,Hairfall,Mild (Seasonal),Head & Shoulders,7,499,Monthly,Ayurvedic/Herbal,Made my hair dry but stopped fall.
+RESP_0339,35-44,Female,Tier 2,Hairfall,Severe (Visible Thinning),Pantene,9,399,Monthly,Ayurvedic/Herbal,Made my hair dry but stopped fall.
+RESP_0340,18-24,Male,Tier 2,Dandruff,Mild (Seasonal),Pantene,7,150,Bi-Monthly,Ayurvedic/Herbal,I need a solution for post-partum hair loss.
+RESP_0341,25-34,Male,Tier 2,Dryness,Severe (Visible Thinning),Head & Shoulders,5,399,Monthly,No Preference,I want something that actually stops hairfall.
+RESP_0342,25-34,Male,Tier 2,Dandruff,Severe (Visible Thinning),Tresemme,3,699,Monthly,Ayurvedic/Herbal,Good but causes dandruff.
+RESP_0343,35-44,Female,Tier 2,Frizz,Mild (Seasonal),Head & Shoulders,5,499,Bi-Monthly,Chemical/Scientific,I want something that actually stops hairfall.
+RESP_0344,45-54,Male,Tier 1,Oily Scalp,Moderate (Clumps),Dove,4,399,Quarterly,No Preference,Just marketing gimmicks.
+RESP_0345,25-34,Female,Tier 1,Hairfall,Mild (Seasonal),Head & Shoulders,1,699,Bi-Monthly,Ayurvedic/Herbal,Good but causes dandruff.
+RESP_0346,18-24,Male,Tier 1,Dandruff,Severe (Visible Thinning),Head & Shoulders,10,150,Quarterly,Chemical/Scientific,Too expensive for daily use.
+RESP_0347,25-34,Female,Tier 2,Oily Scalp,Severe (Visible Thinning),Mamaearth,5,999,Quarterly,Ayurvedic/Herbal,I prefer natural smell.
+RESP_0348,45-54,Female,Tier 1,Hairfall,Mild (Seasonal),Generic/Ayurvedic,2,699,Quarterly,Chemical/Scientific,Too expensive for daily use.
+RESP_0349,25-34,Male,Tier 2,Hairfall,Severe (Visible Thinning),Generic/Ayurvedic,1,699,Quarterly,Ayurvedic/Herbal,I need a solution for post-partum hair loss.
+RESP_0350,25-34,Female,Tier 2,Hairfall,Mild (Seasonal),Pantene,5,699,Quarterly,Ayurvedic/Herbal,I need a solution for post-partum hair loss.
+RESP_0351,25-34,Female,Tier 1,Dandruff,Moderate (Clumps),Pantene,3,699,Quarterly,Ayurvedic/Herbal,Nothing works on my scalp.
+RESP_0352,35-44,Female,Tier 1,Dandruff,Mild (Seasonal),Mamaearth,6,399,Quarterly,Ayurvedic/Herbal,Good but causes dandruff.
+RESP_0353,35-44,Female,Tier 1,Hairfall,Moderate (Clumps),Dove,6,250,Bi-Monthly,Ayurvedic/Herbal,Nothing works on my scalp.
+RESP_0354,25-34,Female,Tier 1,Hairfall,Moderate (Clumps),Tresemme,5,399,Quarterly,Ayurvedic/Herbal,Made my hair dry but stopped fall.
+RESP_0355,25-34,Male,Tier 3,Frizz,Mild (Seasonal),Mamaearth,2,699,Bi-Monthly,Chemical/Scientific,Nothing works on my scalp.
+RESP_0356,25-34,Female,Tier 2,Dandruff,Mild (Seasonal),Dove,4,499,Bi-Monthly,Ayurvedic/Herbal,I need a solution for post-partum hair loss.
+RESP_0357,25-34,Female,Tier 3,Dandruff,Severe (Visible Thinning),Pantene,6,150,Monthly,Chemical/Scientific,Just marketing gimmicks.
+RESP_0358,25-34,Male,Tier 1,Dryness,Severe (Visible Thinning),Dove,1,699,Bi-Monthly,Ayurvedic/Herbal,I need a solution for post-partum hair loss.
+RESP_0359,35-44,Female,Tier 1,Hairfall,Severe (Visible Thinning),Head & Shoulders,8,399,Monthly,No Preference,Just marketing gimmicks.
+RESP_0360,35-44,Male,Tier 2,Dryness,Moderate (Clumps),Head & Shoulders,10,699,Bi-Monthly,No Preference,I prefer natural smell.
+RESP_0361,18-24,Male,Tier 2,Dandruff,Moderate (Clumps),Tresemme,9,399,Quarterly,Chemical/Scientific,I need a solution for post-partum hair loss.
+RESP_0362,55+,Female,Tier 2,Frizz,Severe (Visible Thinning),Generic/Ayurvedic,4,499,Bi-Monthly,Ayurvedic/Herbal,Nothing works on my scalp.
+RESP_0363,18-24,Male,Tier 2,Hairfall,Mild (Seasonal),Tresemme,4,399,Monthly,Chemical/Scientific,I prefer natural smell.
+RESP_0364,45-54,Female,Tier 3,Hairfall,Moderate (Clumps),Head & Shoulders,6,499,Bi-Monthly,Ayurvedic/Herbal,Good but causes dandruff.
+RESP_0365,45-54,Female,Tier 1,Hairfall,Mild (Seasonal),Dove,4,999,Monthly,Chemical/Scientific,I need a solution for post-partum hair loss.
+RESP_0366,18-24,Male,Tier 2,Hairfall,Moderate (Clumps),Generic/Ayurvedic,5,250,Bi-Monthly,Ayurvedic/Herbal,Good but causes dandruff.
+RESP_0367,18-24,Male,Tier 1,Hairfall,Moderate (Clumps),Generic/Ayurvedic,6,499,Quarterly,Ayurvedic/Herbal,Too expensive for daily use.
+RESP_0368,18-24,Female,Tier 2,Hairfall,Moderate (Clumps),Generic/Ayurvedic,3,699,Monthly,Ayurvedic/Herbal,Made my hair dry but stopped fall.
+RESP_0369,25-34,Female,Tier 2,Dandruff,Mild (Seasonal),Dove,9,399,Monthly,Ayurvedic/Herbal,Nothing works on my scalp.
+RESP_0370,25-34,Female,Tier 1,Frizz,Mild (Seasonal),Generic/Ayurvedic,8,399,Monthly,Ayurvedic/Herbal,Just marketing gimmicks.
+RESP_0371,25-34,Female,Tier 1,Dryness,Severe (Visible Thinning),Generic/Ayurvedic,2,699,Quarterly,Ayurvedic/Herbal,Too expensive for daily use.
+RESP_0372,18-24,Male,Tier 2,Hairfall,Severe (Visible Thinning),Dove,7,150,Bi-Monthly,Ayurvedic/Herbal,I prefer natural smell.
+RESP_0373,25-34,Male,Tier 1,Hairfall,Mild (Seasonal),Generic/Ayurvedic,3,699,Bi-Monthly,Ayurvedic/Herbal,I want something that actually stops hairfall.
+RESP_0374,45-54,Female,Tier 1,Frizz,Moderate (Clumps),Pantene,1,699,Bi-Monthly,Ayurvedic/Herbal,Just marketing gimmicks.
+RESP_0375,45-54,Female,Tier 1,Frizz,Severe (Visible Thinning),Tresemme,1,699,Bi-Monthly,Ayurvedic/Herbal,I want something that actually stops hairfall.
+RESP_0376,18-24,Male,Tier 1,Hairfall,Severe (Visible Thinning),Pantene,1,699,Monthly,No Preference,Nothing works on my scalp.
+RESP_0377,45-54,Female,Tier 2,Hairfall,Mild (Seasonal),Head & Shoulders,9,150,Bi-Monthly,Ayurvedic/Herbal,I want something that actually stops hairfall.
+RESP_0378,25-34,Male,Tier 1,Oily Scalp,Moderate (Clumps),Tresemme,1,699,Bi-Monthly,Ayurvedic/Herbal,I need a solution for post-partum hair loss.
+RESP_0379,45-54,Female,Tier 1,Dryness,Severe (Visible Thinning),Mamaearth,10,250,Bi-Monthly,No Preference,Nothing works on my scalp.
+RESP_0380,35-44,Male,Tier 2,Hairfall,Severe (Visible Thinning),Pantene,2,699,Monthly,Ayurvedic/Herbal,Too expensive for daily use.
+RESP_0381,18-24,Female,Tier 1,Hairfall,Mild (Seasonal),Tresemme,7,399,Bi-Monthly,Ayurvedic/Herbal,Too expensive for daily use.
+RESP_0382,18-24,Female,Tier 1,Frizz,Severe (Visible Thinning),Head & Shoulders,7,699,Quarterly,Ayurvedic/Herbal,Made my hair dry but stopped fall.
+RESP_0383,35-44,Female,Tier 1,Hairfall,Mild (Seasonal),Pantene,7,699,Quarterly,Ayurvedic/Herbal,I prefer natural smell.
+RESP_0384,25-34,Male,Tier 1,Frizz,Moderate (Clumps),Tresemme,10,499,Bi-Monthly,Chemical/Scientific,I want something that actually stops hairfall.
+RESP_0385,25-34,Female,Tier 3,Frizz,Mild (Seasonal),Pantene,10,250,Quarterly,Chemical/Scientific,Too expensive for daily use.
+RESP_0386,35-44,Female,Tier 3,Hairfall,Mild (Seasonal),Mamaearth,5,250,Quarterly,Ayurvedic/Herbal,I prefer natural smell.
+RESP_0387,25-34,Female,Tier 2,Dandruff,Mild (Seasonal),Pantene,4,999,Bi-Monthly,Ayurvedic/Herbal,I want something that actually stops hairfall.
+RESP_0388,18-24,Male,Tier 2,Oily Scalp,Mild (Seasonal),Dove,8,499,Monthly,Ayurvedic/Herbal,Nothing works on my scalp.
+RESP_0389,18-24,Male,Tier 2,Hairfall,Severe (Visible Thinning),Mamaearth,10,699,Quarterly,Ayurvedic/Herbal,I prefer natural smell.
+RESP_0390,55+,Female,Tier 1,Hairfall,Mild (Seasonal),Pantene,6,250,Monthly,Chemical/Scientific,I prefer natural smell.
+RESP_0391,35-44,Female,Tier 2,Oily Scalp,Moderate (Clumps),Pantene,4,499,Bi-Monthly,Ayurvedic/Herbal,I need a solution for post-partum hair loss.
+RESP_0392,35-44,Male,Tier 3,Dandruff,Mild (Seasonal),Generic/Ayurvedic,8,250,Monthly,Chemical/Scientific,Too expensive for daily use.
+RESP_0393,55+,Male,Tier 2,Dandruff,Moderate (Clumps),Dove,2,699,Bi-Monthly,Ayurvedic/Herbal,Too expensive for daily use.
+RESP_0394,18-24,Female,Tier 3,Oily Scalp,Severe (Visible Thinning),Head & Shoulders,3,699,Monthly,Ayurvedic/Herbal,Made my hair dry but stopped fall.
+RESP_0395,35-44,Female,Tier 1,Hairfall,Severe (Visible Thinning),Pantene,5,499,Bi-Monthly,No Preference,Made my hair dry but stopped fall.
+RESP_0396,18-24,Male,Tier 2,Hairfall,Severe (Visible Thinning),Mamaearth,5,150,Quarterly,No Preference,I prefer natural smell.
+RESP_0397,25-34,Female,Tier 1,Oily Scalp,Moderate (Clumps),Generic/Ayurvedic,3,699,Bi-Monthly,Ayurvedic/Herbal,Good but causes dandruff.
+RESP_0398,45-54,Male,Tier 1,Dandruff,Severe (Visible Thinning),Mamaearth,8,499,Quarterly,Ayurvedic/Herbal,Nothing works on my scalp.
+RESP_0399,45-54,Male,Tier 1,Dryness,Moderate (Clumps),Mamaearth,7,399,Bi-Monthly,Chemical/Scientific,I want something that actually stops hairfall.
+RESP_0400,18-24,Female,Tier 1,Dryness,Moderate (Clumps),Dove,8,399,Bi-Monthly,Ayurvedic/Herbal,I prefer natural smell.
+RESP_0401,18-24,Male,Tier 2,Hairfall,Moderate (Clumps),Pantene,1,699,Bi-Monthly,Ayurvedic/Herbal,Too expensive for daily use.
+RESP_0402,45-54,Male,Tier 1,Oily Scalp,Severe (Visible Thinning),Tresemme,9,499,Bi-Monthly,Ayurvedic/Herbal,I want something that actually stops hairfall.
+RESP_0403,25-34,Male,Tier 2,Dandruff,Moderate (Clumps),Dove,4,999,Bi-Monthly,Chemical/Scientific,Good but causes dandruff.
+RESP_0404,25-34,Female,Tier 3,Hairfall,Severe (Visible Thinning),Pantene,10,399,Monthly,Chemical/Scientific,I want something that actually stops hairfall.
+RESP_0405,18-24,Female,Tier 3,Hairfall,Severe (Visible Thinning),Mamaearth,6,999,Monthly,Ayurvedic/Herbal,Made my hair dry but stopped fall.
+RESP_0406,18-24,Female,Tier 3,Hairfall,Mild (Seasonal),Tresemme,9,699,Monthly,Ayurvedic/Herbal,Just marketing gimmicks.
+RESP_0407,18-24,Female,Tier 1,Dandruff,Mild (Seasonal),Mamaearth,5,250,Quarterly,Chemical/Scientific,I want something that actually stops hairfall.
+RESP_0408,25-34,Male,Tier 1,Hairfall,Mild (Seasonal),Tresemme,3,699,Monthly,Ayurvedic/Herbal,Too expensive for daily use.
+RESP_0409,25-34,Female,Tier 1,Hairfall,Moderate (Clumps),Dove,10,699,Bi-Monthly,Chemical/Scientific,Just marketing gimmicks.
+RESP_0410,45-54,Female,Tier 2,Dandruff,Severe (Visible Thinning),Head & Shoulders,7,150,Bi-Monthly,Chemical/Scientific,Good but causes dandruff.
+RESP_0411,25-34,Female,Tier 3,Hairfall,Moderate (Clumps),Dove,5,499,Quarterly,Ayurvedic/Herbal,Made my hair dry but stopped fall.
+RESP_0412,18-24,Female,Tier 1,Hairfall,Moderate (Clumps),Dove,6,399,Quarterly,Ayurvedic/Herbal,I need a solution for post-partum hair loss.
+RESP_0413,35-44,Male,Tier 1,Hairfall,Severe (Visible Thinning),Mamaearth,6,399,Bi-Monthly,Ayurvedic/Herbal,I want something that actually stops hairfall.
+RESP_0414,18-24,Male,Tier 1,Hairfall,Severe (Visible Thinning),Mamaearth,8,150,Bi-Monthly,No Preference,I want something that actually stops hairfall.
+RESP_0415,25-34,Female,Tier 2,Hairfall,Moderate (Clumps),Generic/Ayurvedic,8,499,Bi-Monthly,No Preference,Just marketing gimmicks.
+RESP_0416,25-34,Female,Tier 2,Hairfall,Mild (Seasonal),Mamaearth,6,250,Bi-Monthly,Chemical/Scientific,I want something that actually stops hairfall.
+RESP_0417,25-34,Female,Tier 2,Hairfall,Mild (Seasonal),Head & Shoulders,5,250,Quarterly,Ayurvedic/Herbal,Good but causes dandruff.
+RESP_0418,18-24,Male,Tier 1,Dryness,Severe (Visible Thinning),Head & Shoulders,9,499,Bi-Monthly,Ayurvedic/Herbal,Too expensive for daily use.
+RESP_0419,18-24,Female,Tier 1,Hairfall,Severe (Visible Thinning),Mamaearth,1,699,Quarterly,Ayurvedic/Herbal,Good but causes dandruff.
+RESP_0420,35-44,Male,Tier 2,Frizz,Mild (Seasonal),Head & Shoulders,6,250,Bi-Monthly,Ayurvedic/Herbal,Just marketing gimmicks.
+RESP_0421,35-44,Male,Tier 1,Dryness,Moderate (Clumps),Mamaearth,2,699,Quarterly,Ayurvedic/Herbal,Good but causes dandruff.
+RESP_0422,18-24,Female,Tier 1,Hairfall,Severe (Visible Thinning),Head & Shoulders,9,699,Bi-Monthly,Ayurvedic/Herbal,Good but causes dandruff.
+RESP_0423,45-54,Female,Tier 1,Hairfall,Severe (Visible Thinning),Generic/Ayurvedic,7,150,Monthly,Chemical/Scientific,Too expensive for daily use.
+RESP_0424,35-44,Male,Tier 1,Hairfall,Mild (Seasonal),Dove,1,699,Bi-Monthly,Chemical/Scientific,I need a solution for post-partum hair loss.
+RESP_0425,25-34,Female,Tier 3,Oily Scalp,Moderate (Clumps),Dove,4,399,Quarterly,Chemical/Scientific,I prefer natural smell.
+RESP_0426,25-34,Female,Tier 3,Hairfall,Severe (Visible Thinning),Dove,2,699,Monthly,Ayurvedic/Herbal,Made my hair dry but stopped fall.
+RESP_0427,18-24,Male,Tier 2,Hairfall,Mild (Seasonal),Generic/Ayurvedic,6,250,Monthly,Ayurvedic/Herbal,Too expensive for daily use.
+RESP_0428,18-24,Female,Tier 3,Hairfall,Mild (Seasonal),Dove,10,150,Monthly,Ayurvedic/Herbal,Too expensive for daily use.
+RESP_0429,35-44,Female,Tier 1,Frizz,Moderate (Clumps),Pantene,7,250,Quarterly,Ayurvedic/Herbal,Good but causes dandruff.
+RESP_0430,25-34,Male,Tier 1,Dryness,Severe (Visible Thinning),Tresemme,7,250,Bi-Monthly,Chemical/Scientific,I prefer natural smell.
+RESP_0431,35-44,Male,Tier 2,Hairfall,Mild (Seasonal),Tresemme,9,150,Bi-Monthly,Chemical/Scientific,Too expensive for daily use.
+RESP_0432,18-24,Female,Tier 2,Hairfall,Mild (Seasonal),Mamaearth,8,399,Bi-Monthly,Chemical/Scientific,Too expensive for daily use.
+RESP_0433,35-44,Female,Tier 1,Hairfall,Severe (Visible Thinning),Head & Shoulders,2,699,Quarterly,No Preference,Just marketing gimmicks.
+RESP_0434,45-54,Female,Tier 1,Hairfall,Severe (Visible Thinning),Dove,2,699,Quarterly,Chemical/Scientific,I need a solution for post-partum hair loss.
+RESP_0435,25-34,Female,Tier 1,Hairfall,Moderate (Clumps),Generic/Ayurvedic,1,699,Bi-Monthly,Ayurvedic/Herbal,Made my hair dry but stopped fall.
+RESP_0436,25-34,Male,Tier 3,Dryness,Mild (Seasonal),Tresemme,8,399,Monthly,Chemical/Scientific,Nothing works on my scalp.
+RESP_0437,25-34,Female,Tier 1,Hairfall,Moderate (Clumps),Mamaearth,2,699,Quarterly,Chemical/Scientific,Made my hair dry but stopped fall.
+RESP_0438,18-24,Female,Tier 3,Hairfall,Severe (Visible Thinning),Pantene,9,499,Bi-Monthly,Ayurvedic/Herbal,Just marketing gimmicks.
+RESP_0439,35-44,Male,Tier 2,Hairfall,Severe (Visible Thinning),Head & Shoulders,3,699,Monthly,Ayurvedic/Herbal,Just marketing gimmicks.
+RESP_0440,18-24,Female,Tier 3,Oily Scalp,Mild (Seasonal),Tresemme,10,399,Bi-Monthly,Chemical/Scientific,Just marketing gimmicks.
+RESP_0441,25-34,Female,Tier 3,Hairfall,Mild (Seasonal),Dove,8,699,Monthly,Ayurvedic/Herbal,Made my hair dry but stopped fall.
+RESP_0442,18-24,Female,Tier 1,Frizz,Severe (Visible Thinning),Mamaearth,8,250,Quarterly,Ayurvedic/Herbal,I want something that actually stops hairfall.
+RESP_0443,18-24,Female,Tier 1,Dryness,Mild (Seasonal),Dove,1,699,Monthly,Chemical/Scientific,Good but causes dandruff.
+RESP_0444,18-24,Male,Tier 3,Hairfall,Moderate (Clumps),Mamaearth,1,699,Monthly,Ayurvedic/Herbal,I prefer natural smell.
+RESP_0445,25-34,Female,Tier 2,Hairfall,Moderate (Clumps),Tresemme,2,699,Monthly,Ayurvedic/Herbal,I prefer natural smell.
+RESP_0446,18-24,Female,Tier 1,Hairfall,Severe (Visible Thinning),Mamaearth,3,699,Bi-Monthly,Chemical/Scientific,I prefer natural smell.
+RESP_0447,35-44,Male,Tier 2,Hairfall,Mild (Seasonal),Generic/Ayurvedic,4,150,Bi-Monthly,No Preference,Just marketing gimmicks.
+RESP_0448,35-44,Male,Tier 2,Hairfall,Moderate (Clumps),Pantene,5,399,Bi-Monthly,Ayurvedic/Herbal,I need a solution for post-partum hair loss.
+RESP_0449,18-24,Female,Tier 1,Oily Scalp,Moderate (Clumps),Tresemme,4,399,Monthly,Ayurvedic/Herbal,I need a solution for post-partum hair loss.
+RESP_0450,35-44,Male,Tier 1,Hairfall,Moderate (Clumps),Dove,4,250,Quarterly,No Preference,I need a solution for post-partum hair loss.
+RESP_0451,18-24,Female,Tier 2,Oily Scalp,Mild (Seasonal),Head & Shoulders,8,250,Monthly,Ayurvedic/Herbal,Just marketing gimmicks.
+RESP_0452,35-44,Female,Tier 3,Dandruff,Mild (Seasonal),Tresemme,10,499,Quarterly,No Preference,Nothing works on my scalp.
+RESP_0453,55+,Male,Tier 3,Hairfall,Severe (Visible Thinning),Tresemme,6,250,Monthly,Ayurvedic/Herbal,Made my hair dry but stopped fall.
+RESP_0454,35-44,Male,Tier 1,Dryness,Mild (Seasonal),Dove,6,699,Monthly,Chemical/Scientific,Just marketing gimmicks.
+RESP_0455,25-34,Female,Tier 2,Hairfall,Moderate (Clumps),Generic/Ayurvedic,3,699,Bi-Monthly,Ayurvedic/Herbal,Nothing works on my scalp.
+RESP_0456,55+,Female,Tier 1,Frizz,Moderate (Clumps),Pantene,4,250,Bi-Monthly,Chemical/Scientific,Good but causes dandruff.
+RESP_0457,35-44,Male,Tier 2,Dryness,Mild (Seasonal),Mamaearth,7,399,Bi-Monthly,Chemical/Scientific,Just marketing gimmicks.
+RESP_0458,45-54,Male,Tier 3,Hairfall,Moderate (Clumps),Tresemme,1,699,Quarterly,Chemical/Scientific,Made my hair dry but stopped fall.
+RESP_0459,25-34,Male,Tier 1,Dandruff,Mild (Seasonal),Mamaearth,8,399,Quarterly,No Preference,I want something that actually stops hairfall.
+RESP_0460,45-54,Male,Tier 1,Hairfall,Mild (Seasonal),Tresemme,10,399,Quarterly,Ayurvedic/Herbal,Just marketing gimmicks.
+RESP_0461,25-34,Male,Tier 2,Hairfall,Mild (Seasonal),Tresemme,8,499,Monthly,Ayurvedic/Herbal,I want something that actually stops hairfall.
+RESP_0462,18-24,Female,Tier 1,Dryness,Mild (Seasonal),Tresemme,6,250,Quarterly,Ayurvedic/Herbal,Nothing works on my scalp.
+RESP_0463,25-34,Male,Tier 1,Hairfall,Mild (Seasonal),Tresemme,8,699,Bi-Monthly,Ayurvedic/Herbal,I need a solution for post-partum hair loss.
+RESP_0464,25-34,Female,Tier 1,Dryness,Mild (Seasonal),Head & Shoulders,8,699,Bi-Monthly,Ayurvedic/Herbal,I want something that actually stops hairfall.
+RESP_0465,25-34,Male,Tier 2,Hairfall,Mild (Seasonal),Pantene,8,999,Monthly,Chemical/Scientific,Good but causes dandruff.
+RESP_0466,18-24,Female,Tier 2,Dandruff,Severe (Visible Thinning),Head & Shoulders,7,250,Bi-Monthly,Ayurvedic/Herbal,Nothing works on my scalp.
+RESP_0467,45-54,Female,Tier 2,Hairfall,Mild (Seasonal),Tresemme,6,699,Monthly,Chemical/Scientific,Good but causes dandruff.
+RESP_0468,45-54,Female,Tier 2,Dandruff,Severe (Visible Thinning),Dove,7,250,Monthly,No Preference,I want something that actually stops hairfall.
+RESP_0469,18-24,Female,Tier 2,Hairfall,Mild (Seasonal),Tresemme,6,699,Monthly,Ayurvedic/Herbal,Too expensive for daily use.
+RESP_0470,25-34,Female,Tier 1,Oily Scalp,Mild (Seasonal),Pantene,7,399,Bi-Monthly,Chemical/Scientific,Just marketing gimmicks.
+RESP_0471,25-34,Male,Tier 2,Dandruff,Mild (Seasonal),Dove,6,399,Quarterly,Ayurvedic/Herbal,Good but causes dandruff.
+RESP_0472,35-44,Male,Tier 1,Dandruff,Moderate (Clumps),Tresemme,3,699,Monthly,Chemical/Scientific,Too expensive for daily use.
+RESP_0473,25-34,Female,Tier 2,Hairfall,Mild (Seasonal),Pantene,10,150,Quarterly,Ayurvedic/Herbal,Nothing works on my scalp.
+RESP_0474,18-24,Female,Tier 1,Hairfall,Moderate (Clumps),Tresemme,4,399,Quarterly,Ayurvedic/Herbal,Nothing works on my scalp.
+RESP_0475,25-34,Female,Tier 3,Oily Scalp,Moderate (Clumps),Tresemme,7,399,Quarterly,Chemical/Scientific,Made my hair dry but stopped fall.
+RESP_0476,18-24,Male,Tier 3,Hairfall,Severe (Visible Thinning),Dove,3,699,Monthly,Ayurvedic/Herbal,Good but causes dandruff.
+RESP_0477,45-54,Female,Tier 3,Hairfall,Moderate (Clumps),Mamaearth,3,699,Bi-Monthly,Chemical/Scientific,Made my hair dry but stopped fall.
+RESP_0478,25-34,Male,Tier 1,Hairfall,Moderate (Clumps),Head & Shoulders,10,499,Quarterly,No Preference,I need a solution for post-partum hair loss.
+RESP_0479,45-54,Male,Tier 2,Hairfall,Moderate (Clumps),Mamaearth,9,499,Monthly,Ayurvedic/Herbal,Good but causes dandruff.
+RESP_0480,18-24,Male,Tier 1,Frizz,Severe (Visible Thinning),Tresemme,2,699,Monthly,Chemical/Scientific,Made my hair dry but stopped fall.
+RESP_0481,25-34,Female,Tier 1,Hairfall,Mild (Seasonal),Mamaearth,1,699,Bi-Monthly,Ayurvedic/Herbal,I prefer natural smell.
+RESP_0482,35-44,Male,Tier 1,Oily Scalp,Mild (Seasonal),Head & Shoulders,3,699,Quarterly,Chemical/Scientific,Just marketing gimmicks.
+RESP_0483,45-54,Female,Tier 1,Oily Scalp,Mild (Seasonal),Head & Shoulders,7,999,Quarterly,No Preference,I want something that actually stops hairfall.
+RESP_0484,55+,Female,Tier 1,Frizz,Mild (Seasonal),Tresemme,7,399,Quarterly,Ayurvedic/Herbal,Made my hair dry but stopped fall.
+RESP_0485,45-54,Male,Tier 2,Hairfall,Mild (Seasonal),Pantene,3,699,Quarterly,Ayurvedic/Herbal,Just marketing gimmicks.
+RESP_0486,25-34,Female,Tier 1,Frizz,Mild (Seasonal),Dove,6,499,Bi-Monthly,No Preference,I need a solution for post-partum hair loss.
+RESP_0487,25-34,Female,Tier 2,Hairfall,Severe (Visible Thinning),Pantene,2,699,Quarterly,Ayurvedic/Herbal,I want something that actually stops hairfall.
+RESP_0488,35-44,Male,Tier 2,Dryness,Mild (Seasonal),Tresemme,3,699,Monthly,Chemical/Scientific,I want something that actually stops hairfall.
+RESP_0489,25-34,Male,Tier 2,Frizz,Moderate (Clumps),Tresemme,6,499,Quarterly,Chemical/Scientific,Too expensive for daily use.
+RESP_0490,25-34,Female,Tier 1,Hairfall,Moderate (Clumps),Pantene,5,699,Monthly,Ayurvedic/Herbal,Nothing works on my scalp.
+RESP_0491,35-44,Female,Tier 2,Frizz,Moderate (Clumps),Tresemme,6,399,Monthly,Ayurvedic/Herbal,Good but causes dandruff.
+RESP_0492,35-44,Female,Tier 2,Dryness,Mild (Seasonal),Dove,7,499,Bi-Monthly,Chemical/Scientific,I want something that actually stops hairfall.
+RESP_0493,45-54,Male,Tier 2,Hairfall,Severe (Visible Thinning),Dove,4,699,Quarterly,No Preference,Nothing works on my scalp.
+RESP_0494,25-34,Female,Tier 2,Hairfall,Moderate (Clumps),Head & Shoulders,10,150,Quarterly,Chemical/Scientific,Good but causes dandruff.
+RESP_0495,25-34,Female,Tier 1,Hairfall,Moderate (Clumps),Mamaearth,9,499,Monthly,Chemical/Scientific,I need a solution for post-partum hair loss.
+RESP_0496,25-34,Female,Tier 1,Hairfall,Severe (Visible Thinning),Generic/Ayurvedic,8,399,Monthly,Chemical/Scientific,Good but causes dandruff.
+RESP_0497,18-24,Female,Tier 1,Hairfall,Mild (Seasonal),Mamaearth,8,399,Bi-Monthly,Chemical/Scientific,Nothing works on my scalp.
+RESP_0498,25-34,Female,Tier 2,Hairfall,Severe (Visible Thinning),Head & Shoulders,1,699,Bi-Monthly,Ayurvedic/Herbal,I prefer natural smell.
+RESP_0499,45-54,Female,Tier 3,Frizz,Moderate (Clumps),Dove,5,499,Quarterly,Chemical/Scientific,I want something that actually stops hairfall.
+RESP_0500,25-34,Female,Tier 3,Dryness,Mild (Seasonal),Head & Shoulders,10,499,Bi-Monthly,Ayurvedic/Herbal,I prefer natural smell.

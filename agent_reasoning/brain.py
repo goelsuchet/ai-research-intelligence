@@ -9,127 +9,145 @@ from .prompts.goal_library import GOAL_DEFINITIONS
 from .tools import ResearchTools
 from .validator import ClarityValidator
 from .output_manager import OutputManager
+from data_intelligence.db_manager import VectorDBManager
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("AgentBrain")
 
 class AgentBrain:
-    def __init__(self, model_name="gpt-4-turbo"):
+    def __init__(self, model_name="gpt-4o-mini"):
         self.llm = ChatOpenAI(model=model_name, temperature=0)
-        self.goal_queue: List[str] = []
-        self.active_goal: Optional[str] = None
         self.context_memory: Dict = {}
         
         self.validator = ClarityValidator()
         self.output_manager = OutputManager()
         self.tools = ResearchTools() 
+        self.db = VectorDBManager()
 
-    def process_turn(self, user_input: str) -> str:
+    def process_turn(self, user_input: str, layer: str = "handover") -> dict:
         """
-        Main Loop: 
+        Main Loop for Phase 5: 
         1. Parse Input
-        2. Run Tools (if needed)
-        3. SYNTHESIZE Answer (Using OpenAI)
+        2. Detect Goals
+        3. Run Tools & RAG
+        4. Progressively Render Layer
+        5. Clarity Gate
         """
-        
-        # --- 1. PARSE FRONTEND METADATA ---
-        # We need to separate the "User's Question" from the "System Data"
         file_name = None
         active_goal_hint = "1. Launch New Product"
-        clean_user_query = user_input # Default
+        clean_user_query = user_input
 
         if "[SYSTEM_METADATA]" in user_input:
-            # Extract File
             file_match = re.search(r"UPLOADED_FILE: (.+)", user_input)
             if file_match and "None" not in file_match.group(1):
                 file_name = file_match.group(1).strip()
             
-            # Extract Goal
             goal_match = re.search(r"ACTIVE_GOAL: (.+)", user_input)
             if goal_match:
                 active_goal_hint = goal_match.group(1).strip()
                 
-            # Extract The Real Question (Remove the metadata block)
-            # The prompt format is usually [METADATA]...[/METADATA] USER_QUERY: <text>
+            notes_match = re.search(r"USER_NOTES: (.*?)(?=\[/SYSTEM_METADATA\])", user_input, re.DOTALL)
+            if notes_match:
+                raw_notes = notes_match.group(1).strip()
+                self.user_context = self._parse_context(raw_notes)
+                
             if "USER_QUERY:" in user_input:
                 clean_user_query = user_input.split("USER_QUERY:")[-1].strip()
 
-        # --- 2. DATA INTELLIGENCE LAYER (Person 2) ---
+        # Goal Detection (3d.1)
+        next_goals = []
+        if layer == "handover":
+            next_goals = self._detect_goals(clean_user_query)
+        
         tool_output = ""
-        
-        # Only run the heavy tool if we haven't seen this file/goal combo yet, 
-        # OR if it's the first run. For now, we run it every time a file is present 
-        # to ensure we have fresh data, but we feed it to the LLM.
+        trace_dict = {}
+
+        # 2. RUN TOOLS (Only if layer is handover or memory is empty)
+        cache_key = f"{file_name}_{active_goal_hint}"
         if file_name:
-            import os
-            if not os.path.exists(file_name):
-                return f"❌ Error: The uploaded file could not be found at {file_name}."
-            logger.info(f"📂 Brain: Running Quant Engine on {file_name}")
-            tool_output = self.tools.analyze_dataset(file_name, active_goal_hint)
+            if layer == "handover" or cache_key not in self.context_memory:
+                import os
+                if not os.path.exists(file_name):
+                    return {
+                        "response": f"[ERROR] The uploaded file could not be found at {file_name}.",
+                        "trace": {},
+                        "next_goals": []
+                    }
+                logger.info(f"📂 Brain: Running Quant Engine on {file_name}")
+                tool_output, trace_dict = self.tools.analyze_dataset(file_name, active_goal_hint, getattr(self, 'user_context', {}))
+                
+                # RAG Integration (3e.3)
+                if self.db.collection.count() > 0:
+                    rag_res = self.db.query_evidence(clean_user_query, n_results=3)
+                    if rag_res and rag_res["documents"] and rag_res["documents"][0]:
+                        tool_output += "\n\n**Evidence Quotes:**\n"
+                        for q in rag_res["documents"][0]:
+                            tool_output += f"- \"{q}\"\n"
+                
+                self.context_memory[cache_key] = {"tool_output": tool_output, "trace": trace_dict}
+            else:
+                cached = self.context_memory[cache_key]
+                tool_output = cached["tool_output"]
+                trace_dict = cached["trace"]
 
-        # --- 3. COGNITIVE LAYER (Person 1 - OpenAI) ---
-        # THIS IS THE MISSING PIECE. We don't return the tool output. 
-        # We send it to OpenAI to "read" and explain.
-        
-        if tool_output:
-            # We construct a "Reasoning Prompt"
-            synthesis_prompt = f"""
-            SYSTEM CONTEXT:
-            You are an expert AI Research Analyst.
-            You have just run a quantitative analysis using your Data Engine.
-            
-            THE DATA ENGINE OUTPUT:
-            {tool_output}
-            
-            USER'S QUESTION:
-            "{clean_user_query}"
-            
-            INSTRUCTIONS:
-            1. Answer the user's question using ONLY the facts from the Data Engine Output.
-            2. If the user asks something not in the report (like "Age Groups"), clearly say: 
-               "My current analysis report covers the selected metrics, but does not yet contain specific data on [User Topic]. Would you like me to update the analysis code to include that?"
-            3. Do not just dump the raw report unless asked. Synthesize the answer.
-            """
-            
-            # Call OpenAI
-            response = self.llm.invoke([
-                SystemMessage(content="You are a helpful Research Intelligence Assistant."),
-                HumanMessage(content=synthesis_prompt)
-            ])
-            return response.content
+        # Error Guard (3a.2)
+        if tool_output and tool_output.startswith("[ERROR]"):
+            return {
+                "response": tool_output,
+                "trace": trace_dict,
+                "next_goals": next_goals
+            }
 
-        # --- 4. FALLBACK (No File / General Chat) ---
-        # (Existing logic for intent detection...)
-        return self._handle_standard_chat(clean_user_query)
+        # 3. SYNTHESIS via OutputManager (3b.1)
+        draft_stream = self.output_manager.generate_response(
+            goal=active_goal_hint, 
+            data=tool_output, 
+            layer=layer, 
+            trace_dict=trace_dict
+        )
 
-    def _handle_standard_chat(self, user_input):
-        # Existing logic for intent detection/escalation
-        if not self.active_goal:
-             new_goals = self._detect_goals(user_input)
-             self._update_queue(new_goals)
-        
-        # Simple response for now if no file is present
-        return self.output_manager.generate_response(self.active_goal, {}, "summary")
+        # 4. CLARITY GATE (3c.1) (Only run on summary/evidence layers, not handover/deep)
+        if layer in ["summary", "evidence"]:
+            val_result = self.validator.check_clarity(
+                goal=active_goal_hint,
+                findings=tool_output,
+                user_input=clean_user_query
+            )
+            
+            if val_result.get("escalation_needed"):
+                return {
+                    "response_stream": draft_stream, 
+                    "trace": trace_dict,
+                    "next_goals": next_goals,
+                    "escalation": val_result
+                }
+
+        return {
+            "response_stream": draft_stream,
+            "trace": trace_dict,
+            "next_goals": next_goals,
+            "escalation": None
+        }
 
     def _detect_goals(self, user_input: str) -> List[str]:
+        # Only detect if there's actually a real query, not just a button click
+        if len(user_input.strip()) < 5:
+            return []
         prompt = f"Map input to goals: {list(GOAL_DEFINITIONS.keys())}. Return comma-separated list. Input: {user_input}"
         response = self.llm.invoke([SystemMessage(content=SYSTEM_INSTRUCTIONS), HumanMessage(content=prompt)])
-        return [g.strip() for g in response.content.split(',') if g.strip() in GOAL_DEFINITIONS]
+        detected = [g.strip() for g in response.content.split(',') if g.strip() in GOAL_DEFINITIONS]
+        return detected
 
-    def _update_queue(self, new_goals: List[str]):
-        for goal in new_goals:
-            if goal not in self.goal_queue and goal != self.active_goal:
-                self.goal_queue.append(goal)
-        if not self.active_goal and self.goal_queue:
-            self.active_goal = self.goal_queue.pop(0)
-
-    def _has_required_context(self, goal, user_input) -> bool:
-        return True 
-
-    def _complete_current_goal(self):
-        self.active_goal = None
-        if self.goal_queue:
-            self.active_goal = self.goal_queue.pop(0)
-
-    def _handle_escalation(self, escalation_type):
-        return "Thinking..."
+    def _parse_context(self, user_notes: str) -> dict:
+        context = {}
+        if not user_notes or user_notes == "None":
+            return context
+            
+        # Parse price
+        price_match = re.search(r"[₹$]\s?(\d+)|priced at (\d+)", user_notes, re.IGNORECASE)
+        if price_match:
+            price_val = price_match.group(1) if price_match.group(1) else price_match.group(2)
+            context["price_target"] = float(price_val)
+            
+        context["notes"] = user_notes
+        return context
