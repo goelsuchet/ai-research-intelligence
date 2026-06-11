@@ -27,12 +27,32 @@ class QuantInsightEngine:
         except Exception:
             return None
 
+    @staticmethod
+    def reach_at_price(df, price):
+        """Pure recompute for Goal 1 interactive what-if"""
+        if 'willingness_to_pay_inr' not in df.columns:
+            return 0.0
+        points = df['willingness_to_pay_inr'].dropna()
+        if points.empty:
+            return 0.0
+        return (points >= price).mean() * 100.0
+
+    @staticmethod
+    def rice_at(reach, impact, conf, effort):
+        """Pure recompute for Goal 6 interactive what-if"""
+        try:
+            reach, impact, conf, effort = float(reach), float(impact), float(conf), float(effort)
+            if effort <= 0: return 0.0
+            return (reach * impact * (conf / 100.0)) / effort
+        except Exception:
+            return 0.0
+
     # =========================================================================
     # 🧪 GOAL 1: LAUNCH RESEARCH
     # =========================================================================
     def run_goal_1_analysis(self, df, file_path="Unknown", context=None):
         if context is None: context = {}
-        trace_dict = {"tool": "run_goal_1_analysis", "source_file": file_path, "columns_used": [], "rows_analyzed": len(df), "computations": {}, "scenarios": {}, "gap": None}
+        trace_dict = {"tool": "run_goal_1_analysis", "source_file": file_path, "columns_used": [], "rows_analyzed": len(df), "computations": {}, "scenarios": {}, "gap": None, "visuals": []}
         report_lines = ["### 🚀 Goal 1: Launch Viability Report", ""]
         
         market_size = len(df)
@@ -46,6 +66,16 @@ class QuantInsightEngine:
             trace_dict["computations"]["competitor_count"] = competitor_count
             trace_dict["computations"]["top_brands"] = top_brands
             report_lines.append(f"\n**2. Competitive Landscape**\n- **Density:** {density} ({competitor_count} active brands)\n- **Top Leaders:** {', '.join([f'{k} ({v})' for k,v in top_brands.items()])}")
+            
+            # Visual: Competitor Share
+            trace_dict["visuals"].append({
+                "type": "bar",
+                "title": "Top Competitor Share",
+                "x": list(top_brands.keys()),
+                "y": list(top_brands.values()),
+                "x_label": "Brand",
+                "y_label": "Mentions"
+            })
         else:
             report_lines.append(f"\n**2. Competitive Landscape**\n- ⚠️ Data gap identified: `current_brand` column missing.")
             
@@ -75,6 +105,27 @@ class QuantInsightEngine:
             reach_curve = {f"INR_{int(p)}": round((price_points >= p).mean() * 100, 1) for p in sweep}
             trace_dict["scenarios"]["price_reach_curve_pct"] = reach_curve
             
+            # Visuals: WTP Histogram and Reach Curve
+            # Histogram bins (simplified)
+            hist_y, hist_x = np.histogram(price_points, bins=10)
+            trace_dict["visuals"].append({
+                "type": "hist",
+                "title": "Willingness to Pay Distribution",
+                "x": hist_x[:-1].tolist(),
+                "y": hist_y.tolist(),
+                "x_label": "Price (₹)",
+                "y_label": "Count"
+            })
+            
+            trace_dict["visuals"].append({
+                "type": "line",
+                "title": "Price vs Market Reach",
+                "x": sweep.tolist(),
+                "y": list(reach_curve.values()),
+                "x_label": "Price Point (₹)",
+                "y_label": "Reach %"
+            })
+            
             report_lines.append(f"\n**3. Pricing Feasibility**\n- **Median WTP:** ₹{median:.2f}\n- **Viable Band (p25-p75):** ₹{p25:.2f} - ₹{p75:.2f}")
             
             # Gap Analysis
@@ -99,7 +150,7 @@ class QuantInsightEngine:
     # =========================================================================
     def run_goal_2_analysis(self, df, file_path="Unknown", context=None):
         if context is None: context = {}
-        trace_dict = {"tool": "run_goal_2_analysis", "source_file": file_path, "columns_used": [], "rows_analyzed": len(df), "computations": {}, "scenarios": {}, "gap": None}
+        trace_dict = {"tool": "run_goal_2_analysis", "source_file": file_path, "columns_used": [], "rows_analyzed": len(df), "computations": {}, "scenarios": {}, "gap": None, "visuals": []}
         report_lines = ["### 📉 Goal 2: Performance Diagnosis\n\n**1. KPI Health Check**"]
         
         for col in ['acquisition_cost', 'time_to_value_seconds', 'retention_d30']:
@@ -145,6 +196,16 @@ class QuantInsightEngine:
                 total_start = counts.iloc[0] if counts.iloc[0] > 0 else 1
                 funnel_pct = (counts / total_start * 100).round(1).to_dict()
                 trace_dict["scenarios"]["funnel_survival_pct"] = funnel_pct
+                
+                # Visual: Funnel
+                trace_dict["visuals"].append({
+                    "type": "funnel",
+                    "title": "Funnel Drop-Off",
+                    "x": list(funnel_pct.values()),
+                    "y": list(funnel_pct.keys()),
+                    "x_label": "Survival %",
+                    "y_label": "Stage"
+                })
             else:
                 bottleneck = counts.index[0] if not counts.empty else "N/A"
             trace_dict["computations"]["bottleneck"] = bottleneck
@@ -190,7 +251,7 @@ class QuantInsightEngine:
     # =========================================================================
     def run_goal_3_analysis(self, df, file_path="Unknown", context=None):
         if context is None: context = {}
-        trace_dict = {"tool": "run_goal_3_analysis", "source_file": file_path, "columns_used": [], "rows_analyzed": len(df), "computations": {}, "scenarios": {}, "gap": None}
+        trace_dict = {"tool": "run_goal_3_analysis", "source_file": file_path, "columns_used": [], "rows_analyzed": len(df), "computations": {}, "scenarios": {}, "gap": None, "visuals": []}
         report_lines = ["### 🎨 Goal 3: UX & Journey Diagnosis\n\n**1. Cognitive Load Analysis**"]
         
         if 'effort_score' in df.columns:
@@ -210,6 +271,16 @@ class QuantInsightEngine:
                 stage_effort = df.groupby('funnel_stage')['effort_score'].mean().round(2).to_dict()
                 trace_dict["scenarios"]["effort_by_stage"] = stage_effort
                 report_lines.append(f"- **Effort by Stage:** {', '.join([f'{k}: {v}' for k,v in stage_effort.items()])}")
+                
+                # Visual: Effort by stage
+                trace_dict["visuals"].append({
+                    "type": "bar",
+                    "title": "Effort Score by Stage",
+                    "x": list(stage_effort.keys()),
+                    "y": list(stage_effort.values()),
+                    "x_label": "Stage",
+                    "y_label": "Effort (1-10)"
+                })
         else:
             report_lines.append("- ⚠️ Data gap identified: `effort_score` missing.")
             
@@ -244,7 +315,7 @@ class QuantInsightEngine:
     # =========================================================================
     def run_goal_4_analysis(self, df, file_path="Unknown", context=None):
         if context is None: context = {}
-        trace_dict = {"tool": "run_goal_4_analysis", "source_file": file_path, "columns_used": [], "rows_analyzed": len(df), "computations": {}, "scenarios": {}, "gap": None}
+        trace_dict = {"tool": "run_goal_4_analysis", "source_file": file_path, "columns_used": [], "rows_analyzed": len(df), "computations": {}, "scenarios": {}, "gap": None, "visuals": []}
         report_lines = ["### 🔄 Goal 4: Retention & Loyalty Intelligence\n\n**1. Retention Health**"]
         
         if 'retention_d30' in df.columns:
@@ -260,6 +331,17 @@ class QuantInsightEngine:
                 "Day_14": min(round(d30_rate_val * 1.2, 1), 100.0),
                 "Day_30": round(d30_rate_val, 1),
             }
+            
+            # Visual: Retention Decay
+            decay = trace_dict["scenarios"]["retention_decay"]
+            trace_dict["visuals"].append({
+                "type": "line",
+                "title": "Retention Decay Curve",
+                "x": list(decay.keys()),
+                "y": list(decay.values()),
+                "x_label": "Time",
+                "y_label": "Retention %"
+            })
         elif 'satisfaction_score' in df.columns:
             trace_dict["columns_used"].append('satisfaction_score')
             proxy_rate = (df['satisfaction_score'] >= 8).mean()
@@ -304,8 +386,8 @@ class QuantInsightEngine:
     # =========================================================================
     def run_goal_5_analysis(self, df, file_path="Unknown", context=None):
         if context is None: context = {}
-        trace_dict = {"tool": "run_goal_5_analysis", "source_file": file_path, "columns_used": [], "rows_analyzed": len(df), "computations": {}, "scenarios": {}, "gap": None}
-        report_lines = [f"### 🧪 Goal 5: Hypothesis Validation Engine\n\n**1. Intake Audit**\n- **Hypotheses Reviewed:** {len(df)}", "\n**2. Evidence Classification**"]
+        trace_dict = {"tool": "run_goal_5_analysis", "source_file": file_path, "columns_used": [], "rows_analyzed": len(df), "computations": {}, "scenarios": {}, "gap": None, "visuals": []}
+        report_lines = [f"### ⚖️ Goal 5: A/B Test Diagnosis\n\n**1. Primary Metric Shift**\n- **Hypotheses Reviewed:** {len(df)}", "\n**2. Evidence Classification**"]
         
         if 'p_value' in df.columns:
             trace_dict["columns_used"].append('p_value')
@@ -328,6 +410,16 @@ class QuantInsightEngine:
             report_lines.append("\n**3. Variant Performance**")
             for var, conv in variant_conv.items():
                 report_lines.append(f"- **{var}:** {conv*100:.1f}%")
+                
+            # Visual: Variant Conversion
+            trace_dict["visuals"].append({
+                "type": "bar",
+                "title": "Conversion Rate by Variant",
+                "x": list(variant_conv.keys()),
+                "y": [v * 100 for v in variant_conv.values()],
+                "x_label": "Variant",
+                "y_label": "Conversion %"
+            })
                 
             winning_variant = max(variant_conv, key=variant_conv.get)
             trace_dict["computations"]["winning_variant"] = winning_variant
@@ -356,8 +448,8 @@ class QuantInsightEngine:
     # =========================================================================
     def run_goal_6_analysis(self, df, file_path="Unknown", context=None):
         if context is None: context = {}
-        trace_dict = {"tool": "run_goal_6_analysis", "source_file": file_path, "columns_used": [], "rows_analyzed": len(df), "computations": {}, "scenarios": {}, "gap": None}
-        report_lines = ["### 📋 Goal 6: Roadmap Prioritization\n\n**1. Ranked Initiatives**"]
+        trace_dict = {"tool": "run_goal_6_analysis", "source_file": file_path, "columns_used": [], "rows_analyzed": len(df), "computations": {}, "scenarios": {}, "gap": None, "visuals": []}
+        report_lines = ["### 🗺️ Goal 6: Feature Roadmap Validation\n\n**1. Backlog Sizing**"]
         
         if 'impact_score' in df.columns and 'effort_score' in df.columns:
             trace_dict["columns_used"].extend(['impact_score', 'effort_score'])
@@ -396,6 +488,17 @@ class QuantInsightEngine:
             if segments:
                 trace_dict["computations"]["rice_segments"] = segments
             
+            # Visual: Impact vs Effort (scatter)
+            trace_dict["visuals"].append({
+                "type": "scatter",
+                "title": "RICE: Impact vs Effort",
+                "x": df_local['effort_score'].tolist(),
+                "y": df_local['impact_score'].tolist(),
+                "x_label": "Effort Score",
+                "y_label": "Impact Score",
+                "text": df_local.get('feature_name', pd.Series([f"Item {i+1}" for i in range(len(df_local))])).tolist()
+            })
+            
             # Gap Analysis
             hypothesis = context.get("notes", "").lower()
             if hypothesis:
@@ -419,7 +522,7 @@ class QuantInsightEngine:
     # =========================================================================
     def run_goal_7_analysis(self, df, file_path="Unknown", context=None):
         if context is None: context = {}
-        trace_dict = {"tool": "run_goal_7_analysis", "source_file": file_path, "columns_used": list(df.columns), "rows_analyzed": len(df), "computations": {}, "scenarios": {}, "gap": None}
+        trace_dict = {"tool": "run_goal_7_analysis", "source_file": file_path, "columns_used": list(df.columns), "rows_analyzed": len(df), "computations": {}, "scenarios": {}, "gap": None, "visuals": []}
         
         numeric_cols = df.select_dtypes(include=[np.number]).columns
         stats = []
@@ -436,6 +539,16 @@ class QuantInsightEngine:
                 health_scores[col] = round((mean_val / max_val) * 100, 1)
                 
         trace_dict["scenarios"]["health_scores"] = health_scores
+        
+        if health_scores:
+            trace_dict["visuals"].append({
+                "type": "bar",
+                "title": "Normalized Health Scores",
+                "x": list(health_scores.keys()),
+                "y": list(health_scores.values()),
+                "x_label": "Metric",
+                "y_label": "Score (0-100)"
+            })
         
         report_lines = [
             f"### 📢 Goal 7: Executive Strategy Brief",

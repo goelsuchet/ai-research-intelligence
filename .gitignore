@@ -5,3 +5,5 @@ data_intelligence/vector_db/
 *.tmp
 .streamlit/secrets.toml
 samples/.cache/
+PLAN.md
+CLAUDE.md

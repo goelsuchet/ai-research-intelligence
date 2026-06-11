@@ -25,8 +25,8 @@ GOAL_EXPECTED_SECTIONS = {
     "GOAL_2_PERFORMANCE": ["KPI Health Check", "Funnel Analysis", "Churn Diagnosis"],
     "GOAL_3_UX_JOURNEY": ["Cognitive Load Analysis", "Friction Taxonomy"],
     "GOAL_4_RETENTION": ["Retention Health", "Habit Formation"],
-    "GOAL_5_HYPOTHESIS": ["Intake Audit", "Evidence Classification"],
-    "GOAL_6_PRIORITIZATION": ["Ranked Initiatives"],
+    "GOAL_5_HYPOTHESIS": ["Primary Metric Shift", "Evidence Classification"],
+    "GOAL_6_PRIORITIZATION": ["Backlog Sizing"],
     "GOAL_7_SYNTHESIS": ["The Bottom Line", "Aggregate Statistics"],
 }
 
@@ -56,6 +56,37 @@ def test_goals_on_samples(goal_key, filename):
             f"[{goal_key}] Expected section '{section}' not found in report.\n"
             f"Report preview: {report[:300]}"
         )
+        
+    # Visuals assertions
+    assert "visuals" in trace, f"Missing 'visuals' in trace for {goal_key}"
+    for spec in trace["visuals"]:
+        assert "type" in spec
+        assert spec["type"] in ["bar", "hist", "line", "funnel", "scatter"]
+        assert "x" in spec and "y" in spec
+        # x and y should be same length unless it's a histogram where we expect len(x) == len(y) usually 
+        # Actually for hist we used bin edges for x and counts for y, and we took x[:-1] so they are same length!
+        assert len(spec["x"]) == len(spec["y"]), f"Length mismatch in visual spec {spec['title']}"
+
+def test_recompute_functions():
+    # reach_at_price
+    df = pd.DataFrame({"willingness_to_pay_inr": [100, 200, 300, 400, 500]})
+    reach_100 = QuantInsightEngine.reach_at_price(df, 100)
+    reach_300 = QuantInsightEngine.reach_at_price(df, 300)
+    reach_600 = QuantInsightEngine.reach_at_price(df, 600)
+    
+    assert reach_100 == 100.0
+    assert reach_300 == 60.0
+    assert reach_600 == 0.0
+    
+    # monotonically non-increasing
+    assert reach_100 >= reach_300 >= reach_600
+    
+    # rice_at
+    rice1 = QuantInsightEngine.rice_at(reach=1000, impact=3, conf=100, effort=1)
+    assert rice1 == 3000.0
+    
+    rice2 = QuantInsightEngine.rice_at(reach=1000, impact=3, conf=50, effort=2)
+    assert rice2 == 750.0
 
 def test_system_persona_no_email_rules():
     from agent_reasoning.prompts.system_persona import SYSTEM_INSTRUCTIONS

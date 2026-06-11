@@ -1,5 +1,7 @@
 import streamlit as st
 from state_manager import initialize_session_state
+from frontend_ui.charts import render_visual
+from frontend_ui.scenarios import render_scenarios_for_goal
 from agent_reasoning.prompts.goal_library import GOAL_MAPPING
 GOAL_DISPLAY_NAME = {v: k for k, v in GOAL_MAPPING.items()}
 import pandas as pd
@@ -8,6 +10,11 @@ import tempfile
 # --- 1. SETUP & STATE ---
 st.set_page_config(page_title="AI Research Agent", page_icon="🧠", layout="wide")
 initialize_session_state()
+
+@st.cache_data
+def load_cached_data(filepath):
+    """Caches CSV/Excel loading to prevent re-reads on every slider interaction."""
+    return pd.read_csv(filepath) if filepath.endswith('.csv') else pd.read_excel(filepath)
 
 # --- 2. SIDEBAR: GOAL SELECTION (The "Entry Point") ---
 with st.sidebar:
@@ -81,6 +88,7 @@ with col1:
     
     if data_source != "(Upload your own)":
         temp_file_path = data_source
+        st.session_state.temp_file_path = temp_file_path
         st.success(f"✅ Loaded Sample: {temp_file_path}")
         try:
             df = pd.read_csv(temp_file_path)
@@ -186,6 +194,24 @@ def run_agent(query_text, active_goal, layer="handover"):
             "escalation": res_dict.get("escalation")
         })
 
+# Render Visuals and Scenarios
+if st.session_state.messages and st.session_state.messages[-1]["role"] == "assistant":
+    last_msg = st.session_state.messages[-1]
+    trace = last_msg.get("trace", {})
+    
+    if trace.get("visuals"):
+        with st.expander("📈 Visuals", expanded=True):
+            for spec in trace["visuals"]:
+                fig = render_visual(spec)
+                st.plotly_chart(fig, use_container_width=True)
+                
+    if st.session_state.temp_file_path:
+        try:
+            df = load_cached_data(st.session_state.temp_file_path)
+            render_scenarios_for_goal(selected_goal, df, trace)
+        except Exception as e:
+            st.error(f"Could not load data for scenarios: {e}")
+
 # Action Buttons
 if st.session_state.messages and st.session_state.messages[-1]["role"] == "assistant":
     cols = st.columns([1, 1, 1, 2])
@@ -214,8 +240,27 @@ if st.session_state.messages and st.session_state.messages[-1]["role"] == "assis
     st.divider()
     last_msg = st.session_state.messages[-1]
     export_content = last_msg.get("content", "")
-    if last_msg.get("trace"):
-        export_content += f"\n\n### Trace Data\n```json\n{last_msg['trace']}\n```"
+    trace = last_msg.get("trace", {})
+    
+    include_charts = False
+    if trace.get("visuals"):
+        include_charts = st.toggle("Include Charts in Export (Requires Kaleido)")
+    
+    if include_charts:
+        # We append base64 images to markdown
+        import base64
+        for spec in trace.get("visuals", []):
+            try:
+                fig = render_visual(spec)
+                img_bytes = fig.to_image(format="png")
+                b64 = base64.b64encode(img_bytes).decode("utf-8")
+                export_content += f"\n\n![{spec.get('title')}]({f'data:image/png;base64,{b64}'})\n"
+            except Exception as e:
+                export_content += f"\n\n*(Failed to export chart {spec.get('title')}: {e})*\n"
+                
+    if trace:
+        export_content += f"\n\n### Trace Data\n```json\n{trace}\n```"
+    
     st.download_button(
         label="📄 Export Brief (Markdown)",
         data=export_content,

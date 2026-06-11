@@ -34,3 +34,5 @@ def initialize_session_state():
     # 3. Initialize UI Controls
     if "processing" not in st.session_state:
         st.session_state.processing = False
+    if "temp_file_path" not in st.session_state:
+        st.session_state.temp_file_path = None

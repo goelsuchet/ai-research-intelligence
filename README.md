@@ -49,7 +49,9 @@ We solved this by building a modular system with three distinct roles:
 * **🔄 Sequential Goal Queueing:** Handles complex multi-part questions by queueing them (e.g., "I'll analyze Pricing first, then move to Competitors").
 * **🔍 Traceability:** Every insight cites its source. _"Churn is up 15%"_ is accompanied by _"Calculated via scan_kpi_health tool on hairfall.csv."_
 * **📉 Progressive Disclosure:** The UI adapts depth—offering "Summaries" for executives and "Deep Evidence" for analysts.
-* **🌊 Streaming UI & Export:** Responses stream token-by-token in real-time, with a one-click Markdown export of the entire brief and trace.
+* **📈 Deterministic Visuals:** Automatically generates Plotly charts driven by pure math—the LLM never invents a chart or graph.
+* **🎛️ Interactive What-Ifs:** Real-time sliders let users recompute projections (e.g., Price vs. Reach) instantly without waiting for an LLM round-trip.
+* **🌊 Streaming UI & Export:** Responses stream token-by-token in real-time, with a one-click Markdown export (including embedded PNG charts) of the entire brief and trace.
 
 ---
 
@@ -62,6 +64,8 @@ We solved this by building a modular system with three distinct roles:
 | **LLM** | OpenAI GPT-4o-mini (Synthesis) & GPT-4 Turbo (Validation) |
 | **Data Processing** | Pandas, NumPy |
 | **Vector Database** | ChromaDB (Semantic Search) |
+| **NLP / Qualitative** | SentenceTransformers (`all-MiniLM-L6-v2`), TextBlob, scikit-learn (KMeans) |
+| **Visualisation** | Plotly (interactive charts), Kaleido (PNG export) |
 | **Frontend** | Streamlit |
 | **Validation** | Pydantic |
 
@@ -82,10 +86,14 @@ ai-research-intelligence/
 │   └── quant_engine.py    # Pandas/NumPy analysis
 ├── frontend_ui/           # Streamlit Interface
 │   ├── app.py             # Main UI entry point
-│   └── state_manager.py   # Session state & env loader
-├── samples/               # Demo data for testing
-├── generate_data.py       # Script to generate sample CSVs
-├── debug_setup.py         # Smoke test diagnostic script
+│   ├── state_manager.py   # Session state & env loader
+│   ├── charts.py          # Plotly chart renderer (spec → figure)
+│   └── scenarios.py       # Interactive what-if sliders (Goal 1 & 6)
+├── samples/               # Demo CSVs for all 7 goals
+├── tests/
+│   └── test_smoke.py      # Pytest suite (9 goals × sample CSV assertions)
+├── generate_data.py       # Regenerates all sample CSVs deterministically
+├── debug_setup.py         # Diagnostic smoke test script
 ├── requirements.txt       # Python dependencies
 └── README.md              # Project documentation
 ```
